@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "myfirstswadeployment"
+        },
+        "location": { 
+            "value": "Central US"
+        },   
+        "sku": {
+            "value": "Free"
+        },
+        "skucode": {
+            "value": "Free"
+        },
+        "repositoryUrl": {
+            "value": "https://github.com/<YOUR-GITHUB-USER-NAME>/<YOUR-GITHUB-REPOSITORY-NAME>"
+        },
+        "branch": {
+            "value": "main"
+        },
+        "repositoryToken": {
+            "value": "<YOUR-GITHUB-PAT>" 
+        },
+        "appLocation": {
+            "value": "/"
+        },
+        "apiLocation": {
+            "value": ""
+        },
+        "appArtifactLocation": {
+            "value": "src"
+        },
+        "resourceTags": {
+            "value": {
+                "Environment": "Development",
+                "Project": "Testing SWA with Bicep",
+                "ApplicationName": "myfirstswadeployment"
+            }
+        },
+        "appSettings": {
+            "value": {
+                "MY_APP_SETTING1": "value 1",
+                "MY_APP_SETTING2": "value 2"
+            }
+        }
+    }
+}
