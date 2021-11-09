@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "newStorageAccountName": {
+        "value": "YOUR-STORAGE-ACCOUNT-NAME"
+      },
+      "adminUsername": {
+        "value": "YOUR-ADMIN-USERNAME"
+      },
+      "vmDnsName": {
+        "value": "YOUR-VM-DNS-NAME"
+      },
+      "administratorLogin": {
+        "value": "YOUR-ADMIN-LOGIN"
+      },
+      "administratorLoginPassword": {
+        "value": "YOUR-ADMIN-PASS"
+      },
+      "databaseName": {
+        "value": "YOUR-DATABASE-NAME"
+      },
+      "serverName": {
+        "value": "YOUR-SERVER-NAME"
+      },
+      "firewallStartIP": {
+        "value": "0.0.0.0"
+      },
+      "firewallEndIP": {
+        "value": "255.255.255.255"
+      },
+      "adminPasswordOrKey": {
+        "value": "YOUR-SSH-KEY"
+      }
+    }
+  }
