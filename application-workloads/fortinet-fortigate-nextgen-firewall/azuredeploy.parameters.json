@@ -1,0 +1,93 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "fortiGateNamePrefix": {
+            "value": "YOUR-FORTIGATE-NAME-PREFIX"
+        },
+        "fortiGateImageSKU": {
+            "value": "fortinet_fg-vm"
+        },
+        "fortiGateImageVersion": {
+            "value": "latest"
+        },
+        "adminUsername": {
+            "value": "YOUR-ADMIN-USERNAME"
+        },
+        "adminPassword": {
+            "value": "YOUR-PASSWORD"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "instanceType": {
+            "value": "Standard_F2s"
+        },
+        "acceleratedNetworking": {
+            "value": "true"
+        },
+        "publicIPNewOrExisting": {
+            "value": "new"
+        },
+        "publicIPName": {
+            "value": "FGTPublicIP"
+        },
+        "publicIPResourceGroup": {
+            "value": "YOUR-PUBLICIP-RESOURCE-GROUP"
+        },
+        "publicIPAddressType": {
+            "value": "Dynamic"
+        },
+        "vnetNewOrExisting": {
+            "value": "new"
+        },
+        "vnetName": {
+            "value": "FortiGate-VNET"
+        },
+        "vnetResourceGroup": {
+            "value": "YOUR-VNET-RESOURCE-GROUP"
+        },
+        "vnetAddressPrefix": {
+            "value": "10.0.0.0/22"
+        },
+        "subnet1Name": {
+            "value": "ExternalSubnet"
+        },
+        "subnet1Prefix": {
+            "value": "10.0.0.0/26"
+        },
+        "subnet1StartAddress": {
+            "value": "10.0.0.4"
+        },
+        "subnet2Name": {
+            "value": "InternalSubnet"
+        },
+        "subnet2Prefix": {
+            "value": "10.0.1.0/26"
+        },
+        "subnet2StartAddress": {
+            "value": "10.0.1.4"
+        },
+        "subnet3Name": {
+            "value": "ProtectedSubnet"
+        },
+        "subnet3Prefix": {
+            "value": "10.0.2.0/24"
+        },
+        "fortiManager": {
+            "value": "no"
+        },
+        "fortiManagerIP": {
+            "value": ""
+        },
+        "fortiManagerSerial": {
+            "value": ""
+        },
+        "fortiGateLicenseBYOL": {
+            "value": ""
+        },
+        "fortiGateLicenseFlexVM": {
+            "value": ""
+        }
+    }
+}
