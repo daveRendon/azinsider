@@ -1,0 +1,69 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "cloudGuardVersion": {
+            "value": "R81.10 - Bring Your Own License"
+        },
+        "adminPassword": {
+            "value": "YOUR-ADMIN-PASS"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "vmName": {
+            "value": "azinsider"
+        },
+        "vmSize": {
+            "value": "Standard_D3_v2"
+        },
+        "virtualNetworkName": {
+            "value": "vnet01"
+        },
+        "virtualNetworkAddressPrefix": {
+            "value": "10.0.0.0/20"
+        },
+        "Subnet1Name": {
+            "value": "Management"
+        },
+        "Subnet1Prefix": {
+            "value": "10.0.0.0/24"
+        },
+        "Subnet1StartAddress": {
+            "value": "10.0.0.4"
+        },
+        "vnetNewOrExisting": {
+            "value": "new"
+        },
+        "virtualNetworkExistingRGName": {
+            "value": "azinsider_demo"
+        },
+        "managementGUIClientNetwork": {
+            "value": "10.0.0.0/24"
+        },
+        "installationType": {
+            "value": "management"
+        },
+        "bootstrapScript": {
+            "value": ""
+        },
+        "allowDownloadFromUploadToCheckPoint": {
+            "value": "true"
+        },
+        "additionalDiskSizeGB": {
+            "value": 0
+        },
+        "diskType": {
+            "value": "Standard_LRS"
+        },
+        "sourceImageVhdUri": {
+            "value": "noCustomUri"
+        },
+        "enableApi": {
+            "value": "management_only"
+        },
+        "adminShell": {
+            "value": "/etc/cli.sh"
+        }
+    }
+}
