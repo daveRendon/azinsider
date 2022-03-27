@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "publicIPAddressName": {
+            "value": "azinsider"
+        },
+        "publicIPNewOrExisting": {
+            "value": "new"
+        },
+        "publicIPAllocationMethod": {
+            "value": "Dynamic"
+        },
+        "publicIPRGName": {
+            "value": "azinsider_demo"
+        },
+        "vmName": {
+            "value": "azinsider"
+        },
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "adminPasswordOrKey": {
+            "value": "YOUR-ADMIN-PASSWD"
+        },
+        "vmSize": {
+            "value": "Standard_D3_v2"
+        },
+        "imageVersion": {
+            "value": "latest"
+        },
+        "srcIPInboundNSG": {
+            "value": "0.0.0.0/0"
+        },
+        "virtualNetworkName": {
+            "value": "fwVNET"
+        },
+        "virtualNetworkExistingRGName": {
+            "value": "azinsider_demo"
+        },
+        "virtualNetworkAddressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "vnetNewOrExisting": {
+            "value": "new"
+        },
+        "subnet0Name": {
+            "value": "Mgmt"
+        },
+        "subnet1Name": {
+            "value": "Untrust"
+        },
+        "subnet2Name": {
+            "value": "Trust"
+        },
+        "subnet0Prefix": {
+            "value": "10.0.0.0/24"
+        },
+        "subnet1Prefix": {
+            "value": "10.0.1.0/24"
+        },
+        "subnet2Prefix": {
+            "value": "10.0.2.0/24"
+        },
+        "subnet1StartAddress": {
+            "value": "10.0.1.4"
+        },
+        "subnet2StartAddress": {
+            "value": "10.0.2.4"
+        },
+        "bootstrap": {
+            "value": "no"
+        },
+        "customData": {
+            "value": "storage-account=None,access-key=None,file-share=None,share-directory=None"
+        }
+    }
+}
