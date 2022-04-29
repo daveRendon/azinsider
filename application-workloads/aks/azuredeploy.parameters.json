@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dnsPrefix": {
+            "value": "azinsider" 
+        },
+        "linuxAdminUsername": {
+            "value": "azureuser" 
+        },
+        "sshRSAPublicKey": {
+            "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4/ygs442mte8H84qW5NpuRpqERkl2ldhIW/y55ENTQ2z/REFZbcWpI8g7btgIBJvG4F8Wv2XnVUJlEYTi5tRU9rsaEqRTMYJn27cINqdpB4qV121LxerqABAMlZZAx+WBrk1pKB4bbiTXCDmXb9QWrKNnk/uaLZV0JWXkNoCzf7sv6pHsY9SZS6nUYvo6cUo+mY655U2HpabHK6Jg7J4UYn81mdsdeKIKWCNBK+dVcYH2gUENBriAZalW42USbLijJhc7upw/ULLWKd7SFC3IbJo30KdC+LaRVK17QgZHA3LDBq+5dfmER2CaTokJ8DvftDsjHIkAJy+3igCSeda9guGSdoBoHNFL432jRjgpatwBh/eyPGwDBbffXDPk/0N+ERbKkov2J4bnVhyOZjqvzCR9Tb+5k8AOs8XUUUKr/gDQhc2fKmBIOcsORrJoftayoNwyB5INJeHMUBKWtMWh3V6EFlakjstpYNukSykVAcW5yTzYfWulH+QjV6FpDmPIy+Oio51v5kbxzsjlJ0FinZMjqFdw2wt9ferihxx+hBQ+540hdVKik/m4NkbYKovzQxPVWXPIxkoaCFtAjUyilB/NIJkW55D/y+aL43rwY6CI3Mim5TsuPTmBa+X/20groqWQy61hKbPhU+MXbVPZ2cVolKpdHYEC7L+z9X1wAQ== azureuser" // TODO: Fill in parameter value
+        }
+    }
+}
