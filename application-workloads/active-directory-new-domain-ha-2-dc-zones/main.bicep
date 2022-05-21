@@ -83,7 +83,7 @@ resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-11-01' = 
   }
 }
 
-module CreateVNet './nestedtemplates/vnet.json' = {
+module CreateVNet './nestedtemplates/vnet.bicep' = {
   name: 'CreateVNet'
   params: {
     virtualNetworkName: virtualNetworkName
@@ -228,7 +228,7 @@ resource vmName_1_PepareBDC 'Microsoft.Compute/virtualMachines/extensions@2020-1
   ]
 }
 
-module UpdateVNetDNS1 './nestedtemplates/vnet.json' = {
+module UpdateVNetDNS1 './nestedtemplates/vnet.bicep' = {
   name: 'UpdateVNetDNS1'
   params: {
     virtualNetworkName: virtualNetworkName
@@ -246,7 +246,7 @@ module UpdateVNetDNS1 './nestedtemplates/vnet.json' = {
   ]
 }
 
-module UpdateBDCNIC './nestedtemplates/nic.json' = {
+module UpdateBDCNIC './nestedtemplates/nic.bicep' = {
   name: 'UpdateBDCNIC'
   params: {
     nicName: nicName_var[1]
@@ -272,7 +272,7 @@ module UpdateBDCNIC './nestedtemplates/nic.json' = {
   ]
 }
 
-module ConfiguringBackupADDomainController './nestedtemplates/configureADBDC.json'  = {
+module ConfiguringBackupADDomainController './nestedtemplates/configureADBDC.bicep'  = {
   name: 'ConfiguringBackupADDomainController'
   params: {
     extName: '${vmName_var[1]}/PepareBDC'
@@ -283,14 +283,14 @@ module ConfiguringBackupADDomainController './nestedtemplates/configureADBDC.jso
     adBDCConfigurationScript: adBDCConfigurationScript
     adBDCConfigurationFunction: adBDCConfigurationFunction
     adBDCConfigurationModulesURL: adBDCConfigurationModulesURL
-    '_artifactsLocationSasToken': artifactsLocationSasToken
+    artifactsLocationSasToken: artifactsLocationSasToken
   }
   dependsOn: [
     UpdateBDCNIC
   ]
 }
 
-module UpdateVNetDNS2 './nestedtemplates/vnet.json' = {
+module UpdateVNetDNS2 './nestedtemplates/vnet.bicep' = {
   name: 'UpdateVNetDNS2'
   params: {
     virtualNetworkName: virtualNetworkName

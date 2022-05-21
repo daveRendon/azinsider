@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "adminUsername": {
-        "value": "YOUR-ADIN-USERNAME"
+        "value": "azureuser"
       },
       "adminPassword": {
-        "value": "YOUR-PASSWD"
+        "value": "AzureDave01!!"
       },
       "dnsPrefix": {
-        "value": "YOUR-DNS-PREFIX"
+        "value": "azinsiderdmo"
       },
       "domainName": {
         "value": "azinsider.local"
