@@ -1,0 +1,197 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        },
+        "name": {
+            "value": "azinsider"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "hostingPlanName": {
+            "value": "ASP-azinsidrgroup-a6b8"
+        },
+        "serverFarmResourceGroup": {
+            "value": "azinsider_demo"
+        },
+        "sku": {
+            "value": "PremiumV2"
+        },
+        "skuCode": {
+            "value": "P1v2"
+        },
+        "workerSize": {
+            "value": "3"
+        },
+        "workerSizeId": {
+            "value": "3"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "kind": {
+            "value": "linux"
+        },
+        "reserved": {
+            "value": true
+        },
+        "alwaysOn": {
+            "value": true
+        },
+        "linuxFxVersion": {
+            "value": "DOCKER|mcr.microsoft.com/appsvc/wordpress-alpine-php:latest"
+        },
+        "dockerRegistryUrl": {
+            "value": "https://mcr.microsoft.com"
+        },
+        "storageSizeGB": {
+            "value": 128
+        },
+        "storageIops": {
+            "value": 700
+        },
+        "storageAutoGrow": {
+            "value": "Enabled"
+        },
+        "backupRetentionDays": {
+            "value": 7
+        },
+        "geoRedundantBackup": {
+            "value": "Disabled"
+        },
+        "vmName": {
+            "value": "Standard_D2ds_v4"
+        },
+        "serverEdition": {
+            "value": "GeneralPurpose"
+        },
+        "vCores": {
+            "value": 2
+        },
+        "charset": {
+            "value": "utf8"
+        },
+        "collation": {
+            "value": "utf8_general_ci"
+        },
+        "serverName": {
+            "value": "azinsidr-f11bb8d5f4db45a685747f3dfa46d024-dbserver"
+        },
+        "serverUsername": {
+            "value": "ejkvvgbqlo"
+        },
+        "serverPassword": {
+            "value": "YourServerPassword"
+        },
+        "databaseName": {
+            "value": "azinsidr_f11bb8d5f4db45a685747f3dfa46d024_database"
+        },
+        "publicNetworkAccess": {
+            "value": "Disabled"
+        },
+        "wordpressTitle": {
+            "value": "WordPress On Azure"
+        },
+        "wordpressAdminEmail": {
+            "value": "Your-wordpress-admin-email"
+        },
+        "wordpressUsername": {
+            "value": "your-wordpress-username"
+        },
+        "wordpressPassword": {
+            "value": "YourWordPressPassword"
+        },
+        "wpLocaleCode": {
+            "value": "en_US"
+        },
+        "cdnProfileName": {
+            "value": "azinsidr-f72ddf40c97ef984e5ed-cdnprofile"
+        },
+        "cdnEndpointName": {
+            "value": "azinsidr-f72ddf40c97ef984e5ed-endpoint"
+        },
+        "cdnType": {
+            "value": "Standard_Microsoft"
+        },
+        "cdnEndpointProperties": {
+            "value": {
+                "isHttpAllowed": true,
+                "isHttpsAllowed": true,
+                "originHostHeader": "azinsidr.azurewebsites.net",
+                "origins": [
+                    {
+                        "name": "azinsidr-azurewebsites-net",
+                        "properties": {
+                            "hostName": "azinsidr.azurewebsites.net",
+                            "httpPort": 80,
+                            "httpsPort": 443,
+                            "originHostHeader": "azinsidr.azurewebsites.net",
+                            "priority": 1,
+                            "weight": 1000,
+                            "enabled": true
+                        }
+                    }
+                ],
+                "isCompressionEnabled": true,
+                "contentTypesToCompress": [
+                    "application/eot",
+                    "application/font",
+                    "application/font-sfnt",
+                    "application/javascript",
+                    "application/json",
+                    "application/opentype",
+                    "application/otf",
+                    "application/pkcs7-mime",
+                    "application/truetype",
+                    "application/ttf",
+                    "application/vnd.ms-fontobject",
+                    "application/xhtml+xml",
+                    "application/xml",
+                    "application/xml+rss",
+                    "application/x-font-opentype",
+                    "application/x-font-truetype",
+                    "application/x-font-ttf",
+                    "application/x-httpd-cgi",
+                    "application/x-javascript",
+                    "application/x-mpegurl",
+                    "application/x-opentype",
+                    "application/x-otf",
+                    "application/x-perl",
+                    "application/x-ttf",
+                    "font/eot",
+                    "font/ttf",
+                    "font/otf",
+                    "font/opentype",
+                    "image/svg+xml",
+                    "text/css",
+                    "text/csv",
+                    "text/html",
+                    "text/javascript",
+                    "text/js",
+                    "text/plain",
+                    "text/richtext",
+                    "text/tab-separated-values",
+                    "text/xml",
+                    "text/x-script",
+                    "text/x-component",
+                    "text/x-java-source"
+                ]
+            }
+        },
+        "vnetName": {
+            "value": "azinsidr-436c376a86-vnet"
+        },
+        "subnetForApp": {
+            "value": "azinsidr-436c376a86-appsubnet"
+        },
+        "subnetForDb": {
+            "value": "azinsidr-436c376a86-dbsubnet"
+        },
+        "privateDnsZoneNameForDb": {
+            "value": "azinsidr-436c376a86-privatelink.mysql.database.azure.com"
+        }
+    }
+}
