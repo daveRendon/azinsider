@@ -1,0 +1,233 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "resourceGroup": {
+            "type": "string"
+        },
+        "tagsByResource": {
+            "type": "object",
+            "defaultValue": {}
+        },
+        "grafanaRoleId": {
+            "type": "string"
+        },
+        "useSystemAssignedIdentity": {
+            "type": "bool"
+        },
+        "useMonitoringReaderRole": {
+            "type": "bool"
+        },
+        "grafanaAdminObjectIds": {
+            "type": "array",
+            "defaultValue": []
+        },
+        "zoneRedundancy": {
+            "type": "string"
+        },
+        "apiKey": {
+            "type": "string"
+        },
+        "deterministicOutboundIP": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "IdentityType": "[if(parameters('useSystemAssignedIdentity'), 'SystemAssigned', 'None')]",
+        "grafanaWorkspaceDeploymentName": "[concat('gpd', '_', parameters('name'), '_', uniqueString(subscription().id, parameters('resourceGroup')))]",
+        "roleAssignmentDeploymentName": "[concat('MonitoringReader', '_azinsider')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "name": "[variables('grafanaWorkspaceDeploymentName')]",
+            "resourceGroup": "[parameters('resourceGroup')]",
+            "properties": {
+                "mode": "Incremental",
+                "expressionEvaluationOptions": {
+                    "scope": "inner"
+                },
+                "parameters": {
+                    "name": {
+                        "value": "[parameters('name')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tagsByResource": {
+                        "value": "[parameters('tagsByResource')]"
+                    },
+                    "grafanaRoleId": {
+                        "value": "[parameters('grafanaRoleId')]"
+                    },
+                    "grafanaAdminObjectIds": {
+                        "value": "[parameters('grafanaAdminObjectIds')]"
+                    },
+                    "identityType": {
+                        "value": "[variables('IdentityType')]"
+                    },
+                    "zoneRedundancy": {
+                        "value": "[parameters('zoneRedundancy')]"
+                    },
+                    "apiKey": {
+                        "value": "[parameters('apiKey')]"
+                    },
+                    "deterministicOutboundIP": {
+                        "value": "[parameters('deterministicOutboundIP')]"
+                    }
+                },
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01-preview/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "location": {
+                            "type": "string"
+                        },
+                        "tagsByResource": {
+                            "type": "object"
+                        },
+                        "grafanaRoleId": {
+                            "type": "string"
+                        },
+                        "grafanaAdminObjectIds": {
+                            "type": "array",
+                            "defaultValue": []
+                        },
+                        "identityType": {
+                            "type": "string"
+                        },
+                        "zoneRedundancy": {
+                            "type": "string"
+                        },
+                        "apiKey": {
+                            "type": "string"
+                        },
+                        "deterministicOutboundIP": {
+                            "type": "string"
+                        }
+                    },
+                    "variables": {
+                        "grafanaAdminRoleId": "[concat(subscription().id, '/providers/Microsoft.Authorization/roleDefinitions/', parameters('grafanaRoleId'))]"
+                    },
+                    "resources": [
+                        {
+                            "apiVersion": "2022-05-01-preview",
+                            "name": "[parameters('name')]",
+                            "location": "[parameters('location')]",
+                            "tags": "[parameters('tagsByResource')]",
+                            "sku": {
+                                "name": "Standard"
+                            },
+                            "type": "Microsoft.Dashboard/grafana",
+                            "properties": {
+                                "zoneRedundancy": "[parameters('zoneRedundancy')]",
+                                "apiKey": "[parameters('apiKey')]",
+                                "deterministicOutboundIP": "[parameters('deterministicOutboundIP')]"
+                            },
+                            "identity": {
+                                "type": "[parameters('identityType')]"
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Authorization/roleAssignments",
+                            "apiVersion": "2020-04-01-preview",
+                            "condition": "[not(empty(parameters('grafanaAdminObjectIds')))]",
+                            "name": "[guid(parameters('name'), parameters('grafanaAdminObjectIds')[copyIndex()])]",
+                            "scope": "[concat('Microsoft.Dashboard/grafana/', parameters('name'))]",
+                            "dependsOn": [
+                                "[parameters('name')]"
+                            ],
+                            "properties": {
+                                "roleDefinitionId": "[variables('grafanaAdminRoleId')]",
+                                "principalId": "[parameters('grafanaAdminObjectIds')[copyIndex()]]"
+                            },
+                            "copy": {
+                                "name": "roleCopy",
+                                "count": "[length(parameters('grafanaAdminObjectIds'))]"
+                            }
+                        }
+                    ],
+                    "outputs": {
+                        "msiPrincipalId": {
+                            "type": "string",
+                            "value": "[reference(resourceId('Microsoft.Dashboard/grafana', parameters('name')), '2022-05-01-preview', 'Full').identity.principalId]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "name": "[variables('roleAssignmentDeploymentName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[variables('grafanaWorkspaceDeploymentName')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "expressionEvaluationOptions": {
+                    "scope": "inner"
+                },
+                "parameters": {
+                    "resourcePrincipalId": {
+                        "value": "[reference(variables('grafanaWorkspaceDeploymentName')).outputs.msiPrincipalId.value]"
+                    },
+                    "monitoringReaderRole": {
+                        "value": "[parameters('useMonitoringReaderRole')]"
+                    },
+                    "resourceGroupName": {
+                        "value": "[parameters('resourceGroup')]"
+                    },
+                    "resourceName": {
+                        "value": "[parameters('name')]"
+                    }
+                },
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "resourcePrincipalId": {
+                            "type": "string"
+                        },
+                        "monitoringReaderRole": {
+                            "type": "bool"
+                        },
+                        "resourceGroupName": {
+                            "type": "string"
+                        },
+                        "resourceName": {
+                            "type": "string"
+                        }
+                    },
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Authorization/roleAssignments",
+                            "apiVersion": "2020-04-01-preview",
+                            "condition": "[parameters('monitoringReaderRole')]",
+                            "name": "[guid(subscription().id, parameters('resourcePrincipalId'), parameters('resourceGroupName'), parameters('resourceName'), 'MonitoringReader')]",
+                            "properties": {
+                                "roleDefinitionId": "[concat(subscription().id, '/providers/Microsoft.Authorization/roleDefinitions/43d0d8ad-25c7-4714-9337-8ba259a9fe05')]",
+                                "principalId": "[parameters('resourcePrincipalId')]",
+                                "principalType": "ServicePrincipal"
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}

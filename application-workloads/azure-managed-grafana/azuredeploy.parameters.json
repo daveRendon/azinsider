@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "azinsider-grafana"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "grafanaRoleId": {
+            "value": "22926164-76b3-42b3-bc55-97df8dab3e41",
+            "metadata": {
+                "description": "Built-in Grafana admin role"
+            }
+        },
+        "tagsByResource": {
+            "value": {}
+        },
+        "useSystemAssignedIdentity": {
+            "value": true
+        },
+        "useMonitoringReaderRole": {
+            "value": true
+        },
+        "grafanaAdminObjectIds": {
+            "value": [
+                "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx",
+                "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+            ],
+            "metadata": {   
+                "description": "This is the Object ID from the user that will access the dashboard portal UI"
+            }
+        },
+        "zoneRedundancy": {
+            "value": "Enabled"
+        },
+        "apiKey": {
+            "value": "Enabled"
+        },
+        "deterministicOutboundIP": {
+            "value": "Enabled"
+        },
+        "resourceGroup": {
+            "value": "azinsider_demo"
+        }
+    }
+}
