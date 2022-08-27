@@ -1,0 +1,17 @@
+[Unit]
+Description=VotingData ASP.NET Core MVC
+
+[Service]
+WorkingDirectory=/var/www/votingdata
+ExecStart=/usr/bin/dotnet /var/www/votingdata/VotingData.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=votingdata-dotnet
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production 
+Environment=ASPNETCORE_URLS=http://localhost:5001
+
+[Install]
+WantedBy=multi-user.target
