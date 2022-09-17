@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "value": "azinsider-app"
+    },    
+    "redisCacheName": {
+      "value": "azinsider-redis"
+    },
+    "storageAccountType": {
+      "value": "Standard_GRS"
+    },
+    "dbServerName": {
+      "value": "azinsiderdbserver"
+    },
+    "dbName": {
+      "value": "azinsiderdb"
+    },
+    "dbAdministratorLogin": {
+      "value": "umbracouseradmin"
+    },
+    "dbAdministratorLoginPassword": {
+      "value": "Your-passwrd"
+    },
+    "nonAdminDatabaseUsername": {
+      "value": "azureuser"
+    },
+    "nonAdminDatabasePassword": {
+      "value": "Your-passwrd"
+    },
+    "actionGroupName": {
+      "value": "azinsideractiongroup"
+    },
+    "actionGroupShortName": {
+      "value": "acg"
+    },
+    "emails": {
+      "value": [
+        "Your-admin-email"
+      ]
+    },
+    "packageUri":{
+      "value": "https://auxmktplceprod.blob.core.windows.net/packages/ScalableUmbracoCms.WebPI.7.4.3.zip"
+    }
+  }
+}
