@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "functionAppName": {
+            "value": "azinsider"
+        },
+        "packageUri": {
+            "value": "https://github.com/daveRendon/azinsider/raw/main/application-workloads/azure-functions-dotnet-worker/azFunctionNetWorker.zip"
+        },
+        "netFrameworkVersion": {
+            "value": "v7.0"
+        } 
+    }
+
+}
