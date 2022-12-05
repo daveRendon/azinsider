@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+       
+        "name": {
+            "value": "azinsider"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "environmentId": {
+            "value": "/subscriptions/d988cbee-043f-4c46-9a59-dedb2119e48c/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo"
+        },
+        "containers": {
+            "value": [
+                {
+                    "name": "simple-hello-world-container",
+                    "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+                    "command": [],
+                    "resources": {
+                        "cpu": 0.25,
+                        "memory": ".5Gi"
+                    }
+                }
+            ]
+        },
+        "registries": {
+            "value": []
+        },
+        "secrets": {
+            "value": {
+                "arrayValue": []
+            }
+        },
+        "ingress": {
+            "value": {
+                "external": true,
+                "targetPort": 80
+            }
+        },
+        "environmentName": {
+            "value": "managedEnvironment-azinsiderdemo"
+        },
+        "workspaceName": {
+            "value": "workspaceazinsiderdemo"
+        },
+        "workspaceLocation": {
+            "value": "eastus"
+        }
+    }
+}
