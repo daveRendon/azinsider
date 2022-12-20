@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_Srv_Jump_name": {
+            "value": "Srv-Jump"
+        },
+        "virtualMachines_Srv_Work_name": {
+            "value": "Srv-Work"
+        },
+        "virtualNetworkName": {
+            "value": "Test-FW-VN"
+        },
+        "networkInterfaces_srv_jump121_name": {
+            "value": "srv-jump121"
+        },
+        "networkInterfaces_srv_work267_name": {
+            "value": "srv-work267"
+        },
+        "publicIPAddresses_Srv_Jump_PIP_name": {
+            "value": "Srv-Jump-PIP"
+        },
+        "networkSecurityGroups_Srv_Jump_nsg_name": {
+            "value": "Srv-Jump-nsg"
+        },
+        "networkSecurityGroups_Srv_Work_nsg_name": {
+            "value": "Srv-Work-nsg"
+        },
+        "schedules_shutdown_computevm_srv_jump_name": {
+            "value": "shutdown-computevm-srv-jump"
+        },
+        "schedules_shutdown_computevm_srv_work_name": {
+            "value": "shutdown-computevm-srv-work"
+        }
+    }
+}
