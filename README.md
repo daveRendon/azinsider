@@ -1,4 +1,4 @@
-# AzInsider Application Samples using Bicep Language
+# ☁️AzInsider - Application Samples using Bicep Language
 
 Within this repository, you'll discover invaluable references to source codes, showcasing the precise steps for deploying various workloads in your Azure environment.
 
