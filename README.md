@@ -16,6 +16,8 @@ To get going with Bicep:
 
 ## To deploy the application samples 
 
+### Option 1. Using your local machine
+
 You can use Windows Terminal and Azure PowerShell to deploy the application samples
 
 ```
@@ -26,5 +28,21 @@ $deploymentName = "AzInsiderDeployment-"+"$date"+"-"+"$rand"
 New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName azinsider_demo -TemplateFile .\main.bicep -TemplateParameterFile .\azuredeploy.parameters.json -c
 ```
 
+### Option 2. Using the Azure Portal
 
+ 1. In the Azure Portal, open CloudShell (using PowerShell). THen, clone this repository 
+
+```
+git clone https://github.com/daveRendon/azinsider.git
+```
+
+ 2. Then, once you're in the working directory of the sample application, deploy it using the command below:
+
+```
+$date = Get-Date -Format "MM-dd-yyyy"
+$rand = Get-Random -Maximum 1000
+$deploymentName = "AzInsiderDeployment-"+"$date"+"-"+"$rand"
+
+New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName azinsider_demo -TemplateFile .\main.bicep -TemplateParameterFile .\azuredeploy.parameters.json -c
+```
 
