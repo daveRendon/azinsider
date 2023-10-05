@@ -27,6 +27,7 @@ $deploymentName = "AzInsiderDeployment-"+"$date"+"-"+"$rand"
 
 New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName azinsider_demo -TemplateFile .\main.bicep -TemplateParameterFile .\azuredeploy.parameters.json -c
 ```
+You can also pass on a bicep parameters file.
 
 ### Option 2. Using the Azure Portal
 
