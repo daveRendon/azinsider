@@ -79,7 +79,7 @@ module ase 'modules/ase.bicep' = {
 module firewall 'modules/firewall.bicep' = {
   name: 'firewall'
   dependsOn: [
-    vnet
+    ase
   ]
   scope: resourceGroup(rgname)
   params: {
@@ -91,8 +91,7 @@ module firewall 'modules/firewall.bicep' = {
 module dns 'modules/dns.bicep' = {
   name: 'dns'
   dependsOn: [
-    vnet
-    ase
+    firewall
   ]
   scope: resourceGroup(rgname)
   params: {
@@ -104,6 +103,9 @@ module dns 'modules/dns.bicep' = {
 
 module jumpbox 'modules/jumpbox.bicep' = {
   name: 'jumpbox'
+  dependsOn: [
+    dns
+  ]
   params: {
     adminPassword: jumpboxUsername
     adminUsername: jumpboxPassword
@@ -114,6 +116,9 @@ module jumpbox 'modules/jumpbox.bicep' = {
 
 module services 'modules/services.bicep' = {
   name: 'services'
+  dependsOn: [
+    jumpbox
+  ]
   params: {
     allowedSubnetNames: ase.outputs.aseSubnetName
     sqlAadAdminSid: sqlAadAdminSid
@@ -125,6 +130,9 @@ module services 'modules/services.bicep' = {
 
 module sites 'modules/sites.bicep' = {
   name: 'sites'
+  dependsOn: [
+    services
+  ]
   params: {
     aseDnsSuffix: ase.outputs.dnsSuffix
     aseName: ase.name
@@ -139,6 +147,9 @@ module sites 'modules/sites.bicep' = {
 
 module appGtwy 'modules/appgw.bicep' = {
   name: 'appGtwy'
+  dependsOn: [
+    sites
+  ]
   params: {
     appgwApplications: [
       {
@@ -180,6 +191,9 @@ module appGtwy 'modules/appgw.bicep' = {
 
 module endpoints 'modules/privateendpoints.bicep' = {
   name: 'endpoints'
+  dependsOn: [
+    appGtwy
+  ]
   params: {
     akvName: services.outputs.keyVaultName
     cosmosDBName: services.outputs.cosmosDbName
