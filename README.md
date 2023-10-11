@@ -35,7 +35,12 @@ You can also pass on a bicep parameters file.
 
 ```
 git clone https://github.com/daveRendon/azinsider.git
+
+cd azinsider
+
+cd application-workloads
 ```
+
 
  2. Then, once you're in the working directory of the sample application, deploy it using the command below:
 
