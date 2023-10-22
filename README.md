@@ -2,7 +2,9 @@
 
 Welcome to the AzInsider repository – your gateway to deploying diverse workloads effortlessly in your Azure environment using the power of Bicep language.
 
-🌟 **Key Features:**
+🌟 Star this repository now to stay updated and show your support for the project
+
+**Key Features:**
 
 - 📂 Explore the [application-workloads directory](https://github.com/daveRendon/azinsider/tree/main/application-workloads) for a rich collection of real-world application samples.
 - 💡 Contribute and make your mark in the Azure community!
