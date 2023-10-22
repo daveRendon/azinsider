@@ -1,20 +1,20 @@
-🚀 **AzInsider - Azure Application Deployment Repository with Bicep**
+## 🚀 AzInsider - Azure Application Deployment Repository with Bicep
 
 Welcome to the AzInsider repository – your gateway to deploying diverse workloads effortlessly in your Azure environment using the power of Bicep language.
 
 🌟 Star this repository now to stay updated and show your support for the project
 
-**Key Features:**
+### Key Features: ###
 
 - 📂 Explore the [application-workloads directory](https://github.com/daveRendon/azinsider/tree/main/application-workloads) for a rich collection of real-world application samples.
 - 💡 Contribute and make your mark in the Azure community!
 
-🚀 **Get Started with Bicep:**
+### 🚀 Get Started with Bicep: ###
 
 1. **Begin by [installing the necessary tooling](https://docs.microsoft.com/azure/azure-resource-manager/bicep/install?WT.mc_id=AZ-MVP-5000671).**
 2. **Master Bicep with the [Bicep Learning Path](https://docs.microsoft.com/learn/paths/bicep-deploy?WT.mc_id=AZ-MVP-5000671).**
 
-📦 **Deployment Options:**
+### 📦 Deployment Options: ###
 
 **Option 1. Local Machine Deployment:**
 
