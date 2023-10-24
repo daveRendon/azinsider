@@ -5,14 +5,14 @@ param location string = resourceGroup().location
 param vnetName string
 
 @description('The ip address prefix that jumpbox subnet will use.')
-param subnetAddressPrefix string
+param jumpboxSubnetAddressPrefix string
 
 @description('The admin user name.')
-param adminUsername string
+param adminUsername string = 'azureuser'
 
 @description('The admin password.')
 @secure()
-param adminPassword string
+param adminPassword string = 'Azuretest01!!'
 
 var computerName = 'votingjb'
 var jumpboxName = 'jumpboxVm'
@@ -49,7 +49,7 @@ resource jumpboxNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
           sourcePortRange: '*'
           destinationPortRange: '3389'
           sourceAddressPrefix: '*'
-          destinationAddressPrefix: subnetAddressPrefix
+          destinationAddressPrefix: jumpboxSubnetAddressPrefix
           access: 'Allow'
           priority: 100
           direction: 'Inbound'
@@ -62,7 +62,7 @@ resource jumpboxNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
 resource jumpboxSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   name: '${vnetName}/${jumpboxSubnetName}'
   properties: {
-    addressPrefix: subnetAddressPrefix
+    addressPrefix: jumpboxSubnetAddressPrefix
     networkSecurityGroup: {
       id: jumpboxNSG.id
     }

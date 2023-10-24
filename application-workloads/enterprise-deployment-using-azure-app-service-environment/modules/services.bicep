@@ -26,14 +26,14 @@ var cosmosContainerName = 'cacheContainer'
 var cosmosPartitionKeyPaths = [
   '/MessageType'
 ]
-var sqlServerName = 'sqlserver${uniqueString(resourceGroup().id)}'
+var sqlServerName = 'sqlserver-azinsider'
 var sqlDatabaseName = 'voting'
-var serviceBusName = 'votingservicebus${uniqueString(resourceGroup().id)}'
+var serviceBusName = 'votingservicebusazinsider'
 var serviceBusQueueName = 'votingqueue'
 var resourcesStorageAccountName = toLower('resources${uniqueString(resourceGroup().id)}')
 var resourcesContainerName = 'rscontainer'
-var keyVaultName = 'akeyvault1-${uniqueString(resourceGroup().id)}'
-var allowedSubnetNamesArray = split(allowedSubnetNames, ',')
+var keyVaultName = 'kv-azinsider'
+var allowedSubnetNamesArray = split(allowedSubnetNames, 'ase-subnet,')
  
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {
   name: cosmosName
