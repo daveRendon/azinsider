@@ -7,6 +7,10 @@ param vnetAddressPrefix string = '10.0.0.0/16'
 param existentVnetName string = ''
 param asePrefix string = '10.0.100.0/24'
 param fwPrefix string = '10.0.200.0/24'
+param jumpboxSubnetAddressPrefix string = '10.0.250.0/24'
+param servicesPrefix string = '10.0.50.0/24'
+param redisSubnet string = '10.0.2.0/24'
+param appGtwySubnet string = '10.0.1.0/24'
 
 @description('Required. Dedicated host count of ASEv3.')
 param dedicatedHostCount int = 0
@@ -21,16 +25,15 @@ param appGtwyApp2Url string = 'testapp-std.contoso.com'
 param jumpboxUsername string = 'azureuser'
 
 @secure()
-param jumpboxPassword string = 'P@ssword1234'
+param jumpboxPassword string
 param jumpboxPrefix string = '10.0.250.0/24'
 
 param sqlAdminuser string = 'azureuser'
-param sqlPassword string = 'P@ssword1234'
+@secure()
+param sqlPassword string 
 param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' // get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
 
-param servicesPrefix string = '10.0.50.0/24'
-param redisSubnet string = '10.0.2.0/24'
-param appGtwySubnet string = '10.0.1.0/24'
+
 
 var subscriptionId = subscription().subscriptionId
 var mustCreateVNet = empty(existentVnetName)
@@ -117,7 +120,7 @@ module jumpbox 'modules/jumpbox.bicep' = {
     location: location
     adminPassword: jumpboxUsername
     adminUsername: jumpboxPassword
-    subnetAddressPrefix: jumpboxPrefix
+    jumpboxSubnetAddressPrefix: jumpboxPrefix
     vnetName: vnet.name
   }
 }
