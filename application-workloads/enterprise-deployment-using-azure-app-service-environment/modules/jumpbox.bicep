@@ -15,12 +15,12 @@ param adminUsername string
 param adminPassword string
 
 var computerName = 'votingjb'
-var jumpboxName = 'jumpbox-${computerName}${uniqueString(resourceGroup().id)}'
-var jumpboxSubnetName = 'jumpbox-subnet-${uniqueString(resourceGroup().id)}'
+var jumpboxName = 'jumpboxVm'
+var jumpboxSubnetName = 'jumpbox-subnet'
 var jumpboxSubnetId = jumpboxSubnet.id
-var jumpboxPublicIpName = 'jumpbox-pip-${uniqueString(resourceGroup().id)}'
-var jumpboxNSGName = '${vnetName}-JUMPBOX-NSG'
-var jumpboxNicName = 'jumpbox-nic-${uniqueString(resourceGroup().id)}'
+var jumpboxPublicIpName = 'jumpbox-pip'
+var jumpboxNSGName = 'jumpbox-nsg'
+var jumpboxNicName = 'jumpbox-nic'
 
 resource jumpboxPublicIp 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
   name: jumpboxPublicIpName
