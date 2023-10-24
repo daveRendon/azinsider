@@ -17,12 +17,13 @@ param dedicatedHostCount int = 0
 param zoneRedundant bool = false
 
 
-var aseName = 'ASE-${uniqueString(resourceGroup().id)}'
-var aseNSGName = 'ASE-nsg-${uniqueString(resourceGroup().id)}'
+var aseName = 'ase-azinsider'
+var aseNSGName = 'ase-nsg-azinsider'
 var aseId = ase.id
-var aseSubnetName = 'ase-subnet-${aseName}-1'
+var aseSubnetName = 'ase-subnet'
 var aseSubnetId = aseSubnet.id
 var aseLoadBalancingMode = 'Web, Publishing'
+var aseIlbIp = '10.0.100.4'
 
 
 resource aseNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
@@ -89,7 +90,7 @@ resource aseSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' = {
   }
 }
 
-resource ase 'Microsoft.Web/hostingEnvironments@2022-03-01' = {
+resource ase 'Microsoft.Web/hostingEnvironments@2022-09-01' = {
   name: aseName
   location: location
   kind: 'ASEV3'
@@ -97,6 +98,7 @@ resource ase 'Microsoft.Web/hostingEnvironments@2022-03-01' = {
     dedicatedHostCount: dedicatedHostCount
     zoneRedundant: zoneRedundant
     internalLoadBalancingMode: aseLoadBalancingMode
+
     virtualNetwork: {
       id: aseSubnetId 
     }
@@ -107,4 +109,5 @@ output dnsSuffix string = reference(aseId).dnsSuffix
 output aseId string = aseId 
 output aseSubnetName string = aseSubnetName
 output aseName string = aseName
-output aseIlbIp string = reference(aseId).properties.internalLoadBalancerIp
+output aseSubnetId string = aseSubnetId
+output aseIlbIp string = aseIlbIp

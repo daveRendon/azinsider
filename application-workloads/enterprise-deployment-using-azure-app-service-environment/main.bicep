@@ -1,5 +1,4 @@
 // Parameters
-
 param rgname string = 'azinsider_demo'
 param location string = 'eastus'
 param vnetAddressPrefix string = '10.0.0.0/16'
@@ -8,6 +7,12 @@ param vnetAddressPrefix string = '10.0.0.0/16'
 param existentVnetName string = ''
 param asePrefix string = '10.0.100.0/24'
 param fwPrefix string = '10.0.200.0/24'
+
+@description('Required. Dedicated host count of ASEv3.')
+param dedicatedHostCount int = 0
+
+@description('Required. Zone redundant of ASEv3.')
+param zoneRedundant bool = false
 
 //App url
 param appGtwyApp1Url string = 'votingapp-std.contoso.com'
@@ -69,10 +74,11 @@ module ase 'modules/ase.bicep' = {
     vnet
   ]
   scope: resourceGroup(rgname)
-  params: {
-    vnetName: vnetName
+  params:{
+    location: location
     aseSubnetAddressPrefix: asePrefix
-    vnetRouteName: vnetRouteName
+    vnetName: vnet.name
+    vnetRouteName: vnetRoute.name
   }
 }
 
@@ -83,6 +89,7 @@ module firewall 'modules/firewall.bicep' = {
   ]
   scope: resourceGroup(rgname)
   params: {
+    location: location
     vnetName: vnetName
     firewallSubnetPrefix: fwPrefix
   }
@@ -107,6 +114,7 @@ module jumpbox 'modules/jumpbox.bicep' = {
     dns
   ]
   params: {
+    location: location
     adminPassword: jumpboxUsername
     adminUsername: jumpboxPassword
     subnetAddressPrefix: jumpboxPrefix
@@ -120,6 +128,7 @@ module services 'modules/services.bicep' = {
     jumpbox
   ]
   params: {
+    location: location
     allowedSubnetNames: ase.outputs.aseSubnetName
     sqlAadAdminSid: sqlAadAdminSid
     sqlAdminPassword: sqlPassword
@@ -134,6 +143,7 @@ module sites 'modules/sites.bicep' = {
     services
   ]
   params: {
+    location: location
     aseDnsSuffix: ase.outputs.dnsSuffix
     aseName: ase.name
     cosmosDbName: services.outputs.cosmosDbName
@@ -151,6 +161,7 @@ module appGtwy 'modules/appgw.bicep' = {
     sites
   ]
   params: {
+    location: location
     appgwApplications: [
       {
         name: 'votapp'
@@ -195,6 +206,7 @@ module endpoints 'modules/privateendpoints.bicep' = {
     appGtwy
   ]
   params: {
+    location: location
     akvName: services.outputs.keyVaultName
     cosmosDBName: services.outputs.cosmosDbName
     sbName: services.outputs.serviceBusName
