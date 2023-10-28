@@ -52,7 +52,7 @@
         },
         
         "SubId": {
-            "value": "d988cbee-043f-4c46-9a59-dedb2119e48c"
+            "value": "xxxxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxx"
         },
         "sbName": { // The name of the existing service bus namespace for creating the private endpoint.
             "value": "votingservicebusazinsider"
