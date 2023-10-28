@@ -17,7 +17,7 @@
             "value": "Azuretest01!!"
         },
         "sqlAadAdminSid": { // This is the Object ID of the AAD aka managed identity
-            "value": "5b4c9cef-f232-4184-8ecf-a61f3545edc8"
+            "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         },
         "allowedSubnetNames": {
             "value": "ase-subnet"
