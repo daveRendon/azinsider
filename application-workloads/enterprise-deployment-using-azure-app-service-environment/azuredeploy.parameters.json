@@ -2,9 +2,28 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-       
+        
+        "sqlPassword": {
+            "value": "Azuretest01!!"
+        },
+        "adminPassword": {
+            "value": "Azuretest01!!"
+        },
+        
+        "sqlAdminUserName": {
+            "value": "azureuser"
+        },
+        "sqlAdminPassword": {
+            "value": "Azuretest01!!"
+        },
+        "sqlAadAdminSid": { // This is the Object ID of the AAD aka managed identity
+            "value": "5b4c9cef-f232-4184-8ecf-a61f3545edc8"
+        },
+        "allowedSubnetNames": {
+            "value": "ase-subnet"
+        },
         "vnetName": {
-            "value": "ASE-VNET-AzInsider"
+            "value": "ase-vnet-AzInsider"
         },
         
         "redisSubnetAddressPrefix": {
@@ -27,7 +46,19 @@
         },
         "sqlDatabaseName": {
             "value": "voting"
-        }
+        },
+        "appGwSubnetAddressWithPrefix": {
+            "value": "10.0.1.0/24"
+        },
         
+        "SubId": {
+            "value": "d988cbee-043f-4c46-9a59-dedb2119e48c"
+        },
+        "sbName": { // The name of the existing service bus namespace for creating the private endpoint.
+            "value": "votingservicebusazinsider"
+        },
+        "sqlName": { //The name of the existing sql server namespace
+            "value": "sqlserver-azinsider"
+        }
     }
 }
