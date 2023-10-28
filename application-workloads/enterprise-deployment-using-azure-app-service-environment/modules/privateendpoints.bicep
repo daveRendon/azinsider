@@ -22,9 +22,9 @@ param cosmosDBName string
 param akvName string
 
 @description('The ip address prefix that services subnet will use.')
-param subnetAddressPrefix string
+param servicesSubnetAddressPrefix string
 
-var servicesSubnetName = 'services-subnet-${uniqueString(resourceGroup().id)}'
+var servicesSubnetName = 'services-subnet-${uniqueString(resourceGroup().id, deployment().name)}'
 var servicesNSGName = '${vnetName}-SERVICES-NSG'
 
 var vnetId = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Network/virtualNetworks/${vnetName}'
@@ -56,7 +56,7 @@ resource servicesNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
 resource servicesSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   name: '${vnetName}/${servicesSubnetName}'
   properties: {
-    addressPrefix: subnetAddressPrefix
+    addressPrefix: servicesSubnetAddressPrefix
     networkSecurityGroup: {
       id: servicesNSG.id
     }

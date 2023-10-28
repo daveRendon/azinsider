@@ -28,11 +28,11 @@ var cosmosPartitionKeyPaths = [
 ]
 var sqlServerName = 'sqlserver-azinsider'
 var sqlDatabaseName = 'voting'
-var serviceBusName = 'votingservicebusazinsider'
+var serviceBusName = 'votingservicebus'
 var serviceBusQueueName = 'votingqueue'
 var resourcesStorageAccountName = toLower('resources${uniqueString(resourceGroup().id)}')
 var resourcesContainerName = 'rscontainer'
-var keyVaultName = 'kv-azinsider'
+var keyVaultName = 'kv-${uniqueString(resourceGroup().id, deployment().name)}'
 var allowedSubnetNamesArray = split(allowedSubnetNames, 'ase-subnet,')
  
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {

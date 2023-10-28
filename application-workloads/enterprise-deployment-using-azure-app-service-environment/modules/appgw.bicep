@@ -5,10 +5,45 @@ param location string = resourceGroup().location
 param vnetName string
 
 @description('The ip address prefix that gateway will use.')
-param subnetAddressWithPrefix string
+param appGwSubnetAddressWithPrefix string
+
+param appGtwyApp1Url string = 'votingapp-std.contoso.com'
+param appGtwyApp2Url string = 'testapp-std.contoso.com'
 
 @description('List of applications to configure. Each element format is: { name, hostName, backendAddresses, certificate: { data, password }, probePath }')
-param appgwApplications array
+param appgwApplications array = [
+  {
+    name: 'votapp'
+    routingPriority: 100
+    hostName: appGtwyApp1Url
+    backendAddresses: [
+      {
+        fqdn: 'votingapp-std.contoso.com'
+      }
+    ]
+    
+    //certificate: {
+     // data: ''
+     // password: ''
+   // }
+    probePath: '/health'
+  }
+  {
+    name: 'testapp'
+    routingPriority: 101
+    hostName: appGtwyApp2Url
+    backendAddresses: [
+      {
+        fqdn: 'testapp-std.contoso.com'
+      }
+    ]
+    //certificate: {
+    //  data: ''
+    //  password: ''
+   // }
+    probePath: '/'
+  }
+]
 
 @description('Comma separated application gateway zones.')
 param appgwZones string = ''
@@ -23,12 +58,12 @@ var appgwPublicIpAddressName = '${vnetName}-appgw-Ip'
 var appGwPublicIpAddressId = resourceId('Microsoft.Network/publicIPAddresses',appgwPublicIpAddressName)
 var appgwIpConfigName = '${appGatewayName}-ipconfig'
 var appgwFrontendName = '${appGatewayName}-frontend'
-var appgwBackendName = '${appGatewayName}-backend-'
-var appgwHttpSettingsName = '${appGatewayName}-httpsettings-'
-var appgwHealthProbeName = '${appGatewayName}-healthprobe-'
-var appgwListenerName = '${appGatewayName}-listener-'
-var appgwSslCertificateName = '${appGatewayName}-ssl-'
-var appgwRouteRulesName = '${appGatewayName}-routerules-'
+var appgwBackendName = '${appGatewayName}-backend'
+var appgwHttpSettingsName = '${appGatewayName}-httpsettings'
+var appgwHealthProbeName = '${appGatewayName}-healthprobe'
+var appgwListenerName = '${appGatewayName}-listener'
+var appgwSslCertificateName = '${appGatewayName}-ssl'
+var appgwRouteRulesName = '${appGatewayName}-routerules'
 var appgwAutoScaleMinCapacity = 0
 var appgwAutoScaleMaxCapacity = 10
 var appgwZonesArray = (empty(appgwZones) ? json('null') : split(appgwZones, ','))
@@ -91,7 +126,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2022-05-0
             '443'
           ]
           sourceAddressPrefix: 'Internet'
-          destinationAddressPrefix: subnetAddressWithPrefix
+          destinationAddressPrefix: appGwSubnetAddressWithPrefix
           access: 'Allow'
           priority: 202
           direction: 'Inbound'
@@ -104,7 +139,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2022-05-0
 resource appGatewaySubnet 'Microsoft.Network/virtualNetworks/subnets@2022-05-01' = {
   name: subnetName
   properties: {
-    addressPrefix: subnetAddressWithPrefix
+    addressPrefix: appGwSubnetAddressWithPrefix
     networkSecurityGroup: { id: networkSecurityGroup.id, location: location }
   }
 }
@@ -140,9 +175,9 @@ resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
     ]
     frontendPorts: [
       {
-        name: 'port_443'
+        name: 'port_80' //'port_443
         properties: {
-          port: 443
+          port: 80 //443
         }
       }
     ]
@@ -166,8 +201,8 @@ resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
     backendHttpSettingsCollection: [for item in appgwApplications: {
       name: '${appgwHttpSettingsName}${item.name}'
       properties: {
-        port: 443
-        protocol: 'Https'
+        port: 80 //443
+        protocol: 'Http' //https
         cookieBasedAffinity: 'Disabled'
         pickHostNameFromBackendAddress: true
         requestTimeout: 20
@@ -183,14 +218,14 @@ resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
           id: '${appgwId}/frontendIPConfigurations/${appgwFrontendName}'
         }
         frontendPort: {
-          id: '${appgwId}/frontendPorts/port_443'
+          id: '${appgwId}/frontendPorts/port_80' //port_443
         }
-        protocol: 'Https'
-        sslCertificate: {
-          id: '${appgwId}/sslCertificates/${appgwSslCertificateName}${item.name}'
-        }
+        protocol: 'Http' //https
+       // sslCertificate: {
+         // id: '${appgwId}/sslCertificates/${appgwSslCertificateName}${item.name}'
+        //}
         hostName: item.hostName
-        requireServerNameIndication: true
+        requireServerNameIndication: false //can be true only if protocol is Https in http listener
       }
     }]
     requestRoutingRules: [for item in appgwApplications: {
@@ -212,7 +247,7 @@ resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
     probes: [for item in appgwApplications: {
       name: '${appgwHealthProbeName}${item.name}'
       properties: {
-        protocol: 'Https'
+        protocol: 'Http' //https
         path: item.probePath
         interval: 30
         timeout: 30
@@ -226,13 +261,13 @@ resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
         }
       }
     }]
-    sslCertificates: [for item in appgwApplications: {
-      name: '${appgwSslCertificateName}${item.name}'
-      properties: {
-        data: item.certificate.data
-        password: item.certificate.password
-      }
-    }]
+   // sslCertificates: [for item in appgwApplications: {
+     // name: '${appgwSslCertificateName}${item.name}'
+      //properties: {
+        //data: item.certificate.data
+        //password: item.certificate.password
+      //}
+    //}]
   }
 }
 

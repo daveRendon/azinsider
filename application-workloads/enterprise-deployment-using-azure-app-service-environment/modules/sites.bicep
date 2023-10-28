@@ -31,10 +31,10 @@ param logAnalyticsWorkspace string = '${uniqueString(resourceGroup().id)}la'
 @description('The availability zone to deploy. Valid values are: 1, 2 or 3. Use empty to not use zones.')
 param zoneRedundant bool = false
 
-var redisName = 'REDIS-${uniqueString(resourceGroup().id)}'
-var redisSubnetName = 'redis-subnet-${uniqueString(resourceGroup().id)}'
+var redisName = 'redis-${uniqueString(resourceGroup().id)}'
+var redisSubnetName = 'redis-subnet'
 var redisSubnetId = redisSubnet.id
-var redisNSGName = '${vnetName}-REDIS-NSG'
+var redisNSGName = 'redis-nsg'
 var redisSecretName = 'RedisConnectionString'
 var cosmosKeySecretName = 'CosmosKey'
 var serviceBusListenerConnectionStringSecretName = 'ServiceBusListenerConnectionString'
@@ -551,3 +551,4 @@ output votingFunctionName string = votingFunctionName
 output votingWebAppIdentityPrincipalId string = reference('Microsoft.Web/sites/${votingWebName}', '2022-03-01', 'Full').identity.principalId
 output votingApiIdentityPrincipalId string = reference('Microsoft.Web/sites/${votingApiName}', '2022-03-01', 'Full').identity.principalId
 output votingCounterFunctionIdentityPrincipalId string = reference('Microsoft.Web/sites/${votingFunctionName}', '2022-03-01', 'Full').identity.principalId
+output votingAppURLstring string = votingWebApp.properties.hostNames[0]

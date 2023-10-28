@@ -5,7 +5,7 @@ param location string = resourceGroup().location
 param vnetName string
 
 @description('The ip address prefix that jumpbox subnet will use.')
-param jumpboxSubnetAddressPrefix string
+param jumpboxSubnetAddressPrefix string = '10.0.250.0/24'
 
 @description('The admin user name.')
 param adminUsername string = 'azureuser'

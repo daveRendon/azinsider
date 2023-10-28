@@ -5,12 +5,36 @@ param vnetAddressPrefix string = '10.0.0.0/16'
 
 @description('The name of the vnet to use. Leave empty to create a new vnet.')
 param existentVnetName string = ''
-param asePrefix string = '10.0.100.0/24'
-param fwPrefix string = '10.0.200.0/24'
-param jumpboxSubnetAddressPrefix string = '10.0.250.0/24'
-param servicesPrefix string = '10.0.50.0/24'
+param aseSubnet string = '10.0.100.0/24'
+param fwSubnet string = '10.0.200.0/24'
+param jumpboxSubnet string = '10.0.250.0/24'
+param servicesSubnet string = '10.0.50.0/24'
 param redisSubnet string = '10.0.2.0/24'
 param appGtwySubnet string = '10.0.1.0/24'
+
+param subnet1Name string = 'ase-subnet'
+param subnet2Name string = 'AzureFirewallSubnet'
+param subnet3Name string = 'jumpbox-subnet'
+param subnet4Name string = 'redis-subnet'
+param subnet5Name string = 'appgw-subnet'
+param subnet6Name string = 'services-subnet'
+
+param sbName string
+param redisSubnetAddressPrefix string
+param sqlServerName string
+param keyVaultName string
+param sqlDatabaseName string
+param sqlAdminUserName string
+param appGwSubnetAddressWithPrefix string
+param aseDnsSuffix string
+param subId string
+param adminPassword string
+param cosmosDbName string
+param sqlName string
+param sqlAdminPassword string
+param allowedSubnetNames string
+param aseName string
+
 
 @description('Required. Dedicated host count of ASEv3.')
 param dedicatedHostCount int = 0
@@ -24,10 +48,6 @@ param appGtwyApp2Url string = 'testapp-std.contoso.com'
 
 param jumpboxUsername string = 'azureuser'
 
-@secure()
-param jumpboxPassword string
-param jumpboxPrefix string = '10.0.250.0/24'
-
 param sqlAdminuser string = 'azureuser'
 @secure()
 param sqlPassword string 
@@ -37,8 +57,8 @@ param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' // get this
 
 var subscriptionId = subscription().subscriptionId
 var mustCreateVNet = empty(existentVnetName)
-var vnetName = (empty(existentVnetName) ? 'ASE-VNET-AzInsider' : existentVnetName)
-var vnetRouteName = 'ASE-VNETRT-AzInsider'
+param vnetName string = (empty(existentVnetName) ? 'ase-vnet' : existentVnetName)
+var vnetRouteName = 'ase-vnet-route'
 
 resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' = if (mustCreateVNet) {
   name: vnetName
@@ -49,6 +69,44 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' = if (mustCreateVNe
         vnetAddressPrefix
       ]
     }
+    subnets: [
+      {
+        name: subnet1Name
+        properties: {
+          addressPrefix: aseSubnet
+        }
+      }
+      {
+        name: subnet2Name
+        properties: {
+          addressPrefix: fwSubnet
+        }
+      }
+      {
+        name: subnet3Name
+        properties: {
+          addressPrefix: jumpboxSubnet
+        }
+      }
+      {
+        name: subnet4Name
+        properties: {
+          addressPrefix: redisSubnet
+        }
+      }
+      {
+        name: subnet5Name
+        properties: {
+          addressPrefix: appGtwySubnet
+        }
+      }
+      {
+        name: subnet6Name
+        properties: {
+          addressPrefix: servicesSubnet
+        }
+      }
+    ]
   }
 }
 
@@ -79,7 +137,7 @@ module ase 'modules/ase.bicep' = {
   scope: resourceGroup(rgname)
   params:{
     location: location
-    aseSubnetAddressPrefix: asePrefix
+    aseSubnetAddressPrefix: aseSubnet
     vnetName: vnet.name
     vnetRouteName: vnetRoute.name
   }
@@ -88,20 +146,20 @@ module ase 'modules/ase.bicep' = {
 module firewall 'modules/firewall.bicep' = {
   name: 'firewall'
   dependsOn: [
-    ase
+    vnet
   ]
   scope: resourceGroup(rgname)
   params: {
     location: location
     vnetName: vnetName
-    firewallSubnetPrefix: fwPrefix
+    firewallSubnetPrefix: fwSubnet
   }
 }
 
 module dns 'modules/dns.bicep' = {
   name: 'dns'
   dependsOn: [
-    firewall
+    ase
   ]
   scope: resourceGroup(rgname)
   params: {
@@ -114,13 +172,13 @@ module dns 'modules/dns.bicep' = {
 module jumpbox 'modules/jumpbox.bicep' = {
   name: 'jumpbox'
   dependsOn: [
-    dns
+    vnet
   ]
   params: {
     location: location
-    adminPassword: jumpboxUsername
-    adminUsername: jumpboxPassword
-    jumpboxSubnetAddressPrefix: jumpboxPrefix
+    adminPassword: adminPassword
+    adminUsername: jumpboxUsername
+    jumpboxSubnetAddressPrefix: jumpboxSubnet
     vnetName: vnet.name
   }
 }
@@ -128,7 +186,7 @@ module jumpbox 'modules/jumpbox.bicep' = {
 module services 'modules/services.bicep' = {
   name: 'services'
   dependsOn: [
-    jumpbox
+    vnet
   ]
   params: {
     location: location
@@ -198,7 +256,7 @@ module appGtwy 'modules/appgw.bicep' = {
         probePath: '/'
       }
     ]
-    subnetAddressWithPrefix: appGtwySubnet
+    appGwSubnetAddressWithPrefix: appGtwySubnet
     vnetName: vnetName
   }
 }
@@ -206,7 +264,7 @@ module appGtwy 'modules/appgw.bicep' = {
 module endpoints 'modules/privateendpoints.bicep' = {
   name: 'endpoints'
   dependsOn: [
-    appGtwy
+    services
   ]
   params: {
     location: location
@@ -215,7 +273,7 @@ module endpoints 'modules/privateendpoints.bicep' = {
     sbName: services.outputs.serviceBusName
     sqlName: services.outputs.sqlServerName
     SubId: subscriptionId
-    subnetAddressPrefix: servicesPrefix
+    servicesSubnetAddressPrefix: servicesSubnet
     vnetName: vnetName
   }
 }

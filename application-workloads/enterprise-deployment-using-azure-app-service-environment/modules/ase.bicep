@@ -18,7 +18,7 @@ param zoneRedundant bool = false
 
 
 var aseName = 'ase-azinsider'
-var aseNSGName = 'ase-nsg-azinsider'
+var aseNSGName = 'ase-nsg'
 var aseId = ase.id
 var aseSubnetName = 'ase-subnet'
 var aseSubnetId = aseSubnet.id
