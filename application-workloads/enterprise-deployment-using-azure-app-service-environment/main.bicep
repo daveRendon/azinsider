@@ -2,8 +2,6 @@
 param rgname string = 'azinsider_demo'
 param location string = 'eastus'
 param vnetAddressPrefix string = '10.0.0.0/16'
-
-@description('The name of the vnet to use. Leave empty to create a new vnet.')
 param existentVnetName string = ''
 param aseSubnet string = '10.0.100.0/24'
 param fwSubnet string = '10.0.200.0/24'
@@ -11,14 +9,12 @@ param jumpboxSubnet string = '10.0.250.0/24'
 param servicesSubnet string = '10.0.50.0/24'
 param redisSubnet string = '10.0.2.0/24'
 param appGtwySubnet string = '10.0.1.0/24'
-
 param subnet1Name string = 'ase-subnet'
 param subnet2Name string = 'AzureFirewallSubnet'
 param subnet3Name string = 'jumpbox-subnet'
 param subnet4Name string = 'redis-subnet'
 param subnet5Name string = 'appgw-subnet'
 param subnet6Name string = 'services-subnet'
-
 param sbName string
 param redisSubnetAddressPrefix string
 param sqlServerName string
@@ -52,8 +48,6 @@ param sqlAdminuser string = 'azureuser'
 @secure()
 param sqlPassword string 
 param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' // get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
-
-
 
 var subscriptionId = subscription().subscriptionId
 var mustCreateVNet = empty(existentVnetName)
@@ -146,7 +140,7 @@ module ase 'modules/ase.bicep' = {
 module firewall 'modules/firewall.bicep' = {
   name: 'firewall'
   dependsOn: [
-    vnet
+    ase
   ]
   scope: resourceGroup(rgname)
   params: {
@@ -186,7 +180,7 @@ module jumpbox 'modules/jumpbox.bicep' = {
 module services 'modules/services.bicep' = {
   name: 'services'
   dependsOn: [
-    vnet
+    ase
   ]
   params: {
     location: location
@@ -264,7 +258,7 @@ module appGtwy 'modules/appgw.bicep' = {
 module endpoints 'modules/privateendpoints.bicep' = {
   name: 'endpoints'
   dependsOn: [
-    services
+    appGtwy
   ]
   params: {
     location: location
@@ -303,4 +297,3 @@ output votingAPIName string = sites.outputs.votingApiName
 output votingAPIPrincipalId string = sites.outputs.votingApiIdentityPrincipalId
 output appGtwyName string = appGtwy.name
 output appGtwyPublicIpAddress string = appGtwy.outputs.appGwPublicIpAddress
-
