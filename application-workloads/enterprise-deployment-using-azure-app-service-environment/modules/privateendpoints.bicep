@@ -19,13 +19,13 @@ param sqlName string
 param cosmosDBName string
 
 @description('The name of the existing keyvault namespace for creating the private endpoint.')
-param akvName string
+param keyVaultName string
 
 @description('The ip address prefix that services subnet will use.')
 param servicesSubnetAddressPrefix string
 
-var servicesSubnetName = 'services-subnet-${uniqueString(resourceGroup().id, deployment().name)}'
-var servicesNSGName = '${vnetName}-SERVICES-NSG'
+var servicesSubnetName = 'services-subnet'
+var servicesNSGName = 'services-nsg'
 
 var vnetId = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Network/virtualNetworks/${vnetName}'
 // var subnetId = '${vnetId}/subnets/${servicesSubnetName}'
@@ -33,7 +33,7 @@ var vnetId = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/pro
 param sbId string = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.ServiceBus/namespaces/${sbName}'
 param sqlServerId string = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Sql/servers/${sqlName}'
 param cosmosId string = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosDBName}'
-param akvId string = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.KeyVault/vaults/${akvName}'
+param akvId string = '/subscriptions/${SubId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.KeyVault/vaults/${keyVaultName}'
 
 
 //1. Create a private endpoint for the SQL Server
@@ -301,13 +301,13 @@ resource privateDnsZoneARecordCosmos 'Microsoft.Network/privateDnsZones/A@2020-0
 
 //Create variables for the private endpoint
 var akvHostName = '.vaultcore.azure.net'
-var privateEndpointAKVName = 'voting-AKV-PE-${servicesSubnetName}'
-var privateDnsZoneAKVName = 'privatelink${akvHostName}'
-var pvtEndpointDnsGroupAKVName = '${privateEndpointAKVName}/sbdnsgroupname'
+var privateEndpointkeyVaultName = 'voting-AKV-PE-${servicesSubnetName}'
+var privateDnsZonekeyVaultName = 'privatelink${akvHostName}'
+var pvtEndpointDnsGroupkeyVaultName = '${privateEndpointkeyVaultName}/sbdnsgroupname'
 
 //Create the private endpoint
 resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: privateEndpointAKVName
+  name: privateEndpointkeyVaultName
   location: location
   properties: {
     subnet: {
@@ -315,7 +315,7 @@ resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2021-05-01' = {
     }
     privateLinkServiceConnections: [
       {
-        name: privateEndpointAKVName
+        name: privateEndpointkeyVaultName
         properties: {
           privateLinkServiceId: akvId
           groupIds: [
@@ -328,14 +328,14 @@ resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2021-05-01' = {
 }
 
 resource privateDnsZoneAKV 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: privateDnsZoneAKVName
+  name: privateDnsZonekeyVaultName
   location: 'global'
   properties: {}
 }
 
 resource privateDnsZoneLinkAKV 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
   parent: privateDnsZoneAKV
-  name: '${privateDnsZoneAKVName}-link'
+  name: '${privateDnsZonekeyVaultName}-link'
   location: 'global'
   properties: {
     registrationEnabled: false
@@ -346,7 +346,7 @@ resource privateDnsZoneLinkAKV 'Microsoft.Network/privateDnsZones/virtualNetwork
 }
 
 resource pvtEndpointDnsGroupAKV 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
-  name: pvtEndpointDnsGroupAKVName
+  name: pvtEndpointDnsGroupkeyVaultName
   properties: {
     privateDnsZoneConfigs: [
       {
@@ -364,7 +364,7 @@ resource pvtEndpointDnsGroupAKV 'Microsoft.Network/privateEndpoints/privateDnsZo
 
 resource privateDnsZoneARecordAKV 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
   parent: privateDnsZoneAKV
-  name: '${privateEndpointAKVName}.${privateDnsZoneAKVName}'
+  name: '${privateEndpointkeyVaultName}.${privateDnsZonekeyVaultName}'
   properties: {
     ttl: 3600
     aRecords: [
