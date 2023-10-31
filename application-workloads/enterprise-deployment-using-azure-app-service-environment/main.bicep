@@ -13,24 +13,24 @@ param subnet1Name string = 'ase-subnet'
 param subnet2Name string = 'AzureFirewallSubnet'
 param subnet3Name string = 'jumpbox-subnet'
 param subnet4Name string = 'redis-subnet'
-param subnet5Name string = 'appgw-subnet'
-param subnet6Name string = 'services-subnet'
-param sbName string
+param subnet5Name string = 'services-subnet'
+
 param redisSubnetAddressPrefix string
-param sqlServerName string
+param aseName string
+param aseDnsSuffix string
 param keyVaultName string
+param servicesSubnetAddressPrefix string
+param sbName string
+param sqlServerName string
 param sqlDatabaseName string
 param sqlAdminUserName string
 param appGwSubnetAddressWithPrefix string
-param aseDnsSuffix string
 param subId string
 param adminPassword string
 param cosmosDbName string
 param sqlName string
 param sqlAdminPassword string
 param allowedSubnetNames string
-param aseName string
-
 
 @description('Required. Dedicated host count of ASEv3.')
 param dedicatedHostCount int = 0
@@ -90,12 +90,6 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' = if (mustCreateVNe
       }
       {
         name: subnet5Name
-        properties: {
-          addressPrefix: appGtwySubnet
-        }
-      }
-      {
-        name: subnet6Name
         properties: {
           addressPrefix: servicesSubnet
         }
@@ -262,7 +256,7 @@ module endpoints 'modules/privateendpoints.bicep' = {
   ]
   params: {
     location: location
-    akvName: services.outputs.keyVaultName
+    keyVaultName: services.outputs.keyVaultName
     cosmosDBName: services.outputs.cosmosDbName
     sbName: services.outputs.serviceBusName
     sqlName: services.outputs.sqlServerName
