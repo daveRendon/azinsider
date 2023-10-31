@@ -49,12 +49,12 @@ param appgwApplications array = [
 param appgwZones string = ''
 
 var appGatewayName = '${vnetName}-appgw'
-var subnetNameWithoutSegment = '${appGatewayName}-subnet'
+var subnetNameWithoutSegment = 'appgw-subnet'
 var subnetName = '${vnetName}/${subnetNameWithoutSegment}'
 var appgwId = resourceId('Microsoft.Network/applicationGateways', appGatewayName)
 var appgwSubnetId = appGatewaySubnet.id
-var appgwNSGName = '${vnetName}-appgw-NSG'
-var appgwPublicIpAddressName = '${vnetName}-appgw-Ip'
+var appgwNSGName = '${vnetName}-appgw-nsg'
+var appgwPublicIpAddressName = '${vnetName}-appgw-ip'
 var appGwPublicIpAddressId = resourceId('Microsoft.Network/publicIPAddresses',appgwPublicIpAddressName)
 var appgwIpConfigName = '${appGatewayName}-ipconfig'
 var appgwFrontendName = '${appGatewayName}-frontend'
