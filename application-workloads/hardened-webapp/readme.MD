@@ -1,6 +1,6 @@
 # Deploy a Network-hardened web app with private PaaS datastore using Bicep Language
 
-Reference Microsoft Lean docs: Network-hardened web application with private connectivity to PaaS datastores:
+Reference Microsoft Learn docs: Network-hardened web application with private connectivity to PaaS datastores:
 👉 https://learn.microsoft.com/en-us/azure/architecture/example-scenario/security/hardened-web-app
 
 Post by Az-Insder:
