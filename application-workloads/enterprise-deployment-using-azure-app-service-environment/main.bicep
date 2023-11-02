@@ -120,7 +120,7 @@ resource vnetRoute 'Microsoft.Network/routeTables@2022-01-01' = {
 module ase 'modules/ase.bicep' = {
   name: 'ase'
   dependsOn: [
-    vnet
+    jumpbox
   ]
   scope: resourceGroup(rgname)
   params:{
