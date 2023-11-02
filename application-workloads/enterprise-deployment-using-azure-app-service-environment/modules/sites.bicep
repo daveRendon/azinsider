@@ -8,10 +8,10 @@ param vnetName string
 param redisSubnetAddressPrefix string
 
 @description('The ASE name where to host the applications')
-param aseName string
+param aseName string = 'ase-azinsider'
 
 @description('DNS suffix where the app will be deployed')
-param aseDnsSuffix string
+param aseDnsSuffix string = 'ase-azinsider'
 
 @description('The name of the key vault name')
 param keyVaultName string
@@ -47,7 +47,7 @@ var votingApiPlanName = '${votingApiName}-plan'
 var votingWebPlanName = '${votingWebName}-plan'
 var testWebPlanName = '${testWebName}-plan'
 var votingFunctionPlanName = '${votingFunctionName}-plan'
-var aseId = resourceId('Microsoft.Web/hostingEnvironments', aseName)
+var aseId = resourceId('Microsoft.Web/hostingEnvironments', 'ase-azinsider')
 
 resource redisNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   name: redisNSGName

@@ -16,7 +16,6 @@ param dedicatedHostCount int = 0
 @description('Required. Zone redundant of ASEv3.')
 param zoneRedundant bool = false
 
-
 var aseName = 'ase-azinsider'
 var aseNSGName = 'ase-nsg'
 var aseId = ase.id
@@ -25,13 +24,9 @@ var aseSubnetId = aseSubnet.id
 var aseLoadBalancingMode = 'Web, Publishing'
 var aseIlbIp = '10.0.100.4'
 
-
 resource aseNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   name: aseNSGName
   location: location
-  tags: {
-    displayName: aseNSGName
-  }
   properties: {
     securityRules: [
       {
