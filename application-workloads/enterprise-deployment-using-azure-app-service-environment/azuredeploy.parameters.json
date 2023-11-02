@@ -17,13 +17,13 @@
             "value": "Azuretest01!!"
         },
         "sqlAadAdminSid": { // This is the Object ID of the AAD aka managed identity
-            "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+            "value": "xxxxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
         },
         "allowedSubnetNames": {
             "value": "ase-subnet"
         },
         "vnetName": {
-            "value": "ase-vnet-AzInsider"
+            "value": "vnet-azinsider"
         },
         
         "redisSubnetAddressPrefix": {
@@ -35,11 +35,11 @@
         "aseDnsSuffix": {
             "value": "ase-azinsider"
         },
-        "keyVaultName": {
-            "value": "kv-azinsider"
+        "keyVaultName": { // update the keyvault variable name in the services.bicep file
+            "value": "kvazinsider122"
         },
         "cosmosDbName": {
-            "value": "votingcosmos-ombqymkr3dzkg"
+            "value": "votingcosmos-azinsider"
         },
         "sqlServerName": {
             "value": "sqlserver-azinsider"
@@ -51,14 +51,17 @@
             "value": "10.0.1.0/24"
         },
         
-        "SubId": {
-            "value": "xxxxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxx"
+        "SubId": { // Your subscription id
+            "value": ""
         },
         "sbName": { // The name of the existing service bus namespace for creating the private endpoint.
             "value": "votingservicebusazinsider"
         },
         "sqlName": { //The name of the existing sql server namespace
             "value": "sqlserver-azinsider"
+        },
+        "servicesSubnetAddressPrefix": {
+            "value": "10.0.50.0/24"
         }
     }
 }
