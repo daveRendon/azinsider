@@ -14,7 +14,6 @@ param subnet2Name string = 'AzureFirewallSubnet'
 param subnet3Name string = 'jumpbox-subnet'
 param subnet4Name string = 'redis-subnet'
 param subnet5Name string = 'services-subnet'
-
 param redisSubnetAddressPrefix string
 param aseName string
 param aseDnsSuffix string
