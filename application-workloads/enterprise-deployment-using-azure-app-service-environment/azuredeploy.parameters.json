@@ -35,7 +35,7 @@
         "aseDnsSuffix": {
             "value": "ase-azinsider"
         },
-        "keyVaultName": { // update the keyvault variable name in the services.bicep file
+        "keyVaultName": { // validate the keyvault name in the services.bicep file
             "value": "kvazinsider122"
         },
         "cosmosDbName": {
