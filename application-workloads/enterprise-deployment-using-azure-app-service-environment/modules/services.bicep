@@ -20,6 +20,8 @@ param zoneRedundant bool = false
 @description('Comma separated subnet names that can access the services.')
 param allowedSubnetNames string
 
+param keyVaultName string = 'kv-nb${uniqueString(resourceGroup().id, deployment().name)}'
+
 var cosmosName = 'votingcosmos-${uniqueString(resourceGroup().id)}'
 var cosmosDatabaseName = 'cacheDB'
 var cosmosContainerName = 'cacheContainer'
@@ -32,7 +34,6 @@ var serviceBusName = 'votingservicebus'
 var serviceBusQueueName = 'votingqueue'
 var resourcesStorageAccountName = toLower('resources${uniqueString(resourceGroup().id)}')
 var resourcesContainerName = 'rscontainer'
-var keyVaultName = 'kv-nb${uniqueString(resourceGroup().id, deployment().name)}'
 var allowedSubnetNamesArray = split(allowedSubnetNames, 'ase-subnet, services-subnet')
  
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {
