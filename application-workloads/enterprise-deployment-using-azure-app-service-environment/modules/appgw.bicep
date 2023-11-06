@@ -13,7 +13,7 @@ param appGtwyApp2Url string = 'testapp-std.contoso.com'
 @description('List of applications to configure. Each element format is: { name, hostName, backendAddresses, certificate: { data, password }, probePath }')
 param appgwApplications array = [
   {
-    name: 'votapp'
+    name: 'votingapp'
     routingPriority: 100
     hostName: appGtwyApp1Url
     backendAddresses: [
@@ -48,17 +48,17 @@ param appgwApplications array = [
 @description('Comma separated application gateway zones.')
 param appgwZones string = ''
 
-var appGatewayName = '${vnetName}-appgw'
-var subnetNameWithoutSegment = 'appgw-subnet'
+var appGatewayName = 'appgw'
+var subnetNameWithoutSegment = '${appGatewayName}-subnet'
 var subnetName = '${vnetName}/${subnetNameWithoutSegment}'
 var appgwId = resourceId('Microsoft.Network/applicationGateways', appGatewayName)
 var appgwSubnetId = appGatewaySubnet.id
 var appgwNSGName = '${vnetName}-appgw-nsg'
-var appgwPublicIpAddressName = '${vnetName}-appgw-ip'
+var appgwPublicIpAddressName = '${vnetName}-appgw-Ip'
 var appGwPublicIpAddressId = resourceId('Microsoft.Network/publicIPAddresses',appgwPublicIpAddressName)
 var appgwIpConfigName = '${appGatewayName}-ipconfig'
 var appgwFrontendName = '${appGatewayName}-frontend'
-var appgwBackendName = '${appGatewayName}-backend'
+var appgwBackendName = '${appGatewayName}-backend-'
 var appgwHttpSettingsName = '${appGatewayName}-httpsettings'
 var appgwHealthProbeName = '${appGatewayName}-healthprobe'
 var appgwListenerName = '${appGatewayName}-listener'
