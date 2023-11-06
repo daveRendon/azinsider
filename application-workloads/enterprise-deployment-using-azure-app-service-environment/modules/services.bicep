@@ -20,7 +20,8 @@ param zoneRedundant bool = false
 @description('Comma separated subnet names that can access the services.')
 param allowedSubnetNames string
 
-param keyVaultName string = 'kv-nb${uniqueString(resourceGroup().id, deployment().name)}'
+param keyVaultName string = 'kv-bd${uniqueString(resourceGroup().id, deployment().name)}'
+
 
 var cosmosName = 'votingcosmos-${uniqueString(resourceGroup().id)}'
 var cosmosDatabaseName = 'cacheDB'
