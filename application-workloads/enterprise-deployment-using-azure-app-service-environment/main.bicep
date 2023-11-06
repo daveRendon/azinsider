@@ -46,7 +46,7 @@ param jumpboxUsername string = 'azureuser'
 param sqlAdminuser string = 'azureuser'
 @secure()
 param sqlPassword string 
-param sqlAadAdminSid string = 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx' // get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
+param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' // get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
 
 var subscriptionId = subscription().subscriptionId
 var mustCreateVNet = empty(existentVnetName)
@@ -212,12 +212,12 @@ module appGtwy 'modules/appgw.bicep' = {
     location: location
     appgwApplications: [
       {
-        name: 'votapp'
+        name: 'votingapp'
         routingPriority: 100
         hostName: appGtwyApp1Url
         backendAddresses: [
           {
-            fqdn: sites.outputs.votingAppUrl
+            fqdn: 'votingapp-std.contoso.com'
           }
         ]
         
@@ -233,7 +233,7 @@ module appGtwy 'modules/appgw.bicep' = {
         hostName: appGtwyApp2Url
         backendAddresses: [
           {
-            fqdn: sites.outputs.testAppUrl
+            fqdn: 'testapp-std.contoso.com'
           }
         ]
         //certificate: {
