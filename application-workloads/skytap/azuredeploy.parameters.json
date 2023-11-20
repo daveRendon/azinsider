@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "skytap2"
+        },
+        "planId": {
+            "value": "txm1r1_paygo_pub_oct23"
+        },
+        "offerId": {
+            "value": "skytap-on-azure-main1"
+        },
+        "publisherId": {
+            "value": "skytapinc"
+        },
+        "quantity": {
+            "value": 1
+        },
+        "termId": {
+            "value": "gmz7xq9ge3py"
+        },
+        "subscriptionId": {
+            "value": "YOUR-SUBSCRIPTION-ID"
+        },
+        
+        "autoRenew": {
+            "value": false
+        },
+        "location": {
+            "value": "global"
+        },
+       
+        "riskPropertyBagHeader": {
+            "value": "{\"entrypoint\":\"IbizaMarketplace (SaaS)\",\"session_Id\":\"7044a6a5c70346588b491ba2358c1641\",\"locale\":\"en-us\",\"total_price\":0,\"currency\":\"USD\",\"product_service\":\"SaaS\",\"ip_address\":\"YOUR-IP-ADDRESS\"}"
+        }
+    }
+}
