@@ -6,10 +6,10 @@
         "value": "sendgridApp"
       },
       "sendgridapiKey": {
-        "value": "Your-API-Key"
+        "value": "YOUR-API-KEY-HERE"
       },
       "sendgridName": {
-        "value": "sendgridConnection"
+        "value": "sengrid"
       }
     }
   }

@@ -18,7 +18,7 @@ resource sendgrid 'Microsoft.Web/connections@2018-07-01-preview' = {
     api: {
       id: subscriptionResourceId('Microsoft.Web/locations/managedApis', location, 'sendgrid')
     }
-    displayName: 'sendgrid'
+    displayName: 'sengrid'
     parameterValues: {
       apiKey: sendgridApiKey
     }
@@ -99,7 +99,7 @@ resource logicApp 'Microsoft.Logic/workflows@2019-05-01' = {
       '$connections': {
         value: {
           sendgrid: {
-            id: subscriptionResourceId('Microsoft.Web/locations/managedApis', location, 'sendgrid')
+            id: 'subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/sendgrid'
             connectionId: sendgrid.id
           }
         }
