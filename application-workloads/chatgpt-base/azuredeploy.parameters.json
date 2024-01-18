@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "name": {
+        "value": "chatgpt-azinsider"
+      },
+      "location": {
+        "value": "eastus"
+      },
+      "principalId": {
+        "value": "Your-Service-Principal-ID-here"
+      },
+      "openAiResourceName": {
+        "value": "azinsider-OpenAI"
+      },
+      "openAiResourceGroupName": {
+        "value": "openai"
+      },
+      "openAiResourceGroupLocation": {
+        "value": "eastus"
+      },
+      "openAiSkuName": {
+        "value": "S0"
+      },
+      "createRoleForUser": {
+        "value": true
+      },
+      "acaExists": {
+        "value": false
+      }
+    }
+  }
