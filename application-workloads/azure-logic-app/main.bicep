@@ -1,50 +1,106 @@
-@description('The name of the logic app to create.')
+@description('The name for the logic app.')
 param logicAppName string
 
-@description('A test URI')
-param testUri string = 'https://status.azure.com/en-us/status/'
+@description('The SendGrid API key from the SendGrid service.')
+@secure()
+param sendgridApiKey string
+
+@description('The name for the SendGrid connection.')
+param sendgridName string
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
-var frequency = 'Hour'
-var interval = '1'
-var type = 'recurrence'
-var actionType = 'http'
-var method = 'GET'
-var workflowSchema = 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
+resource sendgrid 'Microsoft.Web/connections@2018-07-01-preview' = {
+  location: location
+  name: sendgridName
+  properties: {
+    api: {
+      id: subscriptionResourceId('Microsoft.Web/locations/managedApis', location, 'sendgrid')
+    }
+    displayName: 'sengrid'
+    parameterValues: {
+      apiKey: sendgridApiKey
+    }
+  }
+}
 
 resource logicApp 'Microsoft.Logic/workflows@2019-05-01' = {
   name: logicAppName
   location: location
-  tags: {
-    displayName: logicAppName
-  }
   properties: {
     definition: {
-      '$schema': workflowSchema
+      '$schema': 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#'
       contentVersion: '1.0.0.0'
       parameters: {
-        testUri: {
-          type: 'string'
-          defaultValue: testUri
+        '$connections': {
+          defaultValue: {
+          }
+          type: 'Object'
         }
       }
       triggers: {
-        recurrence: {
-          type: type
-          recurrence: {
-            frequency: frequency
-            interval: interval
+        manual: {
+          type: 'request'
+          kind: 'http'
+          inputs: {
+            schema: {
+              '$schema': 'http://json-schema.org/draft-04/schema#'
+              properties: {
+                emailbody: {
+                  type: 'string'
+                }
+                from: {
+                  type: 'string'
+                }
+                subject: {
+                  type: 'string'
+                }
+                to: {
+                  type: 'string'
+                }
+              }
+              required: [
+                'from'
+                'to'
+                'subject'
+                'emailbody'
+              ]
+              type: 'object'
+            }
           }
         }
       }
       actions: {
-        actionType: {
-          type: actionType
+        Send_email: {
+          type: 'ApiConnection'
           inputs: {
-            method: method
-            uri: testUri
+            body: {
+              body: '@{triggerBody()[\'emailbody\']}'
+              from: '@{triggerBody()[\'from\']}'
+              ishtml: false
+              subject: '@{triggerBody()[\'subject\']}'
+              to: '@{triggerBody()[\'to\']}'
+            }
+            host: {
+              connection: {
+                name: '@parameters(\'$connections\')[\'sendgrid\'][\'connectionId\']'
+              }
+            }
+            method: 'post'
+            path: '/api/mail.send.json'
+          }
+        }
+      }
+      outputs: {
+      }
+    }
+    parameters: {
+      '$connections': {
+        value: {
+          sendgrid: {
+            id: 'subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/sendgrid'
+            connectionId: sendgrid.id
           }
         }
       }
