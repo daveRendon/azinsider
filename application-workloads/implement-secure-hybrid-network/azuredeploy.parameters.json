@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "mocOnPremResourceGroup": {
+        "value": "site-to-site-mock-prem"
+      },
+      "azureNetworkResourceGroup": {
+        "value": "site-to-site-azure-network"
+      },
+      "adminUserName": {
+        "value": "azureuser"
+      },
+      "adminPassword": {
+        "value": "Azuretest01!!"
+      },
+      "resourceGrouplocation": {
+        "value": "eastus"
+      }
+    }
+  }
