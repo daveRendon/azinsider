@@ -1,0 +1,9 @@
+---
+default: True
+MD013: False
+MD041: False
+MD042: False
+MD004:
+  style: dash
+MD010:
+  code_blocks: False
