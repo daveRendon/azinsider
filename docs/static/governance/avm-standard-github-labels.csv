@@ -1,0 +1,38 @@
+Name,Description,HEX
+AZD :technologist:,"These modules are requested/used by the AZD team.",E0BFFA
+Needs: Attention :wave:,"Reply has been added to issue, maintainer to review",E99695
+Needs: Immediate Attention :bangbang:,"Immediate attention of module owner / AVM team is needed",FF0000
+Needs: Author Feedback :ear:,Awaiting feedback from the issue/PR author,F18A07
+Needs: External Changes :hammer_and_pick:,When an issue/PR requires changes that are outside of the control of the module. e.g. to an RP.,DE389D
+Needs: More Evidence :balance_scale:,We are looking for more evidence to make a decision on this,F64872
+Needs: Triage :mag:,Maintainers need to triage still,FBCA04
+Needs: Module Owner :mega:,This module needs an owner to develop or maintain it,FF0019
+Status: Awaiting Release To Be Cut :scissors:,"This is fixed in the main branch but not in the latest release, will be fixed with next release cut",800080
+Status: Do Not Merge :no_entry:,Do not merge PRs with this label attached as they are not ready or aligned to future direction etc.,8B4513
+Status: External Contribution :earth_africa:,This is being worked on by someone outside of the AVM module owners/contributors or AVM core team,D8FA2C
+Status: Fixed :white_check_mark:,Auto label applied when issue fixed by merged PR,90EE90
+Status: Help Wanted :sos:,Extra attention is needed,FF4500
+Status: In Triage :mag:,Picked up for triaging by an AVM core team member,D4AF37
+Status: In PR :point_right:,This is when an issue is due to be fixed in an open PR,EDEDED
+Status: Invalid :x:,This doesn't seem right,E4E669
+Status: Long Term :hourglass_flowing_sand:,"We will do it, but will take a longer amount of time due to complexity/priorities",B60205
+Status: No Recent Activity :zzz:,When an issue/PR has not been modified for X amount of days,808080
+Status: Won't Fix :broken_heart:,This will not be worked on,FFFFFF
+Status: Owners Identified :metal:,This module has its owners identified,FBEF2A
+Status: Module Available :green_circle:,The module is published,C8E6C9
+Status: Module Orphaned :eyes:,The module has no owner and is therefore orphaned at this time,F4A460
+Status: Response Overdue :triangular_flag_on_post:,When an issue/PR has not been responded to for X amount of days,850000
+Status: Looking For Assistance :duck:,This item is looking for anyone to help develop the code and submit a PR for resolution,03FCC2
+Type: Bug :bug:,Something isn't working,D73A4A
+Type: Documentation :page_facing_up:,Improvements or additions to documentation,0075CA
+Type: Duplicate :palms_up_together:,This issue or pull request already exists,CFD3D7
+Type: Feature Request :heavy_plus_sign:,New feature or request,A2EEEF
+Type: Hygiene :broom:,"things related to testing, issue triage etc.",17016A
+Type: New Module Proposal :bulb:,A new module for AVM is being proposed,ADD8E6
+Type: Question/Feedback :raising_hand:,Further information is requested or just some feedback,CB6BA2
+Type: Security Bug :lock:,This is a security bug,FFFF00
+Type: AVM :a: :v: :m:,This is an AVM related issue,F0FFFF
+Language: Terraform :globe_with_meridians:,This is related to the Terraform IaC language,7740B6
+Language: Bicep :muscle:,This is related to the Bicep IaC language,1D73B3
+Class: Resource Module :package:,This is a resource module,D3D3D3
+Class: Pattern Module :package:,This is a pattern module,A9A9A9
