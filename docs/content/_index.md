@@ -13,7 +13,6 @@ Welcome to the AzInsider repository – your gateway to deploying diverse worklo
 We look forward to connecting with you and fostering a vibrant community together!
 {{< /hint >}}
 
-{{< youtube id="JbIMrJKW5N0" title="An introduction to Azure Verified Modules (AVM)" >}}
 
 {{< columns size=large >}}
 
