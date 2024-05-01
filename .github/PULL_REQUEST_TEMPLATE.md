@@ -21,4 +21,4 @@ Replace this with a brief description of what this Pull Request fixes, changes, 
 - [ ] Associated it with relevant [GitHub Issues](https://github.com/daveRendon/azinsider/issues)
 - [ ] Ensured my code/branch is up-to-date with the latest changes in the `main` [branch](https://github.com/daveRendon/azinsider/)
 - [ ] Ensured PR tests are passing
-- [ ] Updated relevant and associated documentation (e.g. Contribution Guide, Docs etc.)
+- [ ] Updated relevant and associated documentation (e.g. Contribution Guide, Docs, etc.)
