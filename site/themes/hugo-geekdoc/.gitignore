@@ -1,0 +1,30 @@
+# local environments
+.swp
+.env*
+/dist/
+/build/
+/node_modules/
+/lhci_reports/
+/exampleSite/themes/
+/exampleSite/public/
+/exampleSite/config/development/
+CHANGELOG.md
+VERSION
+
+# translation envs
+exampleSite/content/de
+
+# auto-generated files
+/data/
+/static/
+/assets/sprites/
+/resources/
+/exampleSite/resources/
+/exampleSite/data/sprites/
+VERSION
+
+# hugo
+.hugo_build.lock
+
+# testing
+.lighthouseci/
