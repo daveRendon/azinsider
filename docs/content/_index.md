@@ -1,12 +1,14 @@
 ---
-title: Azure Verified Modules
+title: AzInsider Home Page
 geekdocNav: true
 # geekdocAlign: center
 geekdocAnchor: true
 ---
 
-{{< hint type=caution icon=gdoc_date title="AVM Community Calls" >}}
-The AVM team is thrilled to announce the launch of our external community calls, tailored for individuals outside of Microsoft. We invite you to join us for insightful discussions and engaging conversations. To attend, simply visit our [dedicated page](/Azure-Verified-Modules/resources/community)!
+{{< hint type=caution icon=gdoc_date title="" >}}
+Welcome to the AzInsider repository – your gateway to deploying diverse workloads effortlessly in your Azure environment using the power of Bicep language.
+
+🌟 Star this repository now to stay updated and show your support for the project
 
 We look forward to connecting with you and fostering a vibrant community together!
 {{< /hint >}}
@@ -17,52 +19,75 @@ We look forward to connecting with you and fostering a vibrant community togethe
 
 ## Value Proposition
 
-Azure Verified Modules (AVM) is an initiative to consolidate and set the standards for what a good Infrastructure-as-Code module looks like.
-
-Modules will then align to these standards, across languages (Bicep, Terraform etc.) and will then be classified as AVMs and available from their respective language specific registries.
-
-AVM is a common code base, a toolkit for our Customers, our Partners, and Microsoft. It's an official, Microsoft driven initiative, with a devolved ownership approach to develop modules, leveraging internal & external communities.
-
-Azure Verified Modules enable and accelerate consistent solution development and delivery of cloud-native or migrated applications and their supporting infrastructure by codifying Microsoft guidance (WAF), with best practice configurations.
+The AzInsider Repo offers code samples to help you deploy various workloads in your Azure environment using Bicep language. It simplifies the deployment process and makes it easy to get your applications up and running in Azure. Check it out!
 
 <--->
 
 <br>
-<img src="img/avm_cycle.png" width=100% alt="AVM development cycle">
 
 {{< /columns >}}
 
 {{< columns size=standard >}}
-## Modules
+## Application Samples
 
-<img src="img/avm_modules.png" width=90% alt="AVM module classifications">
 
 <--->
 
 <br>
 <br>
 
-Azure Verified Modules provides two types of modules: Resource and Pattern modules.
+### Key Features: ###
 
-AVM modules are used to deploy Azure resources and their extensions, as well as reusable architectural patterns consistently.
+- 📂 Explore the [application-workloads directory](https://github.com/daveRendon/azinsider/tree/main/application-workloads) for a rich collection of real-world application samples.
+- 💡 Contribute and make your mark in the Azure community!
 
-Modules are composable building blocks that encapsulate groups of resources dedicated to one task.
+### 🚀 Get Started with Bicep: ###
 
-- Flexible, generalized, multi-purpose
-- Integrates child resources
-- Integrates extension resources
+1. **Begin by [installing the necessary tooling](https://docs.microsoft.com/azure/azure-resource-manager/bicep/install?WT.mc_id=AZ-MVP-5000671).**
+2. **Master Bicep with the [Bicep Learning Path](https://docs.microsoft.com/learn/paths/bicep-deploy?WT.mc_id=AZ-MVP-5000671).**
 
-AVM improves code quality and provides a unified customer experience.
+### 📦 Deployment Options: ###
+
+**Option 1. Local Machine Deployment:**
+
+Deploy application samples directly from your local machine using Windows Terminal and Azure PowerShell.
+
+```powershell
+$date = Get-Date -Format "MM-dd-yyyy"
+$rand = Get-Random -Maximum 1000
+$deploymentName = "AzInsiderDeployment-"+"$date"+"-"+"$rand"
+
+New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName azinsider_demo -TemplateFile .\main.bicep -TemplateParameterFile .\azuredeploy.parameters.json -c
+```
+
+You can also utilize a Bicep parameters file for added flexibility.
+
+**Option 2. Azure Portal Deployment:**
+
+1. Access the Azure Portal, open CloudShell (using PowerShell), and clone this repository:
+
+```shell
+git clone https://github.com/daveRendon/azinsider.git
+cd azinsider
+cd application-workloads
+```
+
+2. Once in the working directory of the sample application, execute the following command:
+
+```powershell
+$date = Get-Date -Format "MM-dd-yyyy"
+$rand = Get-Random -Maximum 1000
+$deploymentName = "AzInsiderDeployment-"+"$date"+"-"+"$rand"
+
+New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName azinsider_demo -TemplateFile .\main.bicep -TemplateParameterFile .\azuredeploy.parameters.json -c
+```
+
+Join us in simplifying Azure deployments with Bicep and unleash the full potential of your cloud projects! 🔥
 
 {{< /columns >}}
 
 {{< hint type=important >}}
 
-AVM is owned, developed & supported by Microsoft, you may raise a GitHub issue on this repository or the module's repository directly to get support or log feature requests.
-
-You can also log a support ticket and these will be redirected to the AVM team and the module owner(s).
-
-See [Module Support](/Azure-Verified-Modules/help-support/module-support) for more information.
 
 {{< /hint >}}
 
@@ -70,21 +95,16 @@ See [Module Support](/Azure-Verified-Modules/help-support/module-support) for mo
 
 ## Next Steps
 
-1. Review [What, Why, How](/Azure-Verified-Modules/concepts/what-why-how/)
+1. Review the [Application Samples](https://github.com/daveRendon/azinsider/tree/staging/application-workloads)
 
-2. Review the [Module Classification Definitions](/Azure-Verified-Modules/specs/shared/module-classifications/)
+1. Review the [FAQ](https://github.azinsider.net/faq/)
 
-3. Review the [Shared Specification](/Azure-Verified-Modules/specs/shared/)
-
-4. Review the [FAQ](/Azure-Verified-Modules/faq/)
-
-5. Learn how to [contribute to AVM](/Azure-Verified-Modules/contributing/)
+1. Learn how to [contribute](https://github.azinsider.net/contributing/)
 
 <--->
 
 <br>
 <br>
 <br>
-<img src="img/avm_logo.png" width=80% alt="AVM">
 
 {{< /columns >}}
