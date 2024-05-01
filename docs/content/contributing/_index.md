@@ -7,15 +7,15 @@ geekdocAnchor: true
 
 This section lists all contribution guidance available to module owners and contributors.
 
-- [Process Overview](/Azure-Verified-Modules/contributing/process/)
-- [Bicep Contribution Guide](/Azure-Verified-Modules/contributing/bicep/)
-- [Terraform Contribution Guide](/Azure-Verified-Modules/contributing/terraform/)
-- [Contribution Q&A](/Azure-Verified-Modules/contributing/q-and-a/)
-- [Website Contribution Guide](/Azure-Verified-Modules/contributing/website/)
+- [Process Overview](/azinsider/contributing/process/)
+- [Bicep Contribution Guide](/azinsider/contributing/bicep/)
+- [Terraform Contribution Guide](/azinsider/contributing/terraform/)
+- [Contribution Q&A](/azinsider/contributing/q-and-a/)
+- [Website Contribution Guide](/azinsider/contributing/website/)
 - [Code of Conduct](https://opensource.microsoft.com/codeofconduct/)
 
 {{< hint type=important >}}
 
-If you cannot find guidance for what you need, please let us know via [GitHub Issues](https://github.com/Azure/Azure-Verified-Modules/issues) 👍
+If you cannot find guidance for what you need, please let us know via [GitHub Issues](https://github.com/daveRendon/azinsider/issues) 👍
 
 {{< /hint >}}

@@ -6,11 +6,11 @@ header:
     external: false
 
   - name: GitHub
-    ref: https://github.com/Azure/Azure-Verified-Modules
+    ref: https://github.com/daveRendon/azinsider/
     icon: gdoc_github
     external: true
 
   - name: GitHub Issues
-    ref: https://github.com/Azure/Azure-Verified-Modules/issues
+    ref: https://github.com/daveRendon/azinsider/issues
     icon: gdoc_error_outline
     external: true
