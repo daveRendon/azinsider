@@ -11,6 +11,6 @@ main:
       - name: "Fundamentals"
         ref: "concepts/fundamentals"
   - name: "Code of Conduct"
-      ref: "https://opensource.microsoft.com/codeofconduct/"
-      external: true
-      icon: "gdoc_language"
+    ref: "https://opensource.microsoft.com/codeofconduct/"
+    external: true
+    icon: "gdoc_language"
