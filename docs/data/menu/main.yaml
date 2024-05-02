@@ -8,4 +8,4 @@ main:
     ref: "concepts"
     sub:
       - name: "Fundamentals"
-        ref: "concepts"
+        ref: "concepts/fundamentals"
