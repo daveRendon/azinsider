@@ -30,7 +30,6 @@ The AzInsider Repo offers code samples to help you deploy various workloads in y
 ## Application Samples
 
 
-<--->
 
 <br>
 <br>
