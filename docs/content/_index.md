@@ -29,11 +29,6 @@ The AzInsider Repo offers code samples to help you deploy various workloads in y
 {{< columns size=standard >}}
 ## Application Samples
 
-
-
-<br>
-<br>
-
 ### Key Features: ###
 
 - 📂 Explore the [application-workloads directory](https://github.com/daveRendon/azinsider/tree/main/application-workloads) for a rich collection of real-world application samples.
