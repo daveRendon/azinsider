@@ -1,5 +1,5 @@
 ---
-title: What, Why, How
+title: Fundamentals
 geekdocNav: true
 geekdocAlign: left
 geekdocAnchor: true
