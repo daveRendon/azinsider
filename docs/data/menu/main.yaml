@@ -3,7 +3,7 @@ main:
   - name: "Home"
     ref: "/"
   - name: "Application Samples"
-            ref: "https://github.com/daveRendon/azinsider/application-workloads"
+    ref: "https://github.com/daveRendon/azinsider/application-workloads"
   - name: "Concepts"
     ref: "concepts"
     sub:
