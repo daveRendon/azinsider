@@ -5,8 +5,6 @@
 
 {{ $bicepResFile := readFile "/static/module-indexes/BicepResourceModules.csv" }}
 {{ $bicepResRows := $bicepResFile | transform.Unmarshal (dict "delimiter" ",") }}
-{{ $bicepPtnFile := readFile "/static/module-indexes/BicepPatternModules.csv" }}
-{{ $bicepPtnRows := $bicepPtnFile | transform.Unmarshal (dict "delimiter" ",") }}
 
 {{ $ModuleStatusColumnId := 0 }}
 
