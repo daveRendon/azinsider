@@ -8,7 +8,7 @@ geekdocCollapseSection: true
 
 This section lists all Azure Verified Modules that are available in or planned for the **Bicep language**.
 
-- [Resource Modules](/azinsider/indexes/bicep/bicep-resource-modules)
+- [Resource Modules](/indexes/bicep/bicep-resource-modules)
 <br>
 ---
 

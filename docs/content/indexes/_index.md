@@ -7,8 +7,8 @@ geekdocAnchor: true
 
 This section lists all Azure Verified Modules that are available or planned in **Bicep and/or Terraform languages**.
 
-- [Bicep](/azinsider/indexes/bicep)
-  - [Resource Modules](/azinsider/indexes/bicep/bicep-resource-modules)
+- [Bicep](/indexes/bicep)
+  - [Resource Modules](/indexes/bicep/bicep-resource-modules)
 
 ---
 
