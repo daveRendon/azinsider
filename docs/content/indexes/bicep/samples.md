@@ -92,3 +92,4 @@ This section is mainly intended **for module owners and contributors** as it con
 {{< moduleNameTelemetryGHTeams header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
 {{< /expand >}}
+<br>
