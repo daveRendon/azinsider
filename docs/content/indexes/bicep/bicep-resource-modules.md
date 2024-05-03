@@ -1,5 +1,5 @@
 ---
-title: Bicep Application Samples
+title: Bicep Resource Modules
 geekdocNav: false
 geekdocAlign: left
 geekdocAnchor: true
@@ -15,9 +15,9 @@ geekdocAnchor: true
 
 {{< hint type=note >}}
 
-This page contains various views of catalog for **Bicep Sample Applications**. To see these views, **click on the expandable sections** with the "➕" sign below.
+This page contains various views of the module index (catalog) for **Bicep Resource Modules**. To see these views, **click on the expandable sections** with the "➕" sign below.
 
-- {{< icon "gdoc_github" >}} To see the **full, unfiltered, unformatted index** on GitHub, click [here](https://github.com/Azure/Azure-Verified-Modules/blob/main/docs/static/module-indexes/BicepResourceModules.csv).
+- {{< icon "gdoc_github" >}} To see the **full, unfiltered, unformatted module index** on GitHub, click [here](https://github.com/Azure/Azure-Verified-Modules/blob/main/docs/static/module-indexes/BicepResourceModules.csv).
 
 - {{< icon "gdoc_download" >}} To download the source CSV file, click [here](/Azure-Verified-Modules/module-indexes/BicepResourceModules.csv).
 
@@ -25,21 +25,21 @@ This page contains various views of catalog for **Bicep Sample Applications**. T
 
 {{< toc >}}
 
-## Catalog
+## Module catalog
 
 {{< hint type=note >}}
-Samples listed below that aren't shown with the status of **`Sample Available 🟢`**, are currently in development and are not yet available for use. For proposed application samples, see the [Proposed App Samples](/azinsider/indexes/samples/#proposed-modules---) section below.
+Modules listed below that aren't shown with the status of **`Module Available 🟢`**, are currently in development and are not yet available for use. For proposed modules, see the [Proposed modules](/Azure-Verified-Modules/indexes/bicep/bicep-resource-modules/#proposed-modules---) section below.
 {{< /hint >}}
 
-The following table shows the number of all available, orphaned and proposed **Bicep App Samples**.
+The following table shows the number of all available, orphaned and proposed **Bicep Resource Modules**.
 
 {{< moduleStats language="Bicep" moduleType="Resource" showLanguage=true showClassification=true >}}
 
 <br>
 
-### Publication History - 📅
+### Module Publication History - 📅
 
-{{< expand "➕  Publication History - App Sample names, status and owners" "expand/collapse" "closed" >}}
+{{< expand "➕ Module Publication History - Module names, status and owners" "expand/collapse" "closed" >}}
 
 {{< moduleHistory header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" exclude="Proposed :new:" monthsToShow=9999 >}}
 
@@ -47,9 +47,9 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### Published App Samples - 🟢 & 👀
+### Published modules - 🟢 & 👀
 
-{{< expand "➕ Published App Samples - Module names, status and owners" "expand/collapse" "open" >}}
+{{< expand "➕ Published Modules - Module names, status and owners" "expand/collapse" "open" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" exclude="Proposed :new:" >}}
 
@@ -57,9 +57,9 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### Proposed App Samples - 🆕
+### Proposed modules - 🆕
 
-{{< expand "➕ Proposed App Samples -  names, status and owners" "expand/collapse" >}}
+{{< expand "➕ Proposed Modules - Module names, status and owners" "expand/collapse" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" exclude="Available :green_circle:,Orphaned :eyes:" >}}
 
@@ -67,9 +67,9 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### All App Samples - 📇
+### All modules - 📇
 
-{{< expand "➕ All App Samples -  names, status and owners" "expand/collapse" >}}
+{{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
@@ -92,4 +92,3 @@ This section is mainly intended **for module owners and contributors** as it con
 {{< moduleNameTelemetryGHTeams header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
 {{< /expand >}}
-<br>
