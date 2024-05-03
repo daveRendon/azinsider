@@ -41,14 +41,7 @@
 {{ if in (slice "Bicep" "All") $language }}
 {{ if in (slice "Resource" "All") $moduleType }}
 {{ $ModuleStatusColumnId = 4 }}
-<tr>
-  {{ if $showLanguage }}<td rowspan="2"><a href="/azinsider/indexes/bicep/" style="color: inherit; text-decoration: none; background-color: transparent;">Bicep</a></td>{{ end }}
-  {{ if $showClassification }}<td><a href="/azinsider/indexes/bicep/bicep-resource-modules/" style="color: inherit; text-decoration: none; background-color: transparent;">Resource</a></td>{{ end }}
-  <td align="right"><a href="/azinsider/indexes/bicep/samples/#published-modules-----" style="color: inherit; text-decoration: none; background-color: transparent;">{{ template "countModules" (slice $ModuleStatusColumnId $bicepResRows "Module Available :green_circle:") }}</a></td>
-  <td align="right"><a href="/azinsider/indexes/bicep/samples/#published-modules-----" style="color: inherit; text-decoration: none; background-color: transparent;">{{ template "countModules" (slice $ModuleStatusColumnId $bicepResRows "Module Orphaned :eyes:") }}</a></td>
-  <td align="right"><a href="/azinsider/indexes/bicep/samples/#proposed-modules---" style="color: inherit; text-decoration: none; background-color: transparent;">{{ template "countModules" (slice $ModuleStatusColumnId $bicepResRows "New Module :new:") }}</a></td>
-  <td align="right"><a href="/azinsider/indexes/bicep/samples/#all-modules---" style="color: inherit; text-decoration: none; background-color: transparent;">{{ template "countModules" (slice $ModuleStatusColumnId $bicepResRows "All") }}</a></td>
-</tr>
+
 {{ end }}
 {{ if in (slice "Pattern" "All") $moduleType }}
 {{ $ModuleStatusColumnId = 2 }}
