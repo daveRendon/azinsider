@@ -13,8 +13,6 @@ geekdocAnchor: true
 
 {{< /hint >}} -->
 
-{{< hint type=note >}}
-
 This page contains the catalog for **Bicep Samples**.
 
 {{< toc >}}
