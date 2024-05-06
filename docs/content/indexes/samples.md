@@ -25,7 +25,7 @@ This page contains various views of the module index (catalog) for **Bicep Sampl
 
 {{< toc >}}
 
-## Module catalog
+## Catalog
 
 {{< hint type=note >}}
 Modules listed below that aren't shown with the status of **`Module Available 🟢`**, are currently in development and are not yet available for use. For proposed modules, see the [Proposed modules](/azinsider/indexes/bicep/samples/#proposed-modules---) section below.
@@ -37,7 +37,7 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### Module Publication History - 📅
+### Publication History - 📅
 
 {{< expand "➕ Module Publication History - Module names, status and owners" "expand/collapse" "closed" >}}
 
@@ -47,7 +47,7 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### Published modules - 🟢 & 👀
+### Published samples - 🟢 & 👀
 
 {{< expand "➕ Published Modules - Module names, status and owners" "expand/collapse" "open" >}}
 
@@ -57,7 +57,7 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### Proposed modules - 🆕
+### Proposed samples - 🆕
 
 {{< expand "➕ Proposed Modules - Module names, status and owners" "expand/collapse" >}}
 
@@ -67,28 +67,10 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-### All modules - 📇
+### All samples - 📇
 
 {{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
-
-{{< /expand >}}
-
-<br>
-
-## For Module Owners & Contributors
-
-{{< hint type=note >}}
-
-This section is mainly intended **for module owners and contributors** as it contains information important for module development, such as **telemetry ID prefix, and GitHub Teams for Owners & Contributors**.
-
-{{< /hint >}}
-
-### Module name, Telemetry ID prefix, GitHub Teams for Owners & Contributors
-
-{{< expand "➕ All Modules - Module name, Telemetry ID prefix, GitHub Teams for Owners & Contributors" "expand/collapse" >}}
-
-{{< moduleNameTelemetryGHTeams header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
 {{< /expand >}}
