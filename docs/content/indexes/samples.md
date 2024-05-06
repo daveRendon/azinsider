@@ -74,7 +74,3 @@ The following table shows the number of all available, orphaned and proposed **B
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
 {{< /expand >}}
-
-<br>
-
-{{< /expand >}}
