@@ -77,9 +77,4 @@ The following table shows the number of all available, orphaned and proposed **B
 
 <br>
 
-
-{{< /hint >}}
-
-
-
 {{< /expand >}}
