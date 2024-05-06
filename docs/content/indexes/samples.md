@@ -20,7 +20,7 @@ This page contains the catalog for **Bicep Samples**.
 ## Catalog
 
 {{< hint type=note >}}
-The Azure Bicep samples listed below that aren't shown with the status of **`Module Available 🟢`**, are currently in development and are not yet available for use. For proposed Bicep samples, see the [Proposed samples](/azinsider/indexes/bicep/samples/#proposed-modules---) section below.
+The Azure Bicep samples listed below that aren't shown with the status of **`Sample Available 🟢`**, are currently in development and are not yet available for use. For proposed Bicep samples, see the [Proposed samples](/azinsider/indexes/bicep/samples/#proposed-modules---) section below.
 {{< /hint >}}
 
 The following table shows the number of all available, orphaned and proposed **Bicep Resource Modules**.
