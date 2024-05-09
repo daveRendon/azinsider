@@ -1,5 +1,5 @@
 ---
-title: Module Indexes
+title: Index
 geekdocNav: true
 geekdocAlign: left
 geekdocAnchor: true
