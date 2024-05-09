@@ -30,19 +30,11 @@ The following table shows the number of all available, orphaned and proposed **B
 
 ### All samples - 📇
 
-{{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" >}}
+{{< collapse "➕ All Modules - Module names, status and owners" "expand/collapse" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
 
-{{< /expand >}}
+{{< /collapse >}}
 
 <br>
-
-### Proposed Bicep samples - 🆕
-
-{{< expand "➕ Proposed Modules - Module names, status and owners" "expand/collapse" >}}
-
-{{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" exclude="Available :green_circle:,Orphaned :eyes:" >}}
-
-{{< /expand >}}
