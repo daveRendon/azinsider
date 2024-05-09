@@ -127,7 +127,7 @@
   {{ if not ( in $exclude $item.ModuleStatus ) }}
     {{ $moduleLatestVersion = "N/A" }}
     {{ if or (eq $item.ModuleStatus "Module Available :green_circle:") (eq $item.ModuleStatus "Module Orphaned :eyes:") }}
-      {{ $moduleMcrUrl := printf "https://mcr.microsoft.com/v2/bicep/%s/tags/list" $item.ModuleName }}
+      {{ $moduleMcrUrl := printf "" $item.ModuleName }}
       {{ $moduleMcrData := getJSON $moduleMcrUrl }}
       {{ $moduleVersions := $moduleMcrData.tags }}
       {{ if $moduleVersions }}
