@@ -23,14 +23,14 @@ This page contains the catalog for **Bicep Samples**.
 The Azure Bicep samples listed below that aren't shown with the status of **`Sample Available 🟢`**, are currently in development and are not yet available for use. For proposed Bicep samples, see the [Proposed samples](/azinsider/indexes/bicep/samples/#proposed-modules---) section below.
 {{< /hint >}}
 
-The following table shows the number of all available, orphaned and proposed **Bicep Resource Modules**.
+The following table shows all the  **Bicep Application Samples**.
 
 {{< moduleStats language="Bicep" moduleType="Resource" showLanguage=true showClassification=true >}}
 <br>
 
 ### All samples - 📇
 
-{{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" >}}
+{{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" "open" >}}
 
 {{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
 
@@ -38,11 +38,3 @@ The following table shows the number of all available, orphaned and proposed **B
 {{< /expand >}}
 
 <br>
-
-### Proposed Bicep samples - 🆕
-
-{{< expand "➕ Proposed Modules - Module names, status and owners" "expand/collapse" >}}
-
-{{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" exclude="Available :green_circle:,Orphaned :eyes:" >}}
-
-{{< /expand >}}
