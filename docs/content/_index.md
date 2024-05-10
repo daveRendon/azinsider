@@ -86,6 +86,25 @@ Join us in simplifying Azure deployments with Bicep and unleash the full potenti
 
 {{< columns size=standard >}}
 
+## Catalog
+
+
+The following table shows all the  **Bicep Application Samples**.
+
+<br>
+
+### All samples - 📇
+
+{{< expand "➕ All Modules - Module names, status and owners" "expand/collapse" "open" >}}
+
+{{< moduleNameStatusOwners header=true csv="/static/module-indexes/BicepResourceModules.csv" language="Bicep" moduleType="resource" >}}
+
+
+{{< /expand >}}
+
+<br>
+
+
 ## Next Steps
 
 1. Review the [Application Samples](https://github.com/daveRendon/azinsider/tree/staging/application-workloads)
