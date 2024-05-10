@@ -14,7 +14,7 @@ We look forward to connecting with you and fostering a vibrant community togethe
 {{< /hint >}}
 
 
-{{< columns size=large >}}
+{{< columns size=standard >}}
 
 ## Value Proposition
 
@@ -84,7 +84,7 @@ Join us in simplifying Azure deployments with Bicep and unleash the full potenti
 
 {{< /hint >}}
 
-{{< columns size=large >}}
+{{< columns size=standard >}}
 
 ## Next Steps
 
