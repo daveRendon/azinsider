@@ -84,7 +84,7 @@ Join us in simplifying Azure deployments with Bicep and unleash the full potenti
 
 {{< /hint >}}
 
-{{< columns size=standard >}}
+{{< columns size=large >}}
 
 ## Catalog
 
