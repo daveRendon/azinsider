@@ -79,12 +79,8 @@ Join us in simplifying Azure deployments with Bicep and unleash the full potenti
 
 {{< /columns >}}
 
-{{< hint type=important >}}
 
 
-{{< /hint >}}
-
-{{< columns size=large >}}
 
 ## Catalog
 
@@ -103,7 +99,7 @@ The following table shows all the  **Bicep Application Samples**.
 {{< /expand >}}
 
 <br>
-
+{{< columns size=large >}}
 
 ## Next Steps
 
