@@ -14,7 +14,7 @@ We look forward to connecting with you and fostering a vibrant community togethe
 {{< /hint >}}
 
 
-{{< columns size=standard >}}
+{{< columns size=large >}}
 
 ## Value Proposition
 
@@ -26,7 +26,7 @@ The AzInsider Repo offers code samples to help you deploy various workloads in y
 
 {{< /columns >}}
 
-{{< columns size=standard >}}
+{{< columns size=large >}}
 ## Application Samples
 
 ### Key Features: ###
