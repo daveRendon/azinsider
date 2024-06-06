@@ -12,7 +12,7 @@
         "value": "azureuser"
       },
       "adminPassword": {
-        "value": "Azuretest01!!"
+        "value": "YourPassword123!"
       },
       "resourceGrouplocation": {
         "value": "eastus"
