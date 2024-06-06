@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+          "value": "Your-admin-username"
+        },
+        "adminPasswordOrSSHKey": {
+          "value": "Your-Password-Or-Key"
+        },
+        "wildflyUserName": {
+          "value": "your-wildfly-username"
+        },
+        "wildflyPassword": {
+          "value": "Your-Password-Or-Key"
+        },
+        "artifactsLocation": {
+            "value": "URL-to-your-artifacts-location-or-storage-account"
+        },
+        "artifactsLocationSasToken": {
+            "value": "sas-token-storage-account"
+        }
+    }
+  }
