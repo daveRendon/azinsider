@@ -6,7 +6,7 @@
       "value": "azureuser"
     },
     "adminPassword": {
-      "value": "AzureTest01!!"
+      "value": "YourPasswordHere"
     }
   }
 }
