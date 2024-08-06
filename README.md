@@ -39,6 +39,13 @@ git clone https://github.com/daveRendon/azinsider.git
 cd azinsider/application-workloads
 ```
 
+Then, go to your working directory. For example 
+
+```shell
+cd chatgpt-base
+```
+
+
 2. Once in the working directory of the sample application, execute the following command:
 
 ```powershell
