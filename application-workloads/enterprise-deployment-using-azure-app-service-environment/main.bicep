@@ -44,9 +44,10 @@ param appGtwyApp2Url string = 'testapp-std.contoso.com'
 param jumpboxUsername string = 'azureuser'
 
 param sqlAdminuser string = 'azureuser'
+// get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
 @secure()
 param sqlPassword string 
-param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' // get this value from the Azure AD user object or using the following command: az ad signed-in-user show --query id -o tsv
+param sqlAadAdminSid string = '5b4c9cef-f232-4184-8ecf-a61f3545edc8' 
 
 var subscriptionId = subscription().subscriptionId
 var mustCreateVNet = empty(existentVnetName)
