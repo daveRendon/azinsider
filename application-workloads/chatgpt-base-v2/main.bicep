@@ -6,7 +6,7 @@ targetScope = 'subscription'
 param name string
 
 @minLength(1)
-@description('Primary location for all resources')
+    @description('Primary location for all resources')
 param location string
 
 param modelName string = 'gpt-35-turbo'
@@ -21,7 +21,7 @@ param acaExists bool = false
 
 param openAiResourceName string = ''
 param openAiResourceGroupName string = ''
-param openAiResourceGroupLocation string = ''
+      param openAiResourceGroupLocation string = ''
 param openAiSkuName string = ''
 param openAiDeploymentCapacity int = 30
 
