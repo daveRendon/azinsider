@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "subscriptionId": {
+          "value": "d988cbee-043f-4c46-9a59-dedb2119e48c"
+      },
+      "name": {
+          "value": "deepseekr1"
+      },
+      "location": {
+          "value": "westus3"
+      },
+      "environmentId": {
+          "value": "/subscriptions/d988cbee-043f-4c46-9a59-dedb2119e48c/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo-deepseekr1"
+      },
+      "containers": {
+          "value": [
+              {
+                  "name": "deepseekr1",
+                  "image": "ghcr.io/open-webui/open-webui:ollama",
+                  "command": [],
+                  "args": [],
+                  "resources": {
+                      "cpu": 8,
+                      "memory": "56Gi"
+                  }
+              }
+          ]
+      },
+      "registries": {
+          "value": []
+      },
+      "secrets": {
+          "value": {
+              "arrayValue": []
+          }
+      },
+      "ingress": {
+          "value": {
+              "external": true,
+              "transport": "Auto",
+              "allowInsecure": false,
+              "targetPort": 8080,
+              "stickySessions": {
+                  "affinity": "none"
+              },
+              "additionalPortMappings": []
+          }
+      },
+      "environmentName": {
+          "value": "managedEnvironment-azinsiderdemo-deepseekr1"
+      },
+      "workspaceName": {
+          "value": "workspaceazinsiderdemo8707"
+      },
+      "workspaceLocation": {
+          "value": "westus3"
+      }
+  }
+}
