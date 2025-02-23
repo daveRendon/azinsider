@@ -5,7 +5,7 @@ param name = 'deepseekr1'
 
 param location = 'westus3'
 
-param environmentId = '/subscriptions/xxxxxxxx/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo-deepseekr1'
+param environmentId = '/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo-deepseekr1'
 
 param containers = [
   {

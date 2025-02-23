@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
       "subscriptionId": {
-          "value": "d988cbee-043f-4c46-9a59-dedb2119e48c"
+          "value": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
       },
       "name": {
           "value": "deepseekr1"
@@ -12,7 +12,7 @@
           "value": "westus3"
       },
       "environmentId": {
-          "value": "/subscriptions/d988cbee-043f-4c46-9a59-dedb2119e48c/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo-deepseekr1"
+          "value": "/subscriptions/xxxx-xxxx-xxxx-xxxx-xxxxxxxx/resourceGroups/azinsider_demo/providers/Microsoft.App/managedEnvironments/managedEnvironment-azinsiderdemo-deepseekr1"
       },
       "containers": {
           "value": [
