@@ -1,24 +1,25 @@
 ---
-title: AzInsider Home Page
+title: Welcome! - This is the AzInsider Home Page
 geekdocNav: true
 # geekdocAlign: center
 geekdocAnchor: true
 ---
 
-{{< hint type=caution icon=gdoc_date title="" >}}
 Welcome to the AzInsider repository – your gateway to deploying diverse workloads effortlessly in your Azure environment using the power of Bicep language.
 
 🌟 Star this repository now to stay updated and show your support for the project
 
 We look forward to connecting with you and fostering a vibrant community together!
-{{< /hint >}}
+
 
 
 {{< columns size=large >}}
 
 ## Value Proposition
 
-The AzInsider Repo offers code samples to help you deploy various workloads in your Azure environment using Bicep language. It simplifies the deployment process and makes it easy to get your applications up and running in Azure. Check it out!
+The AzInsider Repo offers code samples to help you deploy various workloads in your Azure environment using Bicep language. 
+
+It simplifies the deployment process and makes it easy to get your applications up and running in Azure. Check it out!
 
 <--->
 
