@@ -61,8 +61,7 @@ You can also utilize a Bicep parameters file for added flexibility.
 
 ```shell
 git clone https://github.com/daveRendon/azinsider.git
-cd azinsider
-cd application-workloads
+cd azinsider/application-workloads
 ```
 
 2. Once in the working directory of the sample application, execute the following command:
