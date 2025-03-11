@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetManagerName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "tagsByResource": {
+            "type": "object",
+            "defaultValue": {}
+        },
+        "networkManagerScopes": {
+            "type": "object",
+            "defaultValue": {}
+        },
+        "networkManagerScopeAccesses": {
+            "type": "array",
+            "defaultValue": []
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkmanagers",
+            "apiVersion": "2022-01-01",
+            "name": "[parameters('vnetManagerName')]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tagsByResource')]",
+            "properties": {
+                "displayName": "[parameters('vnetManagerName')]",
+                "description": "[parameters('description')]",
+                "networkManagerScopes": "[parameters('networkManagerScopes')]",
+                "networkManagerScopeAccesses": "[parameters('networkManagerScopeAccesses')]"
+            }
+        }
+    ],
+    "outputs": {}
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetManagerName": {
+            "value": "azinsider-vnet-manager"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "tagsByResource": {
+            "value": {}
+        },
+        "networkManagerScopes": {
+            "value": {
+                "subscriptions": [
+                    "/subscriptions/your-subscription-id"
+                ],
+                "managementGroups": []
+            }
+        },
+        "networkManagerScopeAccesses": {
+            "value": [
+                "Connectivity",
+                "SecurityAdmin",
+                "Routing",
+                "SecurityUser"
+            ]
+        }
+    }
+}
