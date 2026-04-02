@@ -60,7 +60,7 @@ var nicNameWebVar = 'nic-web-server'
 var vmNameWebVar = 'vm-web-server'
 var windowsOSVersion = '2012-R2-Datacenter'
 
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: logAnalyticsWorkspaceName
   location: location
   properties: {
@@ -73,7 +73,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08
   }
 }
 
-resource hubVnet 'Microsoft.Network/virtualNetworks@2020-05-01' = {
+resource hubVnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: hubNetwork.name
   location: location
   properties: {
@@ -129,7 +129,7 @@ resource hubVnetDiagnosticSettings 'Microsoft.Network/virtualNetworks/providers/
   dependsOn: [hubVnet]
 }
 
-resource spokeVnet 'Microsoft.Network/virtualNetworks@2020-05-01' = {
+resource spokeVnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: spokeNetwork.name
   location: location
   properties: {
@@ -173,7 +173,7 @@ resource spokeVnetDiagnosticSettings 'Microsoft.Network/virtualNetworks/provider
   dependsOn: [spokeVnet]
 }
 
-resource hubVnetPeeringToSpokeVnet 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource hubVnetPeeringToSpokeVnet 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${hubNetwork.name}/${peering_name_hub_to_spoke}'
   location: location
   properties: {
@@ -192,7 +192,7 @@ resource hubVnetPeeringToSpokeVnet 'Microsoft.Network/virtualNetworks/virtualNet
   ]
 }
 
-resource spokeVnetPeeringToHubVnet 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource spokeVnetPeeringToHubVnet 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${spokeNetwork.name}/${peering_name_spoke_to_hub}'
   location: location
   properties: {
@@ -207,7 +207,7 @@ resource spokeVnetPeeringToHubVnet 'Microsoft.Network/virtualNetworks/virtualNet
   dependsOn: [spokeVnet, vpngGtwy]
 }
 
-resource bastionPublicIp 'Microsoft.Network/publicIpAddresses@2020-05-01' = {
+resource bastionPublicIp 'Microsoft.Network/publicIpAddresses@2025-05-01' = {
   name: bastionHost.publicIPAddressName
   location: location
   sku: {
@@ -218,7 +218,7 @@ resource bastionPublicIp 'Microsoft.Network/publicIpAddresses@2020-05-01' = {
   }
 }
 
-resource bastionNsg 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+resource bastionNsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: bastionHost.nsgName
   location: location
   properties: {
@@ -336,7 +336,7 @@ resource bastionNsgDiagnosticSettings 'Microsoft.Network/networkSecurityGroups/p
   dependsOn: [bastionNsg]
 }
 
-resource bastionHostName 'Microsoft.Network/bastionHosts@2020-06-01' = {
+resource bastionHostName 'Microsoft.Network/bastionHosts@2025-05-01' = {
   name: bastionHost.name
   location: location
   properties: {
@@ -375,7 +375,7 @@ resource bastionHostDiagnosticSettings 'Microsoft.Network/bastionHosts/providers
   dependsOn: [bastionHostName]
 }
 
-resource vpnGtwyPublicIp 'Microsoft.Network/publicIPAddresses@2019-11-01' =
+resource vpnGtwyPublicIp 'Microsoft.Network/publicIPAddresses@2025-05-01' =
   if (configureSitetosite) {
     name: vpnGateway.publicIPAddressName
     location: location
@@ -384,7 +384,7 @@ resource vpnGtwyPublicIp 'Microsoft.Network/publicIPAddresses@2019-11-01' =
     }
   }
 
-resource vpngGtwy 'Microsoft.Network/virtualNetworkGateways@2019-11-01' =
+resource vpngGtwy 'Microsoft.Network/virtualNetworkGateways@2025-05-01' =
   if (configureSitetosite) {
     name: vpnGateway.name
     location: location
@@ -452,7 +452,7 @@ resource vpnGtwyDiagnosticSettings 'Microsoft.Network/virtualNetworkGateways/pro
     dependsOn: [vpngGtwy]
   }
 
-resource azFirewallPublicIp 'Microsoft.Network/publicIPAddresses@2019-11-01' = {
+resource azFirewallPublicIp 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: azureFirewall.publicIPAddressName
   location: location
   sku: {
@@ -463,7 +463,7 @@ resource azFirewallPublicIp 'Microsoft.Network/publicIPAddresses@2019-11-01' = {
   }
 }
 
-resource azFirewall 'Microsoft.Network/azureFirewalls@2020-05-01' = {
+resource azFirewall 'Microsoft.Network/azureFirewalls@2025-05-01' = {
   name: azureFirewall.name
   location: location
   properties: {
@@ -543,7 +543,7 @@ resource azFirewallDiagnosticSettings 'Microsoft.Network/azureFirewalls/provider
   dependsOn: [azFirewall]
 }
 
-resource spokeVnetNsg 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+resource spokeVnetNsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: spokeNetwork.subnetNsgName
   location: location
   properties: {
@@ -596,7 +596,7 @@ resource spokeVnetNsgDiagnosticSettings 'Microsoft.Network/networkSecurityGroups
   dependsOn: [spokeVnetNsg]
 }
 
-resource nicNameWeb 'Microsoft.Network/networkInterfaces@2020-05-01' = [
+resource nicNameWeb 'Microsoft.Network/networkInterfaces@2025-05-01' = [
   for i in range(0, windowsVMCount): {
     name: '${nicNameWebVar}${i}'
     location: location
@@ -630,7 +630,7 @@ resource nicNameWeb 'Microsoft.Network/networkInterfaces@2020-05-01' = [
   }
 ]
 
-resource vmNameWeb 'Microsoft.Compute/virtualMachines@2019-07-01' = [
+resource vmNameWeb 'Microsoft.Compute/virtualMachines@2025-04-01' = [
   for i in range(0, windowsVMCount): {
     name: '${vmNameWebVar}${i}'
     location: location
@@ -671,7 +671,7 @@ resource vmNameWeb 'Microsoft.Compute/virtualMachines@2019-07-01' = [
   }
 ]
 
-resource vmNameWeb_installIIS 'Microsoft.Compute/virtualMachines/extensions@2019-12-01' = [
+resource vmNameWeb_installIIS 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [
   for i in range(0, windowsVMCount): {
     name: '${vmNameWebVar}${i}/installIIS'
     location: location
@@ -690,7 +690,7 @@ resource vmNameWeb_installIIS 'Microsoft.Compute/virtualMachines/extensions@2019
   }
 ]
 
-resource spokeRoutes_table 'Microsoft.Network/routeTables@2020-05-01' = {
+resource spokeRoutes_table 'Microsoft.Network/routeTables@2025-05-01' = {
   name: spokeRoutes.tableName
   location: location
   properties: {
@@ -698,7 +698,7 @@ resource spokeRoutes_table 'Microsoft.Network/routeTables@2020-05-01' = {
   }
 }
 
-resource spokeRoutes_tableName_spokeRoutes_routeNameFirewall 'Microsoft.Network/routeTables/routes@2020-07-01' = {
+resource spokeRoutes_tableName_spokeRoutes_routeNameFirewall 'Microsoft.Network/routeTables/routes@2025-05-01' = {
   parent: spokeRoutes_table
   name: '${spokeRoutes.routeNameFirewall}'
   properties: {
@@ -709,7 +709,7 @@ resource spokeRoutes_tableName_spokeRoutes_routeNameFirewall 'Microsoft.Network/
   dependsOn: [spokeRoutes_table]
 }
 
-resource gatewayRoutes_table 'Microsoft.Network/routeTables@2020-05-01' = {
+resource gatewayRoutes_table 'Microsoft.Network/routeTables@2025-05-01' = {
   name: gatewayRoutes.tableName
   location: location
   properties: {
@@ -717,7 +717,7 @@ resource gatewayRoutes_table 'Microsoft.Network/routeTables@2020-05-01' = {
   }
 }
 
-resource gatewayRoutes_tableName_gatewayRoutes_routeNameFirewall 'Microsoft.Network/routeTables/routes@2020-07-01' = {
+resource gatewayRoutes_tableName_gatewayRoutes_routeNameFirewall 'Microsoft.Network/routeTables/routes@2025-05-01' = {
   parent: gatewayRoutes_table
   name: '${gatewayRoutes.routeNameFirewall}'
   properties: {
@@ -728,7 +728,7 @@ resource gatewayRoutes_tableName_gatewayRoutes_routeNameFirewall 'Microsoft.Netw
   dependsOn: [gatewayRoutes_table]
 }
 
-resource ilb 'Microsoft.Network/loadBalancers@2020-05-01' = {
+resource ilb 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: internalLoadBalancer.name
   location: location
   sku: {

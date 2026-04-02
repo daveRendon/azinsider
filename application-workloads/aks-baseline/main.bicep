@@ -10,17 +10,17 @@ param rgSpokeVnetLocation string = 'centralus'
 param rgAppName string = 'rg-bu0001a0008'
 param rgAppLocation string = 'eastus2'
 
-resource rgHubVnet 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+resource rgHubVnet 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   name: rgHubVnetName
   location: rgHubVnetLocation
 }
 
-resource rgSpokeVnet 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+resource rgSpokeVnet 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   name: rgSpokeVnetName
   location: rgSpokeVnetLocation
 }
 
-resource rgApp 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+resource rgApp 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   name: rgAppName
   location: rgAppLocation
 }

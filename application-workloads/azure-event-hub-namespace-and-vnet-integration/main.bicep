@@ -13,7 +13,7 @@ param location string = resourceGroup().location
 var namespaceVirtualNetworkRuleName = '${eventhubNamespaceName}/${vnetName}'
 var subNetId = resourceId('Microsoft.Network/virtualNetworks/subnets/', vnetName, subnetName)
 
-resource eventhubNamespace 'Microsoft.EventHub/namespaces@2018-01-01-preview' = {
+resource eventhubNamespace 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventhubNamespaceName
   location: location
   sku: {
@@ -24,7 +24,7 @@ resource eventhubNamespace 'Microsoft.EventHub/namespaces@2018-01-01-preview' = 
   }
 }
 
-resource vnetRule 'Microsoft.Network/virtualNetworks@2017-09-01' = {
+resource vnetRule 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName
   location: location
   properties: {

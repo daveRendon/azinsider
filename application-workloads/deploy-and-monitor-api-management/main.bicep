@@ -29,7 +29,7 @@ param location string = resourceGroup().location
 var apiManagementServiceName = 'apiservice-azinsdr'
 var omsWorkspaceName = 'azinsdr-workspace'
 
-resource apiManagementService 'Microsoft.ApiManagement/service@2021-01-01-preview' = {
+resource apiManagementService 'Microsoft.ApiManagement/service@2024-05-01' = {
   name: apiManagementServiceName
   location: location
   sku: {
@@ -46,7 +46,7 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2021-01-01-previe
 }
 
 
-resource omsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+resource omsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: omsWorkspaceName
   location: location
   properties: {

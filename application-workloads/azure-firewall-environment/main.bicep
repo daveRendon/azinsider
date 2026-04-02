@@ -71,7 +71,7 @@ var azureFirewallIpConfigurations = [for i in range(0, numberOfPublicIPAddresses
   }
 }]
 
-resource networkSecurityGroups_Srv_Jump_nsg_name_resource 'Microsoft.Network/networkSecurityGroups@2018-12-01' = {
+resource networkSecurityGroups_Srv_Jump_nsg_name_resource 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroups_Srv_Jump_nsg_name
   location: location
   properties: {
@@ -223,7 +223,7 @@ resource networkSecurityGroups_Srv_Jump_nsg_name_resource 'Microsoft.Network/net
   }
 }
 
-resource networkSecurityGroups_Srv_Work_nsg_name_resource 'Microsoft.Network/networkSecurityGroups@2018-12-01' = {
+resource networkSecurityGroups_Srv_Work_nsg_name_resource 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroups_Srv_Work_nsg_name
   location: location
   properties: {
@@ -355,7 +355,7 @@ resource networkSecurityGroups_Srv_Work_nsg_name_resource 'Microsoft.Network/net
   }
 }
 
-resource publicIPAddresses_Srv_Jump_PIP_name_resource 'Microsoft.Network/publicIPAddresses@2018-12-01' = {
+resource publicIPAddresses_Srv_Jump_PIP_name_resource 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddresses_Srv_Jump_PIP_name
   location: location
   sku: {
@@ -373,7 +373,7 @@ resource publicIPAddresses_Srv_Jump_PIP_name_resource 'Microsoft.Network/publicI
   }
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks@2018-12-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -421,7 +421,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2018-12-01' = {
   }
 }
 
-resource virtualMachines_Srv_Jump_name_resource 'Microsoft.Compute/virtualMachines@2018-10-01' = {
+resource virtualMachines_Srv_Jump_name_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: virtualMachines_Srv_Jump_name
   location: location
   properties: {
@@ -468,7 +468,7 @@ resource virtualMachines_Srv_Jump_name_resource 'Microsoft.Compute/virtualMachin
   }
 }
 
-resource virtualMachines_Srv_Work_name_resource 'Microsoft.Compute/virtualMachines@2018-10-01' = {
+resource virtualMachines_Srv_Work_name_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: virtualMachines_Srv_Work_name
   location: location
   properties: {
@@ -515,7 +515,7 @@ resource virtualMachines_Srv_Work_name_resource 'Microsoft.Compute/virtualMachin
   }
 }
 
-resource schedules_shutdown_computevm_srv_jump_name_resource 'microsoft.devtestlab/schedules@2016-05-15' = {
+resource schedules_shutdown_computevm_srv_jump_name_resource 'microsoft.devtestlab/schedules@2018-09-15' = {
   name: schedules_shutdown_computevm_srv_jump_name
   location: location
   properties: {
@@ -535,7 +535,7 @@ resource schedules_shutdown_computevm_srv_jump_name_resource 'microsoft.devtestl
   }
 }
 
-resource schedules_shutdown_computevm_srv_work_name_resource 'microsoft.devtestlab/schedules@2016-05-15' = {
+resource schedules_shutdown_computevm_srv_work_name_resource 'microsoft.devtestlab/schedules@2018-09-15' = {
   name: schedules_shutdown_computevm_srv_work_name
   location: location
   properties: {
@@ -555,7 +555,7 @@ resource schedules_shutdown_computevm_srv_work_name_resource 'microsoft.devtestl
   }
 }
 
-resource networkSecurityGroups_Srv_Jump_nsg_name_RDP 'Microsoft.Network/networkSecurityGroups/securityRules@2018-12-01' = {
+resource networkSecurityGroups_Srv_Jump_nsg_name_RDP 'Microsoft.Network/networkSecurityGroups/securityRules@2025-05-01' = {
   parent: networkSecurityGroups_Srv_Jump_nsg_name_resource
   name: 'RDP'
   properties: {
@@ -575,7 +575,7 @@ resource networkSecurityGroups_Srv_Jump_nsg_name_RDP 'Microsoft.Network/networkS
   }
 }
 
-resource virtualNetworks_Test_FW_VN_name_AzureFirewallSubnet 'Microsoft.Network/virtualNetworks/subnets@2018-12-01' = {
+resource virtualNetworks_Test_FW_VN_name_AzureFirewallSubnet 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnet
   name: 'AzureFirewallSubnet'
   properties: {
@@ -585,7 +585,7 @@ resource virtualNetworks_Test_FW_VN_name_AzureFirewallSubnet 'Microsoft.Network/
   }
 }
 
-resource virtualNetworks_Test_FW_VN_name_Jump_SN 'Microsoft.Network/virtualNetworks/subnets@2018-12-01' = {
+resource virtualNetworks_Test_FW_VN_name_Jump_SN 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnet
   name: 'Jump-SN'
   properties: {
@@ -596,7 +596,7 @@ resource virtualNetworks_Test_FW_VN_name_Jump_SN 'Microsoft.Network/virtualNetwo
   }
 }
 
-resource virtualNetworks_Test_FW_VN_name_Workload_SN 'Microsoft.Network/virtualNetworks/subnets@2018-12-01' = {
+resource virtualNetworks_Test_FW_VN_name_Workload_SN 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnet
   name: 'Workload-SN'
   properties: {
@@ -607,7 +607,7 @@ resource virtualNetworks_Test_FW_VN_name_Workload_SN 'Microsoft.Network/virtualN
   }
 }
 
-resource networkInterfaces_srv_work267_name_resource 'Microsoft.Network/networkInterfaces@2018-12-01' = {
+resource networkInterfaces_srv_work267_name_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkInterfaces_srv_work267_name
   location: location
   properties: {
@@ -645,7 +645,7 @@ resource networkInterfaces_srv_work267_name_resource 'Microsoft.Network/networkI
   }
 }
 
-resource networkInterfaces_srv_jump121_name_resource 'Microsoft.Network/networkInterfaces@2018-12-01' = {
+resource networkInterfaces_srv_jump121_name_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkInterfaces_srv_jump121_name
   location: location
   properties: {
@@ -687,7 +687,7 @@ resource networkInterfaces_srv_jump121_name_resource 'Microsoft.Network/networkI
 }
 
 
-resource workloadIpGroup 'Microsoft.Network/ipGroups@2022-01-01' = {
+resource workloadIpGroup 'Microsoft.Network/ipGroups@2025-05-01' = {
   name: workloadIpGroupName
   location: location
   properties: {
@@ -697,7 +697,7 @@ resource workloadIpGroup 'Microsoft.Network/ipGroups@2022-01-01' = {
   }
 }
 
-resource infraIpGroup 'Microsoft.Network/ipGroups@2022-01-01' = {
+resource infraIpGroup 'Microsoft.Network/ipGroups@2025-05-01' = {
   name: infraIpGroupName
   location: location
   properties: {
@@ -709,7 +709,7 @@ resource infraIpGroup 'Microsoft.Network/ipGroups@2022-01-01' = {
 }
 
 
-resource publicIpAddress 'Microsoft.Network/publicIPAddresses@2022-01-01' = [for i in range(0, numberOfPublicIPAddresses): {
+resource publicIpAddress 'Microsoft.Network/publicIPAddresses@2025-05-01' = [for i in range(0, numberOfPublicIPAddresses): {
   name: '${azurepublicIpname}${i + 1}'
   location: location
   sku: {
@@ -721,7 +721,7 @@ resource publicIpAddress 'Microsoft.Network/publicIPAddresses@2022-01-01' = [for
   }
 }]
 
-resource firewallPolicy 'Microsoft.Network/firewallPolicies@2022-01-01'= {
+resource firewallPolicy 'Microsoft.Network/firewallPolicies@2025-05-01'= {
   name: firewallPolicyName
   location: location
   properties: {
@@ -729,7 +729,7 @@ resource firewallPolicy 'Microsoft.Network/firewallPolicies@2022-01-01'= {
   }
 }
 
-resource networkRuleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2022-01-01' = {
+resource networkRuleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2025-05-01' = {
   parent: firewallPolicy
   name: 'DefaultNetworkRuleCollectionGroup'
   properties: {
@@ -766,7 +766,7 @@ resource networkRuleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleColl
   }
 }
 
-resource applicationRuleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2022-01-01' = {
+resource applicationRuleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2025-05-01' = {
   parent: firewallPolicy
   name: 'DefaultApplicationRuleCollectionGroup'
   dependsOn: [
@@ -838,7 +838,7 @@ resource applicationRuleCollectionGroup 'Microsoft.Network/firewallPolicies/rule
   }
 }
 
-resource firewall 'Microsoft.Network/azureFirewalls@2021-03-01' = {
+resource firewall 'Microsoft.Network/azureFirewalls@2025-05-01' = {
   name: firewallName
   location: location
   zones: ((length(availabilityZones) == 0) ? null : availabilityZones)
@@ -858,7 +858,7 @@ resource firewall 'Microsoft.Network/azureFirewalls@2021-03-01' = {
   }
 }
 
-resource routeTable 'Microsoft.Network/routeTables@2021-02-01' = {
+resource routeTable 'Microsoft.Network/routeTables@2025-05-01' = {
   name: routeTableName
   location: location
   properties: {
@@ -875,7 +875,7 @@ resource routeTable 'Microsoft.Network/routeTables@2021-02-01' = {
   }
 }
 
-resource lock 'Microsoft.Authorization/locks@2017-04-01' = if (enableDeleteLock) {
+resource lock 'Microsoft.Authorization/locks@2020-05-01' = if (enableDeleteLock) {
   scope: routeTable
   name: lockName
   properties: {

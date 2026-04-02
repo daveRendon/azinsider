@@ -217,7 +217,7 @@ var deployNewVnet = (vnetNewOrExisting == 'new')
 var vnetRGName = (deployNewVnet ? resourceGroup().name : virtualNetworkExistingRGName)
 
 
-resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+resource storageAccountName 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName_var
   properties: {
     supportsHttpsTrafficOnly: true
@@ -232,7 +232,7 @@ resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 }
 
 // This will build a Virtual Network.
-resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -256,7 +256,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   }
 }
 
-resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-06-01' = {
+resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   location: location
   name: publicIPAddressName_var
   properties: {
@@ -268,7 +268,7 @@ resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-06-01' = 
   }
 }
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   location: location
   name: networkSecurityGroupName
   properties: {
@@ -389,7 +389,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   }
 }
 
-resource nic1Name 'Microsoft.Network/networkInterfaces@2020-06-01' = {
+resource nic1Name 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   location: location_var
   name: nic1Name_var
   properties: {
@@ -418,7 +418,7 @@ resource nic1Name 'Microsoft.Network/networkInterfaces@2020-06-01' = {
   ]
 }
 
-resource customImage 'Microsoft.Compute/images@2020-06-01' = if (sourceImageVhdUri != 'noCustomUri') {
+resource customImage 'Microsoft.Compute/images@2025-04-01' = if (sourceImageVhdUri != 'noCustomUri') {
   name: customImage_var
   location: location_var
   properties: {
@@ -434,7 +434,7 @@ resource customImage 'Microsoft.Compute/images@2020-06-01' = if (sourceImageVhdU
   }
 }
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2021-07-01' = {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   location: location_var
   name: vmName
   plan: ((sourceImageVhdUri == 'noCustomUri') ? plan : json('null'))

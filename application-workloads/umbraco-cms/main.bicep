@@ -57,7 +57,7 @@ var storageAccountName_var = '${uniqueString(resourceGroup().id)}standardsa'
 var umbracoAdminWebAppName_var = '${appName}adminapp'
 var appServicePlanName_var = '${appName}serviceplan'
 
-resource actionGroupName_resource 'microsoft.insights/actionGroups@2019-06-01' = {
+resource actionGroupName_resource 'microsoft.insights/actionGroups@2023-01-01' = {
   name: actionGroupName
   location: 'global'
   properties: {
@@ -73,7 +73,7 @@ resource actionGroupName_resource 'microsoft.insights/actionGroups@2019-06-01' =
   }
 }
 
-resource redisCacheName_resource 'Microsoft.Cache/redis@2022-05-01' = {
+resource redisCacheName_resource 'Microsoft.Cache/redis@2024-11-01' = {
   name: redisCacheName
   location: location
   properties: {
@@ -87,7 +87,7 @@ resource redisCacheName_resource 'Microsoft.Cache/redis@2022-05-01' = {
   }
 }
 
-resource dbServerName_resource 'Microsoft.Sql/servers@2022-02-01-preview' = {
+resource dbServerName_resource 'Microsoft.Sql/servers@2023-08-01' = {
   name: dbServerName
   location: location
   properties: {
@@ -97,7 +97,7 @@ resource dbServerName_resource 'Microsoft.Sql/servers@2022-02-01-preview' = {
   }
 }
 
-resource dbServerName_dbName 'Microsoft.Sql/servers/databases@2022-02-01-preview' = {
+resource dbServerName_dbName 'Microsoft.Sql/servers/databases@2023-08-01' = {
   parent: dbServerName_resource
   name: dbName
   location: location
@@ -107,7 +107,7 @@ resource dbServerName_dbName 'Microsoft.Sql/servers/databases@2022-02-01-preview
   }
 }
 
-resource dbServerName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2021-02-01-preview' = {
+resource dbServerName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2023-08-01' = {
   parent: dbServerName_resource
   name: 'AllowAllWindowsAzureIps'
   properties: {
@@ -116,7 +116,7 @@ resource dbServerName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrul
   }
 }
 
-resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+resource storageAccountName 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName_var
   location: location
   sku: {
@@ -126,7 +126,7 @@ resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 }
 
 
-resource appServicePlanName 'Microsoft.Web/serverfarms@2020-12-01' = {
+resource appServicePlanName 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: appServicePlanName_var
   location: location
   sku: {
@@ -136,7 +136,7 @@ resource appServicePlanName 'Microsoft.Web/serverfarms@2020-12-01' = {
 }
 
 
-resource appName_resource 'Microsoft.Web/sites@2022-03-01' = {
+resource appName_resource 'Microsoft.Web/sites@2025-03-01' = {
   name: appName
   location: location
   tags: {
@@ -147,7 +147,7 @@ resource appName_resource 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource appName_MSDeploy 'Microsoft.Web/sites/extensions@2021-02-01' = {
+resource appName_MSDeploy 'Microsoft.Web/sites/extensions@2025-03-01' = {
   parent: appName_resource
   name: 'MSDeploy'
   properties: {
@@ -179,7 +179,7 @@ resource appName_MSDeploy 'Microsoft.Web/sites/extensions@2021-02-01' = {
   ]
 }
 
-resource appName_connectionstrings 'Microsoft.Web/Sites/config@2020-12-01' = {
+resource appName_connectionstrings 'Microsoft.Web/Sites/config@2025-03-01' = {
   parent: appName_resource
   name: 'connectionstrings'
   properties: {
@@ -195,7 +195,7 @@ resource appName_connectionstrings 'Microsoft.Web/Sites/config@2020-12-01' = {
   ]
 }
 
-resource appName_web 'Microsoft.Web/Sites/config@2020-12-01' = {
+resource appName_web 'Microsoft.Web/Sites/config@2025-03-01' = {
   parent: appName_resource
   name: 'web'
   properties: {
@@ -273,7 +273,7 @@ resource appServicePlanName_scaleset 'Microsoft.Insights/autoscalesettings@2022-
   ]
 }
 
-resource umbracoAdminWebAppName 'Microsoft.Web/sites@2022-03-01' = {
+resource umbracoAdminWebAppName 'Microsoft.Web/sites@2025-03-01' = {
   name: umbracoAdminWebAppName_var
   location: location
   tags: {
@@ -284,7 +284,7 @@ resource umbracoAdminWebAppName 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource umbracoAdminWebAppName_MSDeploy 'Microsoft.Web/sites/extensions@2021-02-01' = {
+resource umbracoAdminWebAppName_MSDeploy 'Microsoft.Web/sites/extensions@2025-03-01' = {
   parent: umbracoAdminWebAppName
   name: 'MSDeploy'
   properties: {
@@ -316,7 +316,7 @@ resource umbracoAdminWebAppName_MSDeploy 'Microsoft.Web/sites/extensions@2021-02
   ]
 }
 
-resource umbracoAdminWebAppName_connectionstrings 'Microsoft.Web/Sites/config@2020-12-01' = {
+resource umbracoAdminWebAppName_connectionstrings 'Microsoft.Web/Sites/config@2025-03-01' = {
   parent: umbracoAdminWebAppName
   name: 'connectionstrings'
   properties: {
@@ -332,7 +332,7 @@ resource umbracoAdminWebAppName_connectionstrings 'Microsoft.Web/Sites/config@20
   ]
 }
 
-resource umbracoAdminWebAppName_web 'Microsoft.Web/Sites/config@2020-12-01' = {
+resource umbracoAdminWebAppName_web 'Microsoft.Web/Sites/config@2025-03-01' = {
   parent: umbracoAdminWebAppName
   name: 'web'
   properties: {

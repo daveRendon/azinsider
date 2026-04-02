@@ -3,7 +3,7 @@ param location string = 'eastus'
 param appServicePlanId string
 param repoUrl string = 'https://github.com/daveRendon/wordpress-azure/'
 
-resource appService 'Microsoft.Web/sites@2021-03-01' = {
+resource appService 'Microsoft.Web/sites@2025-03-01' = {
   name: '${appServicePrefix}-site'
   location: location
   properties:{
@@ -34,7 +34,7 @@ resource appService 'Microsoft.Web/sites@2021-03-01' = {
   }
 }
 
-resource appConfig 'Microsoft.Web/sites/config@2021-03-01' = {
+resource appConfig 'Microsoft.Web/sites/config@2025-03-01' = {
   parent: appService
   name: 'web'
   properties: {
@@ -42,7 +42,7 @@ resource appConfig 'Microsoft.Web/sites/config@2021-03-01' = {
   }
 }
 
-resource sourceControls 'Microsoft.Web/sites/sourcecontrols@2021-03-01' = {
+resource sourceControls 'Microsoft.Web/sites/sourcecontrols@2025-03-01' = {
   name: 'web'
   parent: appService
   properties: {

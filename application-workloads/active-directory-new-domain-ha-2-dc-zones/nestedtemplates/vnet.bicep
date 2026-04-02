@@ -30,7 +30,7 @@ var dhcpOptions = {
   dnsServers: DNSServerAddress
 }
 
-resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-11-01' = {
+resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {

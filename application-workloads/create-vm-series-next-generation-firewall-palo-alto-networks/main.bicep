@@ -173,7 +173,7 @@ var subnets = [
 ]
 
 
-resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2017-10-01' = if (publicIPNewOrExisting == 'new') {
+resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2025-05-01' = if (publicIPNewOrExisting == 'new') {
   name: publicIPAddressName
   location: location
   properties: {
@@ -184,7 +184,7 @@ resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2017-
   }
 }
 
-resource nsgName 'Microsoft.Network/networkSecurityGroups@2017-10-01' = {
+resource nsgName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgName_var
   location: location
   properties: {
@@ -235,7 +235,7 @@ resource nsgName 'Microsoft.Network/networkSecurityGroups@2017-10-01' = {
   }
 }
 
-resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2017-10-01' = if (vnetNewOrExisting == 'new') {
+resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = if (vnetNewOrExisting == 'new') {
   name: virtualNetworkName
   location: location
   properties: {
@@ -248,7 +248,7 @@ resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2017-10-
   }
 }
 
-resource nicName_0 'Microsoft.Network/networkInterfaces@2017-10-01' = {
+resource nicName_0 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: '${nicName}0'
   location: location
   properties: {
@@ -269,7 +269,7 @@ resource nicName_0 'Microsoft.Network/networkInterfaces@2017-10-01' = {
   }
 }
 
-resource nicName_1 'Microsoft.Network/networkInterfaces@2017-10-01' = {
+resource nicName_1 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: '${nicName}1'
   location: location
   properties: {
@@ -292,7 +292,7 @@ resource nicName_1 'Microsoft.Network/networkInterfaces@2017-10-01' = {
   ]
 }
 
-resource nicName_2 'Microsoft.Network/networkInterfaces@2017-10-01' = {
+resource nicName_2 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: '${nicName}2'
   location: location
   properties: {
@@ -315,7 +315,7 @@ resource nicName_2 'Microsoft.Network/networkInterfaces@2017-10-01' = {
   ]
 }
 
-resource availabilitySetName_resource 'Microsoft.Compute/availabilitySets@2018-06-01' = if (availabilitySetName != 'None') {
+resource availabilitySetName_resource 'Microsoft.Compute/availabilitySets@2025-04-01' = if (availabilitySetName != 'None') {
   name: availabilitySetName
   location: location
   properties: {
@@ -330,7 +330,7 @@ resource availabilitySetName_resource 'Microsoft.Compute/availabilitySets@2018-0
   ]
 }
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2018-06-01' = {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   plan: {

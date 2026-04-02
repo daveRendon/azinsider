@@ -27,7 +27,7 @@ var webSubnetResourceId = resourceId('Microsoft.Network/virtualNetworks/subnets'
 var bizVMNicResourceId = bizVMNicName.id
 var bizSubnetResourceId = resourceId('Microsoft.Network/virtualNetworks/subnets', vnetName_var, bizSubnetName)
 
-resource sqlServerName_resource 'Microsoft.Sql/servers@2022-02-01-preview' = {
+resource sqlServerName_resource 'Microsoft.Sql/servers@2023-08-01' = {
   name: sqlServerName
   location: location
   tags: {
@@ -42,7 +42,7 @@ resource sqlServerName_resource 'Microsoft.Sql/servers@2022-02-01-preview' = {
   dependsOn: []
 }
 
-resource sqlServerName_sqlServerDatabaseName 'Microsoft.Sql/servers/databases@2022-02-01-preview' = {
+resource sqlServerName_sqlServerDatabaseName 'Microsoft.Sql/servers/databases@2023-08-01' = {
   parent: sqlServerName_resource
   sku: {
     name: 'S0'
@@ -61,7 +61,7 @@ resource sqlServerName_sqlServerDatabaseName 'Microsoft.Sql/servers/databases@20
   ]
 }
 
-resource sqlServerName_demo_vnet_biz_rule 'Microsoft.Sql/servers/virtualNetworkRules@2015-05-01-preview' = {
+resource sqlServerName_demo_vnet_biz_rule 'Microsoft.Sql/servers/virtualNetworkRules@2023-08-01' = {
   parent: sqlServerName_resource
   name: 'demo-vnet-biz-rule'
   properties: {
@@ -74,7 +74,7 @@ resource sqlServerName_demo_vnet_biz_rule 'Microsoft.Sql/servers/virtualNetworkR
   ]
 }
 
-resource webNSGName 'Microsoft.Network/networkSecurityGroups@2018-08-01' = {
+resource webNSGName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: webNSGName_var
   location: location
   tags: {
@@ -100,7 +100,7 @@ resource webNSGName 'Microsoft.Network/networkSecurityGroups@2018-08-01' = {
   dependsOn: []
 }
 
-resource bizNSGName 'Microsoft.Network/networkSecurityGroups@2018-08-01' = {
+resource bizNSGName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: bizNSGName_var
   location: location
   tags: {
@@ -139,7 +139,7 @@ resource bizNSGName 'Microsoft.Network/networkSecurityGroups@2018-08-01' = {
   dependsOn: []
 }
 
-resource vnetName 'Microsoft.Network/virtualNetworks@2018-08-01' = {
+resource vnetName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName_var
   location: location
   properties: {
@@ -174,7 +174,7 @@ resource vnetName 'Microsoft.Network/virtualNetworks@2018-08-01' = {
   dependsOn: []
 }
 
-resource webVMNicPIPName 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
+resource webVMNicPIPName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   sku: {
     name: 'Basic'
     tier: 'Regional'
@@ -192,7 +192,7 @@ resource webVMNicPIPName 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
   dependsOn: []
 }
 
-resource webVMNicName 'Microsoft.Network/networkInterfaces@2018-08-01' = {
+resource webVMNicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: webVMNicName_var
   location: location
   tags: {
@@ -229,7 +229,7 @@ resource webVMNicName 'Microsoft.Network/networkInterfaces@2018-08-01' = {
   ]
 }
 
-resource bizVMNicName 'Microsoft.Network/networkInterfaces@2018-08-01' = {
+resource bizVMNicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: bizVMNicName_var
   location: location
   tags: {
@@ -263,7 +263,7 @@ resource bizVMNicName 'Microsoft.Network/networkInterfaces@2018-08-01' = {
   ]
 }
 
-resource webVMName 'Microsoft.Compute/virtualMachines@2018-06-01' = {
+resource webVMName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: webVMName_var
   location: location
   tags: {
@@ -318,7 +318,7 @@ resource webVMName 'Microsoft.Compute/virtualMachines@2018-06-01' = {
   }
 }
 
-resource webVMName_apache_ext 'Microsoft.Compute/virtualMachines/extensions@2018-10-01' = {
+resource webVMName_apache_ext 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: webVMName
   name: 'apache-ext'
   location: location
@@ -342,7 +342,7 @@ resource webVMName_apache_ext 'Microsoft.Compute/virtualMachines/extensions@2018
   }
 }
 
-resource bizVMName 'Microsoft.Compute/virtualMachines@2018-06-01' = {
+resource bizVMName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: bizVMName_var
   location: location
   tags: {
@@ -397,7 +397,7 @@ resource bizVMName 'Microsoft.Compute/virtualMachines@2018-06-01' = {
   }
 }
 
-resource bizVMName_apache_ext 'Microsoft.Compute/virtualMachines/extensions@2021-03-01' = {
+resource bizVMName_apache_ext 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: bizVMName
   name: 'apache-ext'
   location: location

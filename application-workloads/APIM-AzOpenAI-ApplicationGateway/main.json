@@ -1,0 +1,286 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.37.4.10188",
+      "templateHash": "11339167318398971765"
+    }
+  },
+  "parameters": {
+    "resourcePrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource prefix for naming resources"
+      }
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure region for deployment"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2025-05-01",
+      "name": "[format('{0}-vnet', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "apimSubnet",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "privateEndpointNetworkPolicies": "Disabled",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', format('{0}-apim-nsg', parameters('resourcePrefix')))]"
+              }
+            }
+          },
+          {
+            "name": "appGwSubnet",
+            "properties": {
+              "addressPrefix": "10.0.1.0/24"
+            }
+          },
+          {
+            "name": "privateEndpointSubnet",
+            "properties": {
+              "addressPrefix": "10.0.2.0/24",
+              "privateEndpointNetworkPolicies": "Disabled"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', format('{0}-apim-nsg', parameters('resourcePrefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2025-05-01",
+      "name": "[format('{0}-apim-nsg', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "AllowMgmtInbound",
+            "properties": {
+              "priority": 100,
+              "protocol": "*",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "ApiManagement",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "VirtualNetwork",
+              "destinationPortRange": "3443"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "apiVersion": "2025-09-01",
+      "name": "[format('{0}-openai', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "kind": "OpenAI",
+      "sku": {
+        "name": "S0"
+      },
+      "properties": {
+        "customSubDomainName": "[format('{0}-openai', parameters('resourcePrefix'))]"
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2025-05-01",
+      "name": "[format('{0}-openai-pe', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "subnet": {
+          "id": "[format('{0}/subnets/privateEndpointSubnet', resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix'))))]"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "openaiPrivateLink",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.CognitiveServices/accounts', format('{0}-openai', parameters('resourcePrefix')))]",
+              "groupIds": [
+                "account"
+              ]
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.CognitiveServices/accounts', format('{0}-openai', parameters('resourcePrefix')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.ApiManagement/service",
+      "apiVersion": "2024-05-01",
+      "name": "[format('{0}-apim', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Developer",
+        "capacity": 1
+      },
+      "properties": {
+        "publisherEmail": "admin@contoso.com",
+        "publisherName": "Contoso Admin",
+        "virtualNetworkType": "Internal",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "[format('{0}/subnets/apimSubnet', resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix'))))]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', format('{0}-apim-nsg', parameters('resourcePrefix')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2025-05-01",
+      "name": "[format('{0}-appgw-pip', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static"
+      }
+    },
+    {
+      "type": "Microsoft.Network/applicationGateways",
+      "apiVersion": "2025-05-01",
+      "name": "[format('{0}-appGw', parameters('resourcePrefix'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sku": {
+          "name": "Standard_v2",
+          "tier": "Standard_v2",
+          "capacity": 2
+        },
+        "gatewayIPConfigurations": [
+          {
+            "name": "appGwIpConfig",
+            "properties": {
+              "subnet": {
+                "id": "[format('{0}/subnets/appGwSubnet', resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix'))))]"
+              }
+            }
+          }
+        ],
+        "frontendIPConfigurations": [
+          {
+            "name": "frontendIpConfig",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}-appgw-pip', parameters('resourcePrefix')))]"
+              }
+            }
+          }
+        ],
+        "frontendPorts": [
+          {
+            "name": "httpPort",
+            "properties": {
+              "port": 80
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "apimBackendPool",
+            "properties": {
+              "backendAddresses": [
+                {
+                  "fqdn": "[replace(reference(resourceId('Microsoft.ApiManagement/service', format('{0}-apim', parameters('resourcePrefix'))), '2024-05-01').gatewayUrl, 'https://', '')]"
+                }
+              ]
+            }
+          }
+        ],
+        "backendHttpSettingsCollection": [
+          {
+            "name": "apimBackendHttpSettings",
+            "properties": {
+              "port": 443,
+              "protocol": "Https",
+              "hostName": "[replace(reference(resourceId('Microsoft.ApiManagement/service', format('{0}-apim', parameters('resourcePrefix'))), '2024-05-01').gatewayUrl, 'https://', '')]",
+              "probeEnabled": true,
+              "probe": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/probes', format('{0}-appGw', parameters('resourcePrefix')), 'apimProbe')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "apimProbe",
+            "properties": {
+              "protocol": "Https",
+              "host": "[replace(reference(resourceId('Microsoft.ApiManagement/service', format('{0}-apim', parameters('resourcePrefix'))), '2024-05-01').gatewayUrl, 'https://', '')]",
+              "path": "/status-0123456789abcdef",
+              "interval": 30,
+              "timeout": 30,
+              "unhealthyThreshold": 3,
+              "match": {
+                "statusCodes": [
+                  "200-399"
+                ]
+              }
+            }
+          }
+        ],
+        "httpListeners": [
+          {
+            "name": "httpListener",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', format('{0}-appGw', parameters('resourcePrefix')), 'frontendIpConfig')]"
+              },
+              "frontendPort": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/frontendPorts', format('{0}-appGw', parameters('resourcePrefix')), 'httpPort')]"
+              },
+              "protocol": "Http"
+            }
+          }
+        ],
+        "requestRoutingRules": [
+          {
+            "name": "httpRoutingRule",
+            "properties": {
+              "priority": 100,
+              "ruleType": "Basic",
+              "httpListener": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/httpListeners', format('{0}-appGw', parameters('resourcePrefix')), 'httpListener')]"
+              },
+              "backendAddressPool": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/backendAddressPools', format('{0}-appGw', parameters('resourcePrefix')), 'apimBackendPool')]"
+              },
+              "backendHttpSettings": {
+                "id": "[resourceId('Microsoft.Network/applicationGateways/backendHttpSettingsCollection', format('{0}-appGw', parameters('resourcePrefix')), 'apimBackendHttpSettings')]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service', format('{0}-apim', parameters('resourcePrefix')))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}-appgw-pip', parameters('resourcePrefix')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('{0}-vnet', parameters('resourcePrefix')))]"
+      ]
+    }
+  ]
+}

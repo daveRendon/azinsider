@@ -44,7 +44,7 @@ param azureAppService object = {
 param deploySlots bool = true
 param location string = resourceGroup().location
 
-resource logAnalytics_name 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+resource logAnalytics_name 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: logAnalytics.name
   location: location
   properties: {
@@ -57,7 +57,7 @@ resource logAnalytics_name 'Microsoft.OperationalInsights/workspaces@2020-08-01'
   }
 }
 
-resource azureSqlDatabase_server 'Microsoft.Sql/servers@2020-02-02-preview' = {
+resource azureSqlDatabase_server 'Microsoft.Sql/servers@2023-08-01' = {
   name: azureSqlDatabase.serverName
   location: location
   properties: {
@@ -67,7 +67,7 @@ resource azureSqlDatabase_server 'Microsoft.Sql/servers@2020-02-02-preview' = {
   }
 }
 
-resource azureSqlDatabase_serverName_master 'Microsoft.Sql/servers/databases@2020-08-01-preview' = {
+resource azureSqlDatabase_serverName_master 'Microsoft.Sql/servers/databases@2023-08-01' = {
   name: '${azureSqlDatabase.serverName}/master'
   location: location
   dependsOn: [
@@ -92,7 +92,7 @@ resource azureSqlDatabase_serverName_master_Microsoft_Insights_default_logAnalyt
   ]
 }
 
-resource azureSqlDatabase_serverName_DefaultAuditingSettings 'Microsoft.Sql/servers/auditingSettings@2020-02-02-preview' = {
+resource azureSqlDatabase_serverName_DefaultAuditingSettings 'Microsoft.Sql/servers/auditingSettings@2023-08-01' = {
   name: '${azureSqlDatabase.serverName}/DefaultAuditingSettings'
   properties: {
     state: 'Enabled'
@@ -103,7 +103,7 @@ resource azureSqlDatabase_serverName_DefaultAuditingSettings 'Microsoft.Sql/serv
   ]
 }
 
-resource azureSqlDatabase_serverName_azureSqlDatabase_database 'Microsoft.Sql/servers/databases@2020-08-01-preview' = {
+resource azureSqlDatabase_serverName_azureSqlDatabase_database 'Microsoft.Sql/servers/databases@2023-08-01' = {
   name: '${azureSqlDatabase.serverName}/${azureSqlDatabase.databaseName}'
   location: location
   dependsOn: [
@@ -175,7 +175,7 @@ resource azureSqlDatabase_serverName_azureSqlDatabase_databaseName_Microsoft_Ins
   ]
 }
 
-resource azureSqlDatabase_serverName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2020-02-02-preview' = {
+resource azureSqlDatabase_serverName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2023-08-01' = {
   name: '${azureSqlDatabase.serverName}/AllowAllWindowsAzureIps'
   location: location
   properties: {
@@ -187,7 +187,7 @@ resource azureSqlDatabase_serverName_AllowAllWindowsAzureIps 'Microsoft.Sql/serv
   ]
 }
 
-resource keyVault_name 'Microsoft.KeyVault/vaults@2019-09-01' = {
+resource keyVault_name 'Microsoft.KeyVault/vaults@2025-05-01' = {
   name: keyVault.name
   location: location
   properties: {
@@ -236,7 +236,7 @@ resource keyVault_name_Microsoft_Insights_default_azureAppService_name 'Microsof
   ]
 }
 
-resource keyVault_name_sqlServer 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+resource keyVault_name_sqlServer 'Microsoft.KeyVault/vaults/secrets@2025-05-01' = {
   name: '${keyVault.name}/sqlServer'
   properties: {
     value: 'Data Source=tcp:${azureSqlDatabase_server.properties.fullyQualifiedDomainName},1433;Initial Catalog=${azureSqlDatabase.databaseName};User Id=${adminUserName}@${azureSqlDatabase.serverName};Password=${adminPassword};'
@@ -247,7 +247,7 @@ resource keyVault_name_sqlServer 'Microsoft.KeyVault/vaults/secrets@2019-09-01' 
   ]
 }
 
-resource azureAppService_name 'Microsoft.Web/serverfarms@2020-06-01' = {
+resource azureAppService_name 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: azureAppService.name
   location: location
   sku: {
@@ -278,7 +278,7 @@ resource azureAppService_name_Microsoft_Insights_default_azureAppService_name 'M
   ]
 }
 
-resource azureAppService_webSite 'Microsoft.Web/sites@2020-06-01' = {
+resource azureAppService_webSite 'Microsoft.Web/sites@2025-03-01' = {
   name: azureAppService.webSiteName
   location: location
   identity: {
@@ -293,7 +293,7 @@ resource azureAppService_webSite 'Microsoft.Web/sites@2020-06-01' = {
   }
 }
 
-resource azureAppService_webSiteName_connectionstrings 'Microsoft.Web/sites/config@2020-06-01' = {
+resource azureAppService_webSiteName_connectionstrings 'Microsoft.Web/sites/config@2025-03-01' = {
   name: '${azureAppService.webSiteName}/connectionstrings'
   properties: {
     DefaultConnection: {
@@ -349,7 +349,7 @@ resource azureAppService_webSiteName_Microsoft_Insights_default_azureAppService_
   ]
 }
 
-resource azureAppService_webSiteName_Staging 'Microsoft.Web/sites/slots@2020-06-01' = if (deploySlots) {
+resource azureAppService_webSiteName_Staging 'Microsoft.Web/sites/slots@2025-03-01' = if (deploySlots) {
   name: '${azureAppService.webSiteName}/Staging'
   location: location
   properties: {}
@@ -358,7 +358,7 @@ resource azureAppService_webSiteName_Staging 'Microsoft.Web/sites/slots@2020-06-
   ]
 }
 
-resource azureAppService_webSiteName_Staging_connectionstrings 'Microsoft.Web/sites/slots/config@2020-06-01' = if (deploySlots) {
+resource azureAppService_webSiteName_Staging_connectionstrings 'Microsoft.Web/sites/slots/config@2025-03-01' = if (deploySlots) {
   name: '${azureAppService.webSiteName}/Staging/connectionstrings'
   properties: {
     DefaultConnection: {
@@ -414,7 +414,7 @@ resource azureAppService_webSiteName_Staging_Microsoft_Insights_default_azureApp
   ]
 }
 
-resource azureAppService_webSiteName_LastKnownGood 'Microsoft.Web/sites/slots@2020-06-01' = if (deploySlots) {
+resource azureAppService_webSiteName_LastKnownGood 'Microsoft.Web/sites/slots@2025-03-01' = if (deploySlots) {
   name: '${azureAppService.webSiteName}/LastKnownGood'
   location: location
   properties: {}
@@ -423,7 +423,7 @@ resource azureAppService_webSiteName_LastKnownGood 'Microsoft.Web/sites/slots@20
   ]
 }
 
-resource azureAppService_webSiteName_LastKnownGood_connectionstrings 'Microsoft.Web/sites/slots/config@2020-06-01' = if (deploySlots) {
+resource azureAppService_webSiteName_LastKnownGood_connectionstrings 'Microsoft.Web/sites/slots/config@2025-03-01' = if (deploySlots) {
   name: '${azureAppService.webSiteName}/LastKnownGood/connectionstrings'
   properties: {
     DefaultConnection: {
@@ -479,7 +479,7 @@ resource azureAppService_webSiteName_LastKnownGood_Microsoft_Insights_default_az
   ]
 }
 
-resource azureAppService_name_name 'Microsoft.Insights/autoscalesettings@2015-04-01' = {
+resource azureAppService_name_name 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
   name: '${azureAppService.name}-${resourceGroup().name}'
   location: location
   properties: {
@@ -540,7 +540,7 @@ resource azureAppService_name_name 'Microsoft.Insights/autoscalesettings@2015-04
   ]
 }
 
-resource email_alert 'microsoft.insights/actionGroups@2019-06-01' = {
+resource email_alert 'microsoft.insights/actionGroups@2023-01-01' = {
   name: 'email-alert'
   location: 'global'
   properties: {

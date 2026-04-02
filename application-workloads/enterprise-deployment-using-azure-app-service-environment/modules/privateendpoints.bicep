@@ -44,7 +44,7 @@ var privateDnsZoneSQLName = 'privatelink${environment().suffixes.sqlServerHostna
 var pvtEndpointDnsGroupSQLName = '${privateEndpointSQLName}/sqldnsgroupname'
 
 //Create an NSG for the subnet
-resource servicesNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
+resource servicesNSG 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: servicesNSGName
   location: location
   tags: {
@@ -53,7 +53,7 @@ resource servicesNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
 }
 
 //Create a subnet for all private endpoints
-resource servicesSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
+resource servicesSubnet 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   name: '${vnetName}/${servicesSubnetName}'
   properties: {
     addressPrefix: servicesSubnetAddressPrefix
@@ -64,7 +64,7 @@ resource servicesSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' =
 }
 
 //Create the private endpoint
-resource privateEndpointSQL 'Microsoft.Network/privateEndpoints@2021-05-01' = {
+resource privateEndpointSQL 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: privateEndpointSQLName
   location: location
   properties: {
@@ -86,13 +86,13 @@ resource privateEndpointSQL 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   }
 }
 
-resource privateDnsZoneSQL 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateDnsZoneSQL 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDnsZoneSQLName
   location: 'global'
   properties: {}
 }
 
-resource privateDnsZoneLinkSQL 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privateDnsZoneLinkSQL 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privateDnsZoneSQL
   name: '${privateDnsZoneSQLName}-link'
   location: 'global'
@@ -104,7 +104,7 @@ resource privateDnsZoneLinkSQL 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource pvtEndpointDnsGroupSQL 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
+resource pvtEndpointDnsGroupSQL 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   name: pvtEndpointDnsGroupSQLName
   properties: {
     privateDnsZoneConfigs: [
@@ -121,7 +121,7 @@ resource pvtEndpointDnsGroupSQL 'Microsoft.Network/privateEndpoints/privateDnsZo
   ]
 }
 
-resource privateDnsZoneARecordSQL 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+resource privateDnsZoneARecordSQL 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: privateDnsZoneSQL
   name: '${privateEndpointSQLName}.${privateDnsZoneSQLName}'
   properties: {
@@ -144,7 +144,7 @@ var pvtEndpointDnsGroupSBName = '${privateEndpointSBName}/sbdnsgroupname'
 
 //Create the private endpoint
 
-resource privateEndpointSB 'Microsoft.Network/privateEndpoints@2021-05-01' = {
+resource privateEndpointSB 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: privateEndpointSBName
   location: location
   properties: {
@@ -165,13 +165,13 @@ resource privateEndpointSB 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   }
 }
 
-resource privateDnsZoneSB 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateDnsZoneSB 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDnsZoneSBName
   location: 'global'
   properties: {}
 }
 
-resource privateDnsZoneLinkSB 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privateDnsZoneLinkSB 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privateDnsZoneSB
   name: '${privateDnsZoneSBName}-link'
   location: 'global'
@@ -183,7 +183,7 @@ resource privateDnsZoneLinkSB 'Microsoft.Network/privateDnsZones/virtualNetworkL
   }
 }
 
-resource pvtEndpointDnsGroupSB 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
+resource pvtEndpointDnsGroupSB 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   name: pvtEndpointDnsGroupSBName
   properties: {
     privateDnsZoneConfigs: [
@@ -200,7 +200,7 @@ resource pvtEndpointDnsGroupSB 'Microsoft.Network/privateEndpoints/privateDnsZon
   ]
 }
 
-resource privateDnsZoneARecordSB 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+resource privateDnsZoneARecordSB 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: privateDnsZoneSB
   name: '${privateEndpointSBName}.${privateDnsZoneSBName}'
   properties: {
@@ -224,7 +224,7 @@ var privateDnsZoneCosmosName = 'privatelink${cosmosDBHostName}'
 var pvtEndpointDnsGroupCosmosName = '${privateEndpointCosmosName}/sbdnsgroupname'
 
 //Create the private endpoint
-resource privateEndpointCosmos 'Microsoft.Network/privateEndpoints@2021-05-01' = {
+resource privateEndpointCosmos 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: privateEndpointCosmosName
   location: location
   properties: {
@@ -245,13 +245,13 @@ resource privateEndpointCosmos 'Microsoft.Network/privateEndpoints@2021-05-01' =
   }
 }
 
-resource privateDnsZoneCosmos 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateDnsZoneCosmos 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDnsZoneCosmosName
   location: 'global'
   properties: {}
 }
 
-resource privateDnsZoneLinkCosmos 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privateDnsZoneLinkCosmos 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privateDnsZoneCosmos
   name: '${privateDnsZoneCosmosName}-link'
   location: 'global'
@@ -263,7 +263,7 @@ resource privateDnsZoneLinkCosmos 'Microsoft.Network/privateDnsZones/virtualNetw
   }
 }
 
-resource pvtEndpointDnsGroupCosmos 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
+resource pvtEndpointDnsGroupCosmos 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   name: pvtEndpointDnsGroupCosmosName
   properties: {
     privateDnsZoneConfigs: [
@@ -280,7 +280,7 @@ resource pvtEndpointDnsGroupCosmos 'Microsoft.Network/privateEndpoints/privateDn
   ]
 }
 
-resource privateDnsZoneARecordCosmos 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+resource privateDnsZoneARecordCosmos 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: privateDnsZoneCosmos
   name: '${privateEndpointCosmosName}.${privateDnsZoneCosmosName}'
   properties: {
@@ -306,7 +306,7 @@ var privateDnsZonekeyVaultName = 'privatelink${akvHostName}'
 var pvtEndpointDnsGroupkeyVaultName = '${privateEndpointkeyVaultName}/sbdnsgroupname'
 
 //Create the private endpoint
-resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2021-05-01' = {
+resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: privateEndpointkeyVaultName
   location: location
   properties: {
@@ -327,13 +327,13 @@ resource privateEndpointAKV 'Microsoft.Network/privateEndpoints@2021-05-01' = {
   }
 }
 
-resource privateDnsZoneAKV 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateDnsZoneAKV 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDnsZonekeyVaultName
   location: 'global'
   properties: {}
 }
 
-resource privateDnsZoneLinkAKV 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privateDnsZoneLinkAKV 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privateDnsZoneAKV
   name: '${privateDnsZonekeyVaultName}-link'
   location: 'global'
@@ -345,7 +345,7 @@ resource privateDnsZoneLinkAKV 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource pvtEndpointDnsGroupAKV 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
+resource pvtEndpointDnsGroupAKV 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   name: pvtEndpointDnsGroupkeyVaultName
   properties: {
     privateDnsZoneConfigs: [
@@ -362,7 +362,7 @@ resource pvtEndpointDnsGroupAKV 'Microsoft.Network/privateEndpoints/privateDnsZo
   ]
 }
 
-resource privateDnsZoneARecordAKV 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+resource privateDnsZoneARecordAKV 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: privateDnsZoneAKV
   name: '${privateEndpointkeyVaultName}.${privateDnsZonekeyVaultName}'
   properties: {

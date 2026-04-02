@@ -66,7 +66,7 @@ var adBDCConfigurationModulesURL = uri(_artifactsLocation, 'DSC/ConfigureADBDC.p
 var adBDCConfigurationScript = 'ConfigureADBDC.ps1'
 var adBDCConfigurationFunction = 'ConfigureADBDC'
 
-resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
+resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddressName_var
   location: location
   sku: {
@@ -94,7 +94,7 @@ module CreateVNet './nestedtemplates/vnet.bicep' = {
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2020-11-01' = [for i in range(0, 2): {
+resource nicName 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, 2): {
   name: nicName_var[i]
   location: location
   properties: {
@@ -118,7 +118,7 @@ resource nicName 'Microsoft.Network/networkInterfaces@2020-11-01' = [for i in ra
   ]
 }]
 
-resource vmName 'Microsoft.Compute/virtualMachines@2020-12-01' = [for i in range(0, 2): {
+resource vmName 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, 2): {
   name: vmName_var[i]
   location: location
   zones: [
@@ -168,7 +168,7 @@ resource vmName 'Microsoft.Compute/virtualMachines@2020-12-01' = [for i in range
   ]
 }]
 
-resource vmName_0_CreateAdForest 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource vmName_0_CreateAdForest 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   name: '${vmName_var[0]}/CreateAdForest'
   location: location
   properties: {
@@ -201,7 +201,7 @@ resource vmName_0_CreateAdForest 'Microsoft.Compute/virtualMachines/extensions@2
   ]
 }
 
-resource vmName_1_PepareBDC 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource vmName_1_PepareBDC 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   name: '${vmName_var[1]}/PepareBDC'
   location: location
   properties: {

@@ -11,7 +11,7 @@ param sendgridName string
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
-resource sendgrid 'Microsoft.Web/connections@2018-07-01-preview' = {
+resource sendgrid 'Microsoft.Web/connections@2016-06-01' = {
   location: location
   name: sendgridName
   properties: {

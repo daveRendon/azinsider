@@ -118,7 +118,7 @@ var metrics = [
 ]
 
 // Resources
-resource aiServices 'Microsoft.CognitiveServices/accounts@2024-04-01-preview' existing = {
+resource aiServices 'Microsoft.CognitiveServices/accounts@2025-09-01' existing = {
   name: aiServicesName
 }
 

@@ -11,11 +11,11 @@ param destinationAddressPrefix string
 param destinationPortRange string
 
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-08-01' existing = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' existing = {
   name: nsgName
 }
 
-resource securityRule 'Microsoft.Network/networkSecurityGroups/securityRules@2021-08-01' = {
+resource securityRule 'Microsoft.Network/networkSecurityGroups/securityRules@2025-05-01' = {
   parent: nsg
   name: ruleName
   properties: {

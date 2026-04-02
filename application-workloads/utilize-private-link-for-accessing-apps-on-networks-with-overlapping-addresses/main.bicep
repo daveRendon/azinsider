@@ -38,7 +38,7 @@ var privatelinkServiceName = 'myPLS'
 var loadbalancerId = loadbalancer.id
 
 
-resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName
   location: location
   properties: {
@@ -65,7 +65,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   }
 }
 
-resource loadbalancer 'Microsoft.Network/loadBalancers@2021-05-01' = {
+resource loadbalancer 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: loadbalancerName
   location: location
   sku: {
@@ -128,7 +128,7 @@ resource loadbalancer 'Microsoft.Network/loadBalancers@2021-05-01' = {
   ]
 }
 
-resource networkInterface 'Microsoft.Network/networkInterfaces@2021-05-01' = [for i in range(0, vmCount): {
+resource networkInterface 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, vmCount): {
   name: '${networkInterfaceName}${i}'
   location: location
   properties: {
@@ -155,7 +155,7 @@ resource networkInterface 'Microsoft.Network/networkInterfaces@2021-05-01' = [fo
   ]
 }]
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for i in range(0, vmCount): {
+resource vm 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, vmCount): {
   name: '${vmName}${i}'
   location: location
   properties: {
@@ -194,7 +194,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for i in range(0, 
   }
 } ] 
 
-resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2021-11-01' = [for i in range(0, vmCount): {
+resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, vmCount): {
   name: '${vmName}${i}${'installcustomscript'}'
   parent: vm[i]
   location: location
@@ -209,7 +209,7 @@ resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2021-11-01' =
   }
 }]
 
-resource privatelinkService 'Microsoft.Network/privateLinkServices@2021-05-01' = {
+resource privatelinkService 'Microsoft.Network/privateLinkServices@2025-05-01' = {
   name: privatelinkServiceName
   location: location
   properties: {
@@ -235,7 +235,7 @@ resource privatelinkService 'Microsoft.Network/privateLinkServices@2021-05-01' =
   }
 }
 
-resource vnetConsumer 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+resource vnetConsumer 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetConsumerName
   location: location
   properties: {
@@ -256,7 +256,7 @@ resource vnetConsumer 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   }
 }
 
-resource publicIpAddressConsumer 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
+resource publicIpAddressConsumer 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpAddressConsumerName
   location: location
   tags: {
@@ -270,7 +270,7 @@ resource publicIpAddressConsumer 'Microsoft.Network/publicIPAddresses@2021-05-01
   }
 }
 
-resource networkInterfaceConsumer 'Microsoft.Network/networkInterfaces@2021-05-01' = {
+resource networkInterfaceConsumer 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkInterfaceConsumerName
   location: location
   tags: {
@@ -297,7 +297,7 @@ resource networkInterfaceConsumer 'Microsoft.Network/networkInterfaces@2021-05-0
   ]
 }
 
-resource vmConsumer 'Microsoft.Compute/virtualMachines@2021-11-01' = {
+resource vmConsumer 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmConsumerName
   location: location
   tags: {
@@ -339,7 +339,7 @@ resource vmConsumer 'Microsoft.Compute/virtualMachines@2021-11-01' = {
   }
 }
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
+resource privateEndpoint 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: privateEndpointName
   location: location
   properties: {

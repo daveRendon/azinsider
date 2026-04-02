@@ -64,7 +64,7 @@ var applicationSecurityGroupName1 = 'myAsgWebServers'
 var applicationSecurityGroupName2 = 'myAsgMgmtServers'
 
 
-resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -73,7 +73,7 @@ resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   kind: 'Storage'
 }
 
-resource pip1 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource pip1 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpName1
   location: location
   sku: {
@@ -87,7 +87,7 @@ resource pip1 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   }
 }
 
-resource pip2 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource pip2 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpName2
   location: location
   sku: {
@@ -101,7 +101,7 @@ resource pip2 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   }
 }
 
-resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName
   location: location
   properties: {
@@ -149,21 +149,21 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-02-0
   }
 }
 
-resource applicationSecurityGroup1 'Microsoft.Network/applicationSecurityGroups@2022-05-01' = {
+resource applicationSecurityGroup1 'Microsoft.Network/applicationSecurityGroups@2025-05-01' = {
   name: applicationSecurityGroupName1
   location: location
   
   properties: {}
 }
 
-resource applicationSecurityGroup2 'Microsoft.Network/applicationSecurityGroups@2022-05-01' = {
+resource applicationSecurityGroup2 'Microsoft.Network/applicationSecurityGroups@2025-05-01' = {
   name: applicationSecurityGroupName2
   location: location
   
   properties: {}
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -186,7 +186,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   }
 }
 
-resource nic1 'Microsoft.Network/networkInterfaces@2021-02-01' = {
+resource nic1 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName1
   location: location
   properties: {
@@ -215,7 +215,7 @@ resource nic1 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   }
 }
 
-resource nic2 'Microsoft.Network/networkInterfaces@2021-02-01' = {
+resource nic2 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName2
   location: location
   properties: {
@@ -243,7 +243,7 @@ resource nic2 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   }
 }
 
-resource vm1 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource vm1 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName1
   location: location
   properties: {
@@ -293,7 +293,7 @@ resource vm1 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 }
 
 
-resource vm2 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource vm2 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName2
   location: location
   properties: {
@@ -343,7 +343,7 @@ resource vm2 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 }
 
 
-resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2022-08-01' = {
+resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   name: 'Install-IIS'
   location: location
   parent: vm1

@@ -182,7 +182,7 @@ var sn2GatewayIP = '${sn2IPArray0}.${sn2IPArray1}.${sn2IPArray2}.${sn2IPArray3}'
 var sn2IPStartAddress = split(subnet2StartAddress, '.')
 var sn2IPfga = '${sn2IPArray0}.${sn2IPArray1}.${sn2IPArray2}.${int(sn2IPStartAddress[3])}'
 
-resource routeTableProtectedName 'Microsoft.Network/routeTables@2020-04-01' = {
+resource routeTableProtectedName 'Microsoft.Network/routeTables@2025-05-01' = {
   name: routeTableProtectedName_var
   tags: {
     provider: toUpper(fortinetTags.provider)
@@ -217,7 +217,7 @@ resource routeTableProtectedName 'Microsoft.Network/routeTables@2020-04-01' = {
   }
 }
 
-resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-04-01' = if (vnetNewOrExisting == 'new') {
+resource vnetName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = if (vnetNewOrExisting == 'new') {
   name: vnetName_var
   location: location
   properties: {
@@ -255,7 +255,7 @@ resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-04-01' = if (
   ]
 }
 
-resource NSGName 'Microsoft.Network/networkSecurityGroups@2020-04-01' = {
+resource NSGName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   tags: {
     provider: toUpper(fortinetTags.provider)
   }
@@ -295,7 +295,7 @@ resource NSGName 'Microsoft.Network/networkSecurityGroups@2020-04-01' = {
   }
 }
 
-resource publicIPName_resource 'Microsoft.Network/publicIPAddresses@2020-04-01' = if (publicIPNewOrExisting == 'new') {
+resource publicIPName_resource 'Microsoft.Network/publicIPAddresses@2025-05-01' = if (publicIPNewOrExisting == 'new') {
   tags: {
     provider: toUpper(fortinetTags.provider)
   }
@@ -309,7 +309,7 @@ resource publicIPName_resource 'Microsoft.Network/publicIPAddresses@2020-04-01' 
   }
 }
 
-resource fgaNic1Name 'Microsoft.Network/networkInterfaces@2020-04-01' = {
+resource fgaNic1Name 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   tags: {
     provider: toUpper(fortinetTags.provider)
   }
@@ -341,7 +341,7 @@ resource fgaNic1Name 'Microsoft.Network/networkInterfaces@2020-04-01' = {
   ]
 }
 
-resource fgaNic2Name 'Microsoft.Network/networkInterfaces@2020-04-01' = {
+resource fgaNic2Name 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   tags: {
     provider: toUpper(fortinetTags.provider)
   }
@@ -371,7 +371,7 @@ resource fgaNic2Name 'Microsoft.Network/networkInterfaces@2020-04-01' = {
   ]
 }
 
-resource fgaVmName 'Microsoft.Compute/virtualMachines@2019-07-01' = {
+resource fgaVmName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: fgaVmName_var
   tags: {
     provider: toUpper(fortinetTags.provider)

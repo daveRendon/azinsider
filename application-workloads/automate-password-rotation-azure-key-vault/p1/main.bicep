@@ -6,7 +6,7 @@ param sqlAdminLogin string = 'sqlAdmin'
 
 param location string = resourceGroup().location
 
-resource resourceNamePrefix_sql 'Microsoft.Sql/servers@2022-05-01-preview' = {
+resource resourceNamePrefix_sql 'Microsoft.Sql/servers@2023-08-01' = {
   name: '${resourceNamePrefix}-sql'
   location: location
   properties: {
@@ -16,7 +16,7 @@ resource resourceNamePrefix_sql 'Microsoft.Sql/servers@2022-05-01-preview' = {
   }
 }
 
-resource resourceNamePrefix_sql_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2022-05-01-preview' = {
+resource resourceNamePrefix_sql_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2023-08-01' = {
   parent: resourceNamePrefix_sql
   name: 'AllowAllWindowsAzureIps'
   properties: {
@@ -25,7 +25,7 @@ resource resourceNamePrefix_sql_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/f
   }
 }
 
-resource resourceNamePrefix_sql2 'Microsoft.Sql/servers@2022-05-01-preview' = {
+resource resourceNamePrefix_sql2 'Microsoft.Sql/servers@2023-08-01' = {
   name: '${resourceNamePrefix}-sql2'
   location: location
   properties: {
@@ -35,7 +35,7 @@ resource resourceNamePrefix_sql2 'Microsoft.Sql/servers@2022-05-01-preview' = {
   }
 }
 
-resource resourceNamePrefix_sql2_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2022-05-01-preview' = {
+resource resourceNamePrefix_sql2_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2023-08-01' = {
   parent: resourceNamePrefix_sql2
   name: 'AllowAllWindowsAzureIps'
   properties: {
@@ -44,7 +44,7 @@ resource resourceNamePrefix_sql2_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/
   }
 }
 
-resource resourceNamePrefix_kv 'Microsoft.KeyVault/vaults@2018-02-14' = {
+resource resourceNamePrefix_kv 'Microsoft.KeyVault/vaults@2025-05-01' = {
   name: '${resourceNamePrefix}-kv'
   location: location
   properties: {

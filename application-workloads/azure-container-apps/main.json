@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.37.4.10188",
+      "templateHash": "14062873290210420029"
+    }
+  },
+  "parameters": {
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "environmentId": {
+      "type": "string"
+    },
+    "containers": {
+      "type": "array"
+    },
+    "secrets": {
+      "type": "secureObject"
+    },
+    "registries": {
+      "type": "array"
+    },
+    "ingress": {
+      "type": "object"
+    },
+    "environmentName": {
+      "type": "string"
+    },
+    "workspaceName": {
+      "type": "string"
+    },
+    "workspaceLocation": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.App/containerApps",
+      "apiVersion": "2025-07-01",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "environmentId": "[parameters('environmentId')]",
+        "configuration": {
+          "secrets": "[parameters('secrets').arrayValue]",
+          "registries": "[parameters('registries')]",
+          "activeRevisionsMode": "Single",
+          "ingress": "[parameters('ingress')]"
+        },
+        "template": {
+          "containers": "[parameters('containers')]",
+          "scale": {
+            "minReplicas": 0
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.App/managedEnvironments', parameters('environmentName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.App/managedEnvironments",
+      "apiVersion": "2025-07-01",
+      "name": "[parameters('environmentName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "appLogsConfiguration": {
+          "destination": "log-analytics",
+          "logAnalyticsConfiguration": {
+            "customerId": "[reference(format('Microsoft.OperationalInsights/workspaces/{0}', parameters('workspaceName')), '2020-08-01').customerId]",
+            "sharedKey": "[listKeys(format('Microsoft.OperationalInsights/workspaces/{0}', parameters('workspaceName')), '2020-08-01').primarySharedKey]"
+          }
+        }
+      },
+      "sku": {
+        "name": "Consumption"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2025-07-01",
+      "name": "[parameters('workspaceName')]",
+      "location": "[parameters('workspaceLocation')]",
+      "properties": {
+        "sku": {
+          "name": "PerGB2018"
+        },
+        "retentionInDays": 30,
+        "workspaceCapping": {}
+      }
+    }
+  ]
+}

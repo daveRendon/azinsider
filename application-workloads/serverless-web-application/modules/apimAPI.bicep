@@ -6,21 +6,21 @@ param originUrl string
 
 var functionAppKeyName = '${backendApiName}-key'
 
-resource backendApiApp 'Microsoft.Web/sites@2021-01-15' existing = {
+resource backendApiApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: backendApiName
   scope: resourceGroup(currentResourceGroup)
 }
 
-resource functionKey 'Microsoft.Web/sites/functions/keys@2021-01-15' existing = {
+resource functionKey 'Microsoft.Web/sites/functions/keys@2025-03-01' existing = {
   name: '${backendApiName}/GetTodoItems/default'
   scope: resourceGroup(currentResourceGroup)
 }
 
-resource apim 'Microsoft.ApiManagement/service@2021-01-01-preview' existing = {
+resource apim 'Microsoft.ApiManagement/service@2024-05-01' existing = {
   name: apimName
 }
 
-resource namedValues 'Microsoft.ApiManagement/service/namedValues@2021-01-01-preview' = {
+resource namedValues 'Microsoft.ApiManagement/service/namedValues@2024-05-01' = {
   parent: apim
   name: functionAppKeyName
   properties: {
@@ -29,7 +29,7 @@ resource namedValues 'Microsoft.ApiManagement/service/namedValues@2021-01-01-pre
   }
 }
 
-resource backendApi 'Microsoft.ApiManagement/service/backends@2021-01-01-preview' = {
+resource backendApi 'Microsoft.ApiManagement/service/backends@2024-05-01' = {
   parent: apim
   name: backendApiName
   properties: {
@@ -47,7 +47,7 @@ resource backendApi 'Microsoft.ApiManagement/service/backends@2021-01-01-preview
   }
 }
 
-resource api 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
+resource api 'Microsoft.ApiManagement/service/apis@2024-05-01' = {
   parent: apim
   name: apiName
   properties: {
@@ -61,7 +61,7 @@ resource api 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
   }
 }
 
-resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2021-01-01-preview' = {
+resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2024-05-01' = {
   parent: api
   name: 'policy'
   properties: {
@@ -70,7 +70,7 @@ resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2021-01-01-pre
   }
 }
 
-resource opGetTodos 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opGetTodos 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'getTodoList'
   parent: api
   properties: {
@@ -80,7 +80,7 @@ resource opGetTodos 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-
   }
 }
 
-resource opGetTodosPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opGetTodosPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opGetTodos
   name: 'policy'
   properties: {
@@ -89,7 +89,7 @@ resource opGetTodosPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   }
 }
 
-resource opGetTodosById 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opGetTodosById 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'getTodoItem'
   parent: api
   properties: {
@@ -106,7 +106,7 @@ resource opGetTodosById 'Microsoft.ApiManagement/service/apis/operations@2021-01
   }
 }
 
-resource opGetTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opGetTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opGetTodosById
   name: 'policy'
   properties: {
@@ -115,7 +115,7 @@ resource opGetTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/p
   }
 }
 
-resource opPostTodoItem 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opPostTodoItem 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'postTodoItem'
   parent: api
   properties: {
@@ -125,7 +125,7 @@ resource opPostTodoItem 'Microsoft.ApiManagement/service/apis/operations@2021-01
   }
 }
 
-resource opPostTodoItemPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opPostTodoItemPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opPostTodoItem
   name: 'policy'
   properties: {
@@ -134,7 +134,7 @@ resource opPostTodoItemPolicy 'Microsoft.ApiManagement/service/apis/operations/p
   }
 }
 
-resource opPutTodosById 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opPutTodosById 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'putTodoItem'
   parent: api
   properties: {
@@ -151,7 +151,7 @@ resource opPutTodosById 'Microsoft.ApiManagement/service/apis/operations@2021-01
   }
 }
 
-resource opPutTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opPutTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opPutTodosById
   name: 'policy'
   properties: {
@@ -160,7 +160,7 @@ resource opPutTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/p
   }
 }
 
-resource opDeleteTodosById 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opDeleteTodosById 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'deleteTodoItem'
   parent: api
   properties: {
@@ -177,7 +177,7 @@ resource opDeleteTodosById 'Microsoft.ApiManagement/service/apis/operations@2021
   }
 }
 
-resource opDeleteTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opDeleteTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opDeleteTodosById
   name: 'policy'
   properties: {
@@ -186,7 +186,7 @@ resource opDeleteTodosByIdPolicy 'Microsoft.ApiManagement/service/apis/operation
   }
 }
 
-resource opHealthCheck 'Microsoft.ApiManagement/service/apis/operations@2021-01-01-preview' = {
+resource opHealthCheck 'Microsoft.ApiManagement/service/apis/operations@2024-05-01' = {
   name: 'HealthCheck'
   parent: api
   properties: {
@@ -196,7 +196,7 @@ resource opHealthCheck 'Microsoft.ApiManagement/service/apis/operations@2021-01-
   }
 }
 
-resource opHealthCheckPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2021-01-01-preview' = {
+resource opHealthCheckPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2024-05-01' = {
   parent: opHealthCheck
   name: 'policy'
   properties: {

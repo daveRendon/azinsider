@@ -34,7 +34,7 @@ param restartPolicy string = 'OnFailure'
 
 
 //Create a cognitive services resource
-resource cognitiveService 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
+resource cognitiveService 'Microsoft.CognitiveServices/accounts@2025-09-01' = {
   name: cognitiveServiceName
   location: location
   sku: {
@@ -53,7 +53,7 @@ output cognitiveServiceKey string = cognitiveService.listKeys().key1
 
 
 //Create azure container instance
-resource containerGroup 'Microsoft.ContainerInstance/containerGroups@2021-09-01' = {
+resource containerGroup 'Microsoft.ContainerInstance/containerGroups@2025-09-01' = {
   name: name
   location: location
   properties: {

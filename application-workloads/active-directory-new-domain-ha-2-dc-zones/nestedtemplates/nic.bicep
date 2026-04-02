@@ -16,7 +16,7 @@ param dnsServers array
 @description('Location for all resources.')
 param location string
 
-resource nicName_resource 'Microsoft.Network/networkInterfaces@2020-11-01' = {
+resource nicName_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName
   location: location
   properties: {

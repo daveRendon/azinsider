@@ -6,16 +6,16 @@ param currentResourceGroup string
 
 var keyVaultSecretName = '${cosmosAccountName}-key'
 
-resource functionApp 'Microsoft.Web/sites@2021-01-15' existing = {
+resource functionApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: functionAppName
   scope: resourceGroup(currentResourceGroup)
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2021-06-01-preview' existing = {
+resource keyVault 'Microsoft.KeyVault/vaults@2025-05-01' existing = {
   name: keyVaultName
 }
 
-resource keyVaultAccessPolicies 'Microsoft.KeyVault/vaults/accessPolicies@2021-06-01-preview' = {
+resource keyVaultAccessPolicies 'Microsoft.KeyVault/vaults/accessPolicies@2025-05-01' = {
   parent: keyVault
   name: 'add'
   properties: {
@@ -34,7 +34,7 @@ resource keyVaultAccessPolicies 'Microsoft.KeyVault/vaults/accessPolicies@2021-0
   }
 }
 
-resource deploymentScripts 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+resource deploymentScripts 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   name: 'getConnectionString'
   kind: 'AzurePowerShell'
   location: resourceGroup().location
@@ -62,7 +62,7 @@ resource deploymentScripts 'Microsoft.Resources/deploymentScripts@2020-10-01' = 
   }
 }
 
-resource keyVaultSecrets 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
+resource keyVaultSecrets 'Microsoft.KeyVault/vaults/secrets@2025-05-01' = {
   parent: keyVault
   name : keyVaultSecretName
   properties: {

@@ -32,7 +32,7 @@ var sku = '20h2-evd'
 @description('Public uri location of PowerShell Chocolately setup script')
 var scriptLocation = 'https://gist.githubusercontent.com/daveRendon/9649e6ffeeb1669c9179fa13a7f43c5f/raw/54f6f7ba5bd2862d1972ab52c3a3c56be14c0397/ChocoInstall.ps1'
 
-resource networkSecurityGroup_name_resource 'Microsoft.Network/networkSecurityGroups@2019-07-01' = {
+resource networkSecurityGroup_name_resource 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroup_name
   location: location
   properties: {
@@ -54,7 +54,7 @@ resource networkSecurityGroup_name_resource 'Microsoft.Network/networkSecurityGr
   }
 }
 
-resource virtualNetwork_name_default 'Microsoft.Network/virtualNetworks/subnets@2019-07-01' = {
+resource virtualNetwork_name_default 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: virtualNetwork_name_resource
   name: 'default'
   properties: {
@@ -64,7 +64,7 @@ resource virtualNetwork_name_default 'Microsoft.Network/virtualNetworks/subnets@
   }
 }
 
-resource virtualNetwork_name_resource 'Microsoft.Network/virtualNetworks@2019-07-01' = {
+resource virtualNetwork_name_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetwork_name
   location: location
   properties: {
@@ -88,7 +88,7 @@ resource virtualNetwork_name_resource 'Microsoft.Network/virtualNetworks@2019-07
   }
 }
 
-resource pip 'Microsoft.Network/publicIPAddresses@2019-07-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddress_name
   location: location
   sku: {
@@ -104,7 +104,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2019-07-01' = {
   }
 }
 
-resource nic_name_resource 'Microsoft.Network/networkInterfaces@2019-07-01' = {
+resource nic_name_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nic_name
   location: location
   properties: {
@@ -133,7 +133,7 @@ resource nic_name_resource 'Microsoft.Network/networkInterfaces@2019-07-01' = {
   }
 }
 
-resource vm_name_resource 'Microsoft.Compute/virtualMachines@2019-07-01' = {
+resource vm_name_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vm_name
   location: location
   properties: {
@@ -169,7 +169,7 @@ resource vm_name_resource 'Microsoft.Compute/virtualMachines@2019-07-01' = {
   }
 }
 
-resource vm_name_GPUDrivers 'Microsoft.Compute/virtualMachines/extensions@2019-07-01' = {
+resource vm_name_GPUDrivers 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vm_name_resource
   name: 'GPUDrivers'
   location: location
@@ -187,7 +187,7 @@ resource vm_name_GPUDrivers 'Microsoft.Compute/virtualMachines/extensions@2019-0
   ]
 }
 
-resource vm_name_SetupChocolatey 'Microsoft.Compute/virtualMachines/extensions@2019-07-01' = {
+resource vm_name_SetupChocolatey 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vm_name_resource
   name: 'SetupChocolatey'
   location: location

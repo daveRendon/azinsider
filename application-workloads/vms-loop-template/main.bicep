@@ -24,7 +24,7 @@ var subnetName = 'subnet'
 var subnet0Name = 'subnet0'
 var subnet1Name = 'subnet1'
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2020-06-01' = [for i in range(0, vmCount): {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, vmCount): {
   name: '${vmName}${i}'
   location: location
   properties: {
@@ -67,7 +67,7 @@ resource vmName_resource 'Microsoft.Compute/virtualMachines@2020-06-01' = [for i
   ]
 }]
 
-resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName
   location: location
   properties: {
@@ -93,7 +93,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   }
 }
 
-resource nic 'Microsoft.Network/networkInterfaces@2020-06-01' = [for i in range(0, vmCount): {
+resource nic 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, vmCount): {
   name: '${nic_var}${i}'
   location: location
   properties: {

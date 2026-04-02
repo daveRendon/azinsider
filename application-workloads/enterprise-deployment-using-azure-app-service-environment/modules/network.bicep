@@ -11,7 +11,7 @@ var mustCreateVNet = empty(existentVnetName)
 var vnetName = (empty(existentVnetName) ? 'ASE-VNET${uniqueString(resourceGroup().id)}' : existentVnetName)
 var vnetRouteName = 'ASE-VNETRT${uniqueString(resourceGroup().id)}'
 
-resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' = if (mustCreateVNet) {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = if (mustCreateVNet) {
   name: vnetName
   location: location
   tags: {
@@ -26,7 +26,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' = if (mustCreateVNe
   }
 }
 
-resource vnetRoute 'Microsoft.Network/routeTables@2022-01-01' = {
+resource vnetRoute 'Microsoft.Network/routeTables@2025-05-01' = {
   name: vnetRouteName
   location: location
   tags: {

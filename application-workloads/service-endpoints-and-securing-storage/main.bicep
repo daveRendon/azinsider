@@ -132,7 +132,7 @@ param publicIpName2 string = 'myVmPublic-ip'
 var nic2Name = 'myVM2Nic'
 
 //Task 1 and 2: Create Vnet with two subnets, and configure a storage endpoint
-resource vnet 'Microsoft.Network/virtualNetworks@2021-08-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName
   location: location
   properties: {
@@ -179,7 +179,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-08-01' = {
 }
 
 //Task 3: Configure a network security group to restrict access to the subnet
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgName
   location: location
   properties: {
@@ -191,7 +191,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
 }
 
 //Task 4: Configure a network security group to allow rdp on the public subnet
-resource nsg2 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+resource nsg2 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsg2Name
   location: location
   properties: {
@@ -213,7 +213,7 @@ resource nsg2 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
 }
 
 // Task 5: Create a storage account with a file share
-resource sa 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+resource sa 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   kind: 'StorageV2'
@@ -259,7 +259,7 @@ resource sa 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-04-01' = {
+resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2025-06-01' = {
   name: '${sa.name}/default/${fileShareName}'
 }
 
@@ -269,7 +269,7 @@ resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2021-0
 // Task 6: Deploy virtual machines into the designated subnets
 
 //Create VM1
-resource pip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpName
   location: location
   sku: {
@@ -284,7 +284,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
 }
 
 
-resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
+resource nic 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName
   location: location
   properties: {
@@ -305,7 +305,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   }
 }
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   properties: {
@@ -351,7 +351,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 
 //Create VM2
 
-resource pip2 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource pip2 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpName2
   location: location
   sku: {
@@ -366,7 +366,7 @@ resource pip2 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
 }
 
 
-resource nic2 'Microsoft.Network/networkInterfaces@2021-02-01' = {
+resource nic2 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nic2Name
   location: location
   properties: {
@@ -387,7 +387,7 @@ resource nic2 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   }
 }
 
-resource vm2 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource vm2 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vm2Name
   location: location
   properties: {

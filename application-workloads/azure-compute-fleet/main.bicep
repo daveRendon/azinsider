@@ -20,7 +20,7 @@ param networkInterfaceConfigurationName string
 var computerNamePrefix = toLower(substring(concat(name, uniqueString(resourceGroup().id)), 0, 9))
 var networkApiVersion = '2020-11-01'
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-01-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -31,7 +31,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   }
 }
 
-resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2020-05-01' = {
+resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName
   location: location
   properties: {
@@ -39,7 +39,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2020-05-0
   }
 }
 
-resource name_resource 'Microsoft.AzureFleet/fleets@2024-05-01-preview' = {
+resource name_resource 'Microsoft.AzureFleet/fleets@2024-11-01' = {
   name: name
   location: location
   properties: {

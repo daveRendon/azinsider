@@ -19,7 +19,7 @@ param storageAccountType string = 'Standard_LRS'
 
 var applicationInsightsName = functionAppName
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -28,7 +28,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   kind: 'Storage'
 }
 
-resource hostingPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+resource hostingPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: hostingPlanName
   location: location
   kind: 'linux'
@@ -54,7 +54,7 @@ resource applicationInsights 'microsoft.insights/components@2020-02-02' = {
   kind: 'web'
 }
 
-resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
+resource functionApp 'Microsoft.Web/sites@2025-03-01' = {
   name: functionAppName
   kind: 'functionapp,linux'
   location: location

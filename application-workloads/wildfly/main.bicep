@@ -62,7 +62,7 @@ var fileToBeDownloaded = 'JBoss-EAP_on_Azure.war'
 var scriptArgs = '-a ${uri(artifactsLocation, '.')} -t "${artifactsLocationSasToken}" -p ${scriptFolder} -f ${fileToBeDownloaded}'
 
 
-resource bootStorageAccountName 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource bootStorageAccountName 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: bootStorageAccountName_var
   location: location
   sku: {
@@ -74,7 +74,7 @@ resource bootStorageAccountName 'Microsoft.Storage/storageAccounts@2021-02-01' =
   }
 }
 
-resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2019-11-01' = {
+resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName_var
   location: location
   tags: {
@@ -97,7 +97,7 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2019-11-01' = {
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2019-11-01' = {
+resource nicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName_var
   location: location
   tags: {
@@ -121,7 +121,7 @@ resource nicName 'Microsoft.Network/networkInterfaces@2019-11-01' = {
   ]
 }
 
-resource vmName 'Microsoft.Compute/virtualMachines@2019-12-01' = {
+resource vmName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName_var
   location: location
   tags: {
@@ -169,7 +169,7 @@ resource vmName 'Microsoft.Compute/virtualMachines@2019-12-01' = {
   ]
 }
 
-resource vmName_wildfly_setup 'Microsoft.Compute/virtualMachines/extensions@2019-12-01' = {
+resource vmName_wildfly_setup 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vmName
   name: 'wildfly-setup'
   location: location

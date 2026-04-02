@@ -29,7 +29,7 @@ var nicNameWindows_var = 'nic-windows'
 var vmNameWindows_var = 'vm-windows'
 var windowsOSVersion = '2016-Datacenter'
 
-resource mocOnpremNetwork_name 'Microsoft.Network/virtualNetworks@2020-05-01' = {
+resource mocOnpremNetwork_name 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: mocOnpremNetwork.name
   location: location
   properties: {
@@ -59,7 +59,7 @@ resource mocOnpremNetwork_name 'Microsoft.Network/virtualNetworks@2020-05-01' = 
   }
 }
 
-resource mocOnpremGateway_publicIPAddress 'Microsoft.Network/publicIPAddresses@2019-11-01' =
+resource mocOnpremGateway_publicIPAddress 'Microsoft.Network/publicIPAddresses@2025-05-01' =
   if (configureSitetosite) {
     name: mocOnpremGateway.publicIPAddressName
     location: location
@@ -68,7 +68,7 @@ resource mocOnpremGateway_publicIPAddress 'Microsoft.Network/publicIPAddresses@2
     }
   }
 
-resource mocOnpremGateway_name 'Microsoft.Network/virtualNetworkGateways@2019-11-01' =
+resource mocOnpremGateway_name 'Microsoft.Network/virtualNetworkGateways@2025-05-01' =
   if (configureSitetosite) {
     name: mocOnpremGateway.name
     location: location
@@ -105,7 +105,7 @@ resource mocOnpremGateway_name 'Microsoft.Network/virtualNetworkGateways@2019-11
     dependsOn: [mocOnpremNetwork_name]
   }
 
-resource bastionHost_publicIPAddress 'Microsoft.Network/publicIpAddresses@2020-05-01' = {
+resource bastionHost_publicIPAddress 'Microsoft.Network/publicIpAddresses@2025-05-01' = {
   name: bastionHost.publicIPAddressName
   location: location
   sku: {
@@ -116,7 +116,7 @@ resource bastionHost_publicIPAddress 'Microsoft.Network/publicIpAddresses@2020-0
   }
 }
 
-resource bastionHost_nsg 'Microsoft.Network/networkSecurityGroups@2019-11-01' = {
+resource bastionHost_nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: bastionHost.nsgName
   location: location
   properties: {
@@ -216,7 +216,7 @@ resource bastionHost_nsg 'Microsoft.Network/networkSecurityGroups@2019-11-01' = 
   }
 }
 
-resource bastionHost_name 'Microsoft.Network/bastionHosts@2020-06-01' = {
+resource bastionHost_name 'Microsoft.Network/bastionHosts@2025-05-01' = {
   name: bastionHost.name
   location: location
   properties: {
@@ -241,7 +241,7 @@ resource bastionHost_name 'Microsoft.Network/bastionHosts@2020-06-01' = {
   dependsOn: [mocOnpremNetwork_name]
 }
 
-resource nicNameWindows 'Microsoft.Network/networkInterfaces@2020-05-01' = {
+resource nicNameWindows 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicNameWindows_var
   location: location
   properties: {
@@ -264,7 +264,7 @@ resource nicNameWindows 'Microsoft.Network/networkInterfaces@2020-05-01' = {
   dependsOn: [mocOnpremNetwork_name]
 }
 
-resource vmNameWindows 'Microsoft.Compute/virtualMachines@2019-07-01' = {
+resource vmNameWindows 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmNameWindows_var
   location: location
   properties: {

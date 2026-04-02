@@ -439,7 +439,7 @@ var workbookContent = {
   fromTemplateId: 'asc-DefenderForCloudCostEstimation'
 }
 
-resource workbookId_resource 'microsoft.insights/workbooks@2021-03-08' = {
+resource workbookId_resource 'microsoft.insights/workbooks@2023-06-01' = {
   name: workbookId
   location: resourceGroup().location
   kind: 'shared'

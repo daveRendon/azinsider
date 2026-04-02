@@ -14,12 +14,12 @@ param adminUserName string
 param adminPassword string
 param resourceGrouplocation string = 'eastus'
 
-resource mocOnPremResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {
+resource mocOnPremResourceGroup_resource 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   name: mocOnPremResourceGroup
   location: resourceGrouplocation
 }
 
-resource azureNetworkResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {
+resource azureNetworkResourceGroup_resource 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   name: azureNetworkResourceGroup
   location: resourceGrouplocation
 }

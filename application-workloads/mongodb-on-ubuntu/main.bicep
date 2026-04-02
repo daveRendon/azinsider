@@ -66,7 +66,7 @@ var linuxConfiguration = {
 }
 var networkSecurityGroupName_var = 'default-NSG'
 
-resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2020-05-01' = {
+resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddressName
   location: location
   properties: {
@@ -77,7 +77,7 @@ resource publicIPAddressName_resource 'Microsoft.Network/publicIPAddresses@2020-
   }
 }
 
-resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2020-05-01' = {
+resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName_var
   location: location
   properties: {
@@ -99,7 +99,7 @@ resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2020-
   }
 }
 
-resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-05-01' = {
+resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -122,7 +122,7 @@ resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-05-
   }
 }
 
-resource nicName_resource 'Microsoft.Network/networkInterfaces@2020-05-01' = {
+resource nicName_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName
   location: location
   properties: {
@@ -146,7 +146,7 @@ resource nicName_resource 'Microsoft.Network/networkInterfaces@2020-05-01' = {
   ]
 }
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2019-12-01' = {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   properties: {
@@ -182,7 +182,7 @@ resource vmName_resource 'Microsoft.Compute/virtualMachines@2019-12-01' = {
   }
 }
 
-resource vmName_installmongo 'Microsoft.Compute/virtualMachines/extensions@2019-12-01' = {
+resource vmName_installmongo 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vmName_resource
   name: 'installmongo'
   location: location

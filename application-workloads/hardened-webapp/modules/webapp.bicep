@@ -13,15 +13,15 @@ param webAppName string
 // Virtual Network Parameters
 param virtualNetworkName string
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' existing = {
   name: virtualNetworkName
 }
 
-resource privatednszone 'Microsoft.Network/privateDnsZones@2020-06-01' existing = {
+resource privatednszone 'Microsoft.Network/privateDnsZones@2024-06-01' existing = {
   name: 'privatelink.azurewebsites.net'
 }
 
-resource appServicePlan 'Microsoft.Web/serverfarms@2021-01-15' = {
+resource appServicePlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: appServicePlanName
   location: location
   sku: {
@@ -34,7 +34,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2021-01-15' = {
   }
 }
 
-resource webApp 'Microsoft.Web/sites@2021-01-15' = {
+resource webApp 'Microsoft.Web/sites@2025-03-01' = {
   name: webAppName
   location: location
   properties: {
@@ -46,7 +46,7 @@ resource webApp 'Microsoft.Web/sites@2021-01-15' = {
   }
 }
 
-resource networkConfig 'Microsoft.Web/sites/networkConfig@2021-01-15' = {
+resource networkConfig 'Microsoft.Web/sites/networkConfig@2025-03-01' = {
   parent: webApp
   name: 'virtualNetwork'
   properties: {
@@ -55,7 +55,7 @@ resource networkConfig 'Microsoft.Web/sites/networkConfig@2021-01-15' = {
   }
 }
 
-resource routingConfig 'Microsoft.Web/sites/config@2021-01-15' = {
+resource routingConfig 'Microsoft.Web/sites/config@2025-03-01' = {
   parent: webApp
   name: 'web'
   properties: {
@@ -63,7 +63,7 @@ resource routingConfig 'Microsoft.Web/sites/config@2021-01-15' = {
   }
 }
 
-resource privateendpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
+resource privateendpoint 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   dependsOn: [
     virtualNetwork
     webApp
@@ -91,7 +91,7 @@ resource privateendpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
   }
 }
 
-resource privatednszonegroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-02-01' = {
+resource privatednszonegroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   parent: privateendpoint
   dependsOn: [
     webApp

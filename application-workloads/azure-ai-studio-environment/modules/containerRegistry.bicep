@@ -62,7 +62,7 @@ var metrics = [
 ]
 
 // Resources
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-12-01-preview' = {
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2025-11-01' = {
   name: name
   location: location
   tags: tags

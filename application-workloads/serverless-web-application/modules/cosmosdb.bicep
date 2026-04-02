@@ -11,7 +11,7 @@ param databaseName string
 @description('The name for the collection')
 param collectionName string
 
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
+resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-10-15' = {
   name: toLower(accountName)
   kind: 'MongoDB'
   location: location
@@ -28,7 +28,7 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
   }
 }
 
-resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-04-15' = {
+resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2025-10-15' = {
   name: '${toLower(databaseName)}'
   parent: cosmosAccount
   properties: {
@@ -41,7 +41,7 @@ resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-0
   }
 }
 
-resource collection 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections@2021-06-15' = {
+resource collection 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections@2025-10-15' = {
   name: '${toLower(collectionName)}'
   parent: cosmosDB
   properties: {

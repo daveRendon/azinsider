@@ -55,7 +55,7 @@ var linuxConfiguration = {
 }
 var networkSecurityGroupName_var = 'default-NSG'
 
-resource pip 'Microsoft.Network/publicIPAddresses@2020-06-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddressName_var
   location: location
   properties: {
@@ -66,7 +66,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2020-06-01' = {
   }
 }
 
-resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
+resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName_var
   location: location
   properties: {
@@ -88,7 +88,7 @@ resource networkSecurityGroupName 'Microsoft.Network/networkSecurityGroups@2020-
   }
 }
 
-resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-06-01' = {
+resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName_var
   location: location
   properties: {
@@ -111,7 +111,7 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2020-06-01' = {
+resource nicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName_var
   location: location
   properties: {
@@ -135,7 +135,7 @@ resource nicName 'Microsoft.Network/networkInterfaces@2020-06-01' = {
   ]
 }
 
-resource vmName 'Microsoft.Compute/virtualMachines@2019-12-01' = {
+resource vmName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName_var
   location: location
   properties: {
@@ -174,7 +174,7 @@ resource vmName 'Microsoft.Compute/virtualMachines@2019-12-01' = {
   }
 }
 
-resource vmName_extensionName 'Microsoft.Compute/virtualMachines/extensions@2019-12-01' = {
+resource vmName_extensionName 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vmName
   name: extensionName
   location: location

@@ -13,7 +13,7 @@ param eventGridSubscriptionName string = '${webAppPrefix}-sub'
 @description('The webhook URL to send the subscription events to. This URL must be valid and must be prepared to accept the Event Grid webhook URL challenge request.')
 param eventGridSubscriptionUrl string = 'https://wapp-${webAppPrefix}.azurewebsites.net/api/updates'
 
-resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
+resource appServicePlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: appServicePlanName
   location: location
   properties: {
@@ -25,7 +25,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   kind: 'linux'
 }
 
-resource webApp 'Microsoft.Web/sites@2021-01-01' = {
+resource webApp 'Microsoft.Web/sites@2025-03-01' = {
   name: webAppName
   location: location
   tags: {}
@@ -38,12 +38,12 @@ resource webApp 'Microsoft.Web/sites@2021-01-01' = {
   }
 }
 
-resource eventGridTopic 'Microsoft.EventGrid/topics@2020-06-01' = {
+resource eventGridTopic 'Microsoft.EventGrid/topics@2025-02-15' = {
   name: eventGridTopicName
   location: location
 }
 
-resource eventGridSubscription 'Microsoft.EventGrid/eventSubscriptions@2020-06-01' = {
+resource eventGridSubscription 'Microsoft.EventGrid/eventSubscriptions@2025-02-15' = {
   name: eventGridSubscriptionName
   scope: eventGridTopic
   dependsOn:[

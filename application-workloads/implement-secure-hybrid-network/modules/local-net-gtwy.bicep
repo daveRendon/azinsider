@@ -6,7 +6,7 @@ param mocOnpremGatewayName string
 param localNetworkGateway string = 'local-gateway-moc-prem'
 param location string
 
-resource localNetworkGateway_resource 'Microsoft.Network/localNetworkGateways@2020-05-01' = {
+resource localNetworkGateway_resource 'Microsoft.Network/localNetworkGateways@2025-05-01' = {
   name: localNetworkGateway
   location: location
   properties: {
@@ -21,7 +21,7 @@ resource localNetworkGateway_resource 'Microsoft.Network/localNetworkGateways@20
   }
 }
 
-resource connection 'Microsoft.Network/connections@2020-05-01' = {
+resource connection 'Microsoft.Network/connections@2025-05-01' = {
   name: connectionName
   location: location
   properties: {

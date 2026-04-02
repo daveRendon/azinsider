@@ -9,15 +9,15 @@ param location string = resourceGroup().location
 // Virtual Network Parameters
 param virtualNetworkName string
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' existing = {
   name: virtualNetworkName
 }
 
-resource privatednszone 'Microsoft.Network/privateDnsZones@2020-06-01' existing = {
+resource privatednszone 'Microsoft.Network/privateDnsZones@2024-06-01' existing = {
   name: 'privatelink.database.windows.net'
 }
 
-resource sqlServer 'Microsoft.Sql/servers@2021-02-01-preview' = {
+resource sqlServer 'Microsoft.Sql/servers@2023-08-01' = {
   name: sqlName
   location: location
   properties: {
@@ -27,7 +27,7 @@ resource sqlServer 'Microsoft.Sql/servers@2021-02-01-preview' = {
   }
 }
 
-resource privateendpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
+resource privateendpoint 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   dependsOn: [
     sqlServer
     privatednszone
@@ -55,7 +55,7 @@ resource privateendpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
   }
 }
 
-resource privatednszonegroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-02-01' = {
+resource privatednszonegroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01' = {
   parent: privateendpoint
   dependsOn: [
     sqlServer

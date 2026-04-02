@@ -171,7 +171,7 @@ var pricings = [
   }
 ]
 
-resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (enableDefaultTelemetry) {
+resource defaultTelemetry 'Microsoft.Resources/deployments@2025-04-01' = if (enableDefaultTelemetry) {
   name: 'pid-47ed15a6-730a-4827-bcb4-0fd963ffbd82-${uniqueString(deployment().name, location)}'
   location: location
   properties: {
@@ -184,7 +184,7 @@ resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (ena
   }
 }
 
-resource pricingTiers 'Microsoft.Security/pricings@2018-06-01' = [for (pricing, index) in pricings: {
+resource pricingTiers 'Microsoft.Security/pricings@2024-01-01' = [for (pricing, index) in pricings: {
   name: pricing.name
   properties: {
     pricingTier: pricing.pricingTier
@@ -209,7 +209,7 @@ resource deviceSecurityGroups 'Microsoft.Security/deviceSecurityGroups@2019-08-0
 }
 
 
-resource securityContacts 'Microsoft.Security/securityContacts@2017-08-01-preview' = if (!empty(securityContactProperties)) {
+resource securityContacts 'Microsoft.Security/securityContacts@2023-12-01-preview' = if (!empty(securityContactProperties)) {
   name: 'default'
   properties: {
     email: securityContactProperties.email

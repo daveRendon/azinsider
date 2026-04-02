@@ -8,7 +8,7 @@ param location string = resourceGroup().location
 param acrSku string = 'Basic'
 
 //This creates the Azure Container Registry
-resource acrResource 'Microsoft.ContainerRegistry/registries@2021-06-01-preview' = {
+resource acrResource 'Microsoft.ContainerRegistry/registries@2025-11-01' = {
   name: acrName
   location: location
   sku: {

@@ -73,28 +73,28 @@ param ArmTier string = 'Standard'
 ])
 param DnsTier string = 'Standard'
 
-resource VirtualMachines 'Microsoft.Security/pricings@2022-03-01' = {
+resource VirtualMachines 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'VirtualMachines'
   properties: {
     pricingTier: virtualMachineTier
   }
 }
 
-resource AppServices 'Microsoft.Security/pricings@2018-06-01' = {
+resource AppServices 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'AppServices'
   properties: {
     pricingTier: appServiceTier
   }
 }
 
-resource SqlServers 'Microsoft.Security/pricings@2018-06-01' = {
+resource SqlServers 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'SqlServers'
   properties: {
     pricingTier: paasSQLServiceTier
   }
 }
 
-resource SqlServerVirtualMachines 'Microsoft.Security/pricings@2018-06-01' = {
+resource SqlServerVirtualMachines 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'SqlServerVirtualMachines'
   properties: {
     pricingTier: sqlServerOnVmTier
@@ -102,28 +102,28 @@ resource SqlServerVirtualMachines 'Microsoft.Security/pricings@2018-06-01' = {
 
 }
 
-resource StorageAccounts 'Microsoft.Security/pricings@2018-06-01' = {
+resource StorageAccounts 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'StorageAccounts'
   properties: {
     pricingTier: storageAccountTier
   }
 }
 
-resource KubernetesService 'Microsoft.Security/pricings@2018-06-01' = {
+resource KubernetesService 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'KubernetesService'
   properties: {
     pricingTier: kubernetesServiceTier
   }
 }
 
-resource ContainerRegistry 'Microsoft.Security/pricings@2018-06-01' = {
+resource ContainerRegistry 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'ContainerRegistry'
   properties: {
     pricingTier: containerRegistryTier
   }
 }
 
-resource KeyVaults 'Microsoft.Security/pricings@2018-06-01' = {
+resource KeyVaults 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'KeyVaults'
   properties: {
     pricingTier: keyvaultTier
@@ -131,14 +131,14 @@ resource KeyVaults 'Microsoft.Security/pricings@2018-06-01' = {
 
 }
 
-resource Arm 'Microsoft.Security/pricings@2018-06-01' = {
+resource Arm 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'Arm'
   properties: {
     pricingTier: ArmTier
   }
 }
 
-resource Dns 'Microsoft.Security/pricings@2018-06-01' = {
+resource Dns 'Microsoft.Security/pricings@2024-01-01' = {
   name: 'Dns'
   properties: {
     pricingTier: DnsTier

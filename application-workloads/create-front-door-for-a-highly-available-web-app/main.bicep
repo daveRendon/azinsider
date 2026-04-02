@@ -34,7 +34,7 @@ var frontDoorOriginName = 'MyAppServiceOrigin'
 var frontDoorRouteName = 'MyRoute'
 
 
-resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = [for (item, i) in locationNames: {
+resource appServicePlan 'Microsoft.Web/serverfarms@2025-03-01' = [for (item, i) in locationNames: {
   name: '${appServicePlanName}${item}' // app serivce plan name
   location: item // Azure Region
   sku: {
@@ -43,7 +43,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = [for (item, i) 
   }
 }]
 
-resource appService 'Microsoft.Web/sites@2020-06-01' = [for (item, i) in locationNames: {
+resource appService 'Microsoft.Web/sites@2025-03-01' = [for (item, i) in locationNames: {
   name: '${appName}${i}' // Globally unique app serivce name
   location: item
   identity: {
@@ -80,7 +80,7 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = [for (item, i) in locatio
 }]
 
 
-resource frontDoorProfile 'Microsoft.Cdn/profiles@2021-06-01' = {
+resource frontDoorProfile 'Microsoft.Cdn/profiles@2025-06-01' = {
   name: frontDoorProfileName
   location: 'global'
   sku: {
@@ -88,7 +88,7 @@ resource frontDoorProfile 'Microsoft.Cdn/profiles@2021-06-01' = {
   }
 }
 
-resource frontDoorEndpoint 'Microsoft.Cdn/profiles/afdEndpoints@2021-06-01' = {
+resource frontDoorEndpoint 'Microsoft.Cdn/profiles/afdEndpoints@2025-06-01' = {
   name: frontDoorEndpointName
   parent: frontDoorProfile
   location: 'global'
@@ -97,7 +97,7 @@ resource frontDoorEndpoint 'Microsoft.Cdn/profiles/afdEndpoints@2021-06-01' = {
   }
 }
 
-resource frontDoorOriginGroup 'Microsoft.Cdn/profiles/originGroups@2021-06-01' = {
+resource frontDoorOriginGroup 'Microsoft.Cdn/profiles/originGroups@2025-06-01' = {
   name: frontDoorOriginGroupName
   parent: frontDoorProfile
   properties: {
@@ -114,7 +114,7 @@ resource frontDoorOriginGroup 'Microsoft.Cdn/profiles/originGroups@2021-06-01' =
   }
 }
 
-resource frontDoorOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2021-06-01' = {
+resource frontDoorOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2025-06-01' = {
   name: frontDoorOriginName
   parent: frontDoorOriginGroup
   properties: {
@@ -127,7 +127,7 @@ resource frontDoorOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2021-06-01
   }
 }
 
-resource frontDoorRoute 'Microsoft.Cdn/profiles/afdEndpoints/routes@2021-06-01' = {
+resource frontDoorRoute 'Microsoft.Cdn/profiles/afdEndpoints/routes@2025-06-01' = {
   name: frontDoorRouteName
   parent: frontDoorEndpoint
   dependsOn: [

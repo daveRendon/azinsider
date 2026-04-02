@@ -9,13 +9,13 @@ param ipAddress string
 
 var vnetId = resourceId('Microsoft.Network/virtualNetworks', vnetName)
 
-resource dnsZone 'Microsoft.Network/privateDnsZones@2018-09-01' = {
+resource dnsZone 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: zoneName
   location: 'global'
   properties: { }
 }
 
-resource dnsZoneARecord1 'Microsoft.Network/privateDnsZones/A@2018-09-01' = {
+resource dnsZoneARecord1 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: dnsZone
   name: '@'
   properties: {
@@ -28,7 +28,7 @@ resource dnsZoneARecord1 'Microsoft.Network/privateDnsZones/A@2018-09-01' = {
   }
 }
 
-resource dnsZoneARecord2 'Microsoft.Network/privateDnsZones/A@2018-09-01' = {
+resource dnsZoneARecord2 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: dnsZone
   name: '*'
   properties: {
@@ -41,7 +41,7 @@ resource dnsZoneARecord2 'Microsoft.Network/privateDnsZones/A@2018-09-01' = {
   }
 }
 
-resource dnsZoneARecord3 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+resource dnsZoneARecord3 'Microsoft.Network/privateDnsZones/A@2024-06-01' = {
   parent: dnsZone
   name: '*.scm'
   properties: {
@@ -54,7 +54,7 @@ resource dnsZoneARecord3 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
   }
 }
 
-resource zoneDnsToVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource zoneDnsToVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: dnsZone
   name: 'dns-to-vnet-link'
   location: 'global'

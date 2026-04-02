@@ -12,11 +12,11 @@ param nsgName string = ''
 // Azure Firewall Parameters
 param firewallIpName string
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2022-01-01' existing = if(usePreviewFeatures){
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' existing = if(usePreviewFeatures){
   name: nsgName
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -64,17 +64,17 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   }
 }
 
-resource privatednszoneweb 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privatednszoneweb 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: 'privatelink.azurewebsites.net'
   location: 'global'
 }
 
-resource privatednszonesql 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privatednszonesql 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: 'privatelink.database.windows.net'
   location: 'global'
 }
 
-resource privatednszonelinkweb 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privatednszonelinkweb 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privatednszoneweb
   dependsOn: [
     virtualNetwork
@@ -89,7 +89,7 @@ resource privatednszonelinkweb 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource privatednszonelinksql 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource privatednszonelinksql 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   parent: privatednszonesql
   dependsOn: [
     virtualNetwork
@@ -104,7 +104,7 @@ resource privatednszonelinksql 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource firewallip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource firewallip 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: firewallIpName
   location: location
   sku: {

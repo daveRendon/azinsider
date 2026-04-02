@@ -64,7 +64,7 @@ var aiServicesMetrics = [
 ]
 
 // Resources
-resource aiServices 'Microsoft.CognitiveServices/accounts@2024-04-01-preview' = {
+resource aiServices 'Microsoft.CognitiveServices/accounts@2025-09-01' = {
   name: name
   location: location
   sku: sku
@@ -79,7 +79,7 @@ resource aiServices 'Microsoft.CognitiveServices/accounts@2024-04-01-preview' = 
 }
 
 @batchSize(1)
-resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
+resource model 'Microsoft.CognitiveServices/accounts/deployments@2025-09-01' = [
   for deployment in deployments: {
     name: deployment.model.name
     parent: aiServices

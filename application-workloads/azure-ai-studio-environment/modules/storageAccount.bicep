@@ -93,7 +93,7 @@ var metrics = [
 ]
 
 // Resources
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: name
   location: location
   tags: tags

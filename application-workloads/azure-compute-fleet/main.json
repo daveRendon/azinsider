@@ -1,0 +1,170 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.37.4.10188",
+      "templateHash": "3644650246800766938"
+    }
+  },
+  "parameters": {
+    "addressPrefixes": {
+      "type": "array"
+    },
+    "subnets": {
+      "type": "array"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "networkSecurityGroupName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "securityRules": {
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "licenseType": {
+      "type": "string"
+    },
+    "zones": {
+      "type": "array"
+    },
+    "sizes": {
+      "type": "array"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "password": {
+      "type": "securestring"
+    },
+    "regularTargetCapacity": {
+      "type": "string"
+    },
+    "regularMinCapacity": {
+      "type": "string"
+    },
+    "regularAllocationStrategy": {
+      "type": "string"
+    },
+    "networkInterfaceConfigurationName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "computerNamePrefix": "[toLower(substring(concat(parameters('name'), uniqueString(resourceGroup().id)), 0, 9))]",
+    "networkApiVersion": "2020-11-01"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2025-05-01",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": "[parameters('addressPrefixes')]"
+        },
+        "subnets": "[parameters('subnets')]"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2025-05-01",
+      "name": "[parameters('networkSecurityGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": "[parameters('securityRules')]"
+      }
+    },
+    {
+      "type": "Microsoft.AzureFleet/fleets",
+      "apiVersion": "2024-11-01",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "vmSizesProfile": "[parameters('sizes')]",
+        "computeProfile": {
+          "computeApiVersion": "2023-09-01",
+          "baseVirtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2025-datacenter-g2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "fromImage",
+                "caching": "ReadWrite",
+                "osType": "Windows",
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                }
+              }
+            },
+            "licenseType": "[parameters('licenseType')]",
+            "osProfile": {
+              "adminUsername": "[parameters('userName')]",
+              "computerNamePrefix": "[variables('computerNamePrefix')]",
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              },
+              "adminPassword": "[parameters('password')]"
+            },
+            "networkProfile": {
+              "networkApiVersion": "[variables('networkApiVersion')]",
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "[parameters('networkInterfaceConfigurationName')]",
+                  "properties": {
+                    "primary": true,
+                    "enableAcceleratedNetworking": false,
+                    "networkSecurityGroup": {
+                      "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                    },
+                    "ipConfigurations": [
+                      {
+                        "name": "[format('{0}-ipConfig', take(parameters('networkInterfaceConfigurationName'), sub(80, length('-ipConfig'))))]",
+                        "properties": {
+                          "primary": true,
+                          "subnet": {
+                            "id": "/subscriptions/your-subscription-id/resourceGroups/azinsider_demo/providers/Microsoft.Network/virtualNetworks/vnet-eastus-1/subnets/snet-eastus-1"
+                          },
+                          "publicIPAddressConfiguration": {
+                            "name": "[format('{0}-publicip', parameters('networkInterfaceConfigurationName'))]",
+                            "properties": {
+                              "idleTimeoutInMinutes": 15
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "regularPriorityProfile": {
+          "capacity": "[parameters('regularTargetCapacity')]",
+          "minCapacity": "[parameters('regularMinCapacity')]",
+          "allocationStrategy": "[parameters('regularAllocationStrategy')]"
+        }
+      },
+      "zones": "[parameters('zones')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+      ]
+    }
+  ]
+}
