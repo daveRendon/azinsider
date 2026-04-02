@@ -57,7 +57,7 @@ var subnetAddressForApp = '10.0.0.0/24'
 var subnetAddressForDb = '10.0.1.0/24'
 var cdnApiVersion = '2020-04-15'
 
-resource name_resource 'Microsoft.Web/sites@2021-03-01' = {
+resource name_resource 'Microsoft.Web/sites@2025-03-01' = {
   name: name
   location: location
   tags: null
@@ -140,7 +140,7 @@ resource name_resource 'Microsoft.Web/sites@2021-03-01' = {
   ]
 }
 
-resource hostingPlanName_resource 'Microsoft.Web/serverfarms@2021-03-01' = {
+resource hostingPlanName_resource 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: hostingPlanName
   location: location
   kind: kind
@@ -161,7 +161,7 @@ resource hostingPlanName_resource 'Microsoft.Web/serverfarms@2021-03-01' = {
   ]
 }
 
-resource serverName_resource 'Microsoft.DBforMySQL/flexibleServers@2021-05-01' = {
+resource serverName_resource 'Microsoft.DBforMySQL/flexibleServers@2024-12-30' = {
   location: location
   name: serverName
   tags: {
@@ -196,7 +196,7 @@ resource serverName_resource 'Microsoft.DBforMySQL/flexibleServers@2021-05-01' =
   ]
 }
 
-resource serverName_databaseName 'Microsoft.DBforMySQL/flexibleServers/databases@2021-05-01' = {
+resource serverName_databaseName 'Microsoft.DBforMySQL/flexibleServers/databases@2024-12-30' = {
   name: '${serverName}/${databaseName}'
   properties: {
     charset: charset
@@ -207,7 +207,7 @@ resource serverName_databaseName 'Microsoft.DBforMySQL/flexibleServers/databases
   ]
 }
 
-resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-07-01' = {
+resource vnetName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   location: location
   name: vnetName
   properties: {
@@ -250,13 +250,13 @@ resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-07-01' = {
   dependsOn: []
 }
 
-resource privateDnsZoneNameForDb_resource 'Microsoft.Network/privateDnsZones@2018-09-01' = {
+resource privateDnsZoneNameForDb_resource 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: privateDnsZoneNameForDb
   location: 'global'
   dependsOn: []
 }
 
-resource privateDnsZoneNameForDb_privateDnsZoneNameForDb_vnetlink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
+resource privateDnsZoneNameForDb_privateDnsZoneNameForDb_vnetlink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
   name: '${privateDnsZoneNameForDb}/${privateDnsZoneNameForDb}-vnetlink'
   location: 'global'
   properties: {
@@ -271,7 +271,7 @@ resource privateDnsZoneNameForDb_privateDnsZoneNameForDb_vnetlink 'Microsoft.Net
   ]
 }
 
-resource name_virtualNetwork 'Microsoft.Web/sites/networkConfig@2021-03-01' = {
+resource name_virtualNetwork 'Microsoft.Web/sites/networkConfig@2025-03-01' = {
   name: '${name}/virtualNetwork'
   properties: {
     subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', vnetName, subnetForApp)
@@ -282,7 +282,7 @@ resource name_virtualNetwork 'Microsoft.Web/sites/networkConfig@2021-03-01' = {
   ]
 }
 
-resource name_web 'Microsoft.Web/sites/config@2021-03-01' = {
+resource name_web 'Microsoft.Web/sites/config@2025-03-01' = {
   name: '${name}/web'
   properties: {
     alwaysOn: alwaysOn
@@ -293,7 +293,7 @@ resource name_web 'Microsoft.Web/sites/config@2021-03-01' = {
   ]
 }
 
-resource cdnProfileName_resource 'Microsoft.Cdn/profiles@2020-04-15' = {
+resource cdnProfileName_resource 'Microsoft.Cdn/profiles@2025-06-01' = {
   name: cdnProfileName
   location: 'Global'
   sku: {
@@ -309,7 +309,7 @@ resource cdnProfileName_resource 'Microsoft.Cdn/profiles@2020-04-15' = {
   ]
 }
 
-resource cdnProfileName_cdnEndPointName 'Microsoft.Cdn/profiles/endpoints@2020-04-15' = {
+resource cdnProfileName_cdnEndPointName 'Microsoft.Cdn/profiles/endpoints@2025-06-01' = {
   name: '${cdnProfileName}/${cdnEndpointName}'
   location: 'Global'
   properties: cdnEndpointProperties

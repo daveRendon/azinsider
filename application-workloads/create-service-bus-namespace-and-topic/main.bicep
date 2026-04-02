@@ -11,7 +11,7 @@ param environmentName string
 param workspaceName string
 param workspaceLocation string
 
-resource name_resource 'Microsoft.App/containerApps@2022-06-01-preview' = {
+resource name_resource 'Microsoft.App/containerApps@2025-07-01' = {
   name: name
   location: location
   properties: {
@@ -34,7 +34,7 @@ resource name_resource 'Microsoft.App/containerApps@2022-06-01-preview' = {
   ]
 }
 
-resource environment 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
+resource environment 'Microsoft.App/managedEnvironments@2025-07-01' = {
   name: environmentName
   location: location
   properties: {
@@ -54,7 +54,7 @@ resource environment 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
   ]
 }
 
-resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+resource workspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: workspaceName
   location: workspaceLocation
   properties: {

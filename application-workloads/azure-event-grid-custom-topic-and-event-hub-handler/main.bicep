@@ -13,12 +13,12 @@ param eventHubName string = 'eventhub'
 @description('The location in which the Event Grid resources should be deployed.')
 param location string = resourceGroup().location
 
-resource topic 'Microsoft.EventGrid/topics@2020-06-01' = {
+resource topic 'Microsoft.EventGrid/topics@2025-02-15' = {
   name: topicName
   location: location
 }
 
-resource eventHubNamespace_resource 'Microsoft.EventHub/namespaces@2018-01-01-preview' = {
+resource eventHubNamespace_resource 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespace
   location: location
   sku: {
@@ -30,7 +30,7 @@ resource eventHubNamespace_resource 'Microsoft.EventHub/namespaces@2018-01-01-pr
   }
 }
 
-resource eventHubNamespace_eventHub 'Microsoft.EventHub/namespaces/EventHubs@2017-04-01' = {
+resource eventHubNamespace_eventHub 'Microsoft.EventHub/namespaces/EventHubs@2024-01-01' = {
   parent: eventHubNamespace_resource
   name: eventHubName
   properties: {
@@ -39,7 +39,7 @@ resource eventHubNamespace_eventHub 'Microsoft.EventHub/namespaces/EventHubs@201
   }
 }
 
-resource subscription 'Microsoft.EventGrid/eventSubscriptions@2020-06-01' = {
+resource subscription 'Microsoft.EventGrid/eventSubscriptions@2025-02-15' = {
   scope: topic
   name: subscriptionName
   properties: {

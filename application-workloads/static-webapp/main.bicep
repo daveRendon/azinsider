@@ -13,7 +13,7 @@ param appArtifactLocation string
 param resourceTags object
 param appSettings object
 
-resource name_resource 'Microsoft.Web/staticSites@2021-01-15' = {
+resource name_resource 'Microsoft.Web/staticSites@2025-03-01' = {
   name: name
   location: location
   tags: resourceTags
@@ -33,7 +33,7 @@ resource name_resource 'Microsoft.Web/staticSites@2021-01-15' = {
   }
 }
 
-resource name_appsettings 'Microsoft.Web/staticSites/config@2021-01-15' = {
+resource name_appsettings 'Microsoft.Web/staticSites/config@2025-03-01' = {
   parent: name_resource
   name: 'appsettings'
   properties: appSettings

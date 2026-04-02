@@ -86,7 +86,7 @@ var linuxConfiguration = {
   }
 }
 
-resource serverName_resource 'Microsoft.Sql/servers@2020-11-01-preview' = {
+resource serverName_resource 'Microsoft.Sql/servers@2023-08-01' = {
   location: location
   name: serverName
   properties: {
@@ -96,7 +96,7 @@ resource serverName_resource 'Microsoft.Sql/servers@2020-11-01-preview' = {
   }
 }
 
-resource serverName_databaseName 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
+resource serverName_databaseName 'Microsoft.Sql/servers/databases@2023-08-01' = {
   parent: serverName_resource
   location: location
   name: databaseName
@@ -107,7 +107,7 @@ resource serverName_databaseName 'Microsoft.Sql/servers/databases@2020-11-01-pre
   }
 }
 
-resource serverName_FirewallRule1 'Microsoft.Sql/servers/firewallrules@2020-11-01-preview' = {
+resource serverName_FirewallRule1 'Microsoft.Sql/servers/firewallrules@2023-08-01' = {
   parent: serverName_resource
   name: 'FirewallRule1'
   properties: {
@@ -116,7 +116,7 @@ resource serverName_FirewallRule1 'Microsoft.Sql/servers/firewallrules@2020-11-0
   }
 }
 
-resource newStorageAccountName_resource 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource newStorageAccountName_resource 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: newStorageAccountName
   location: location
   sku: {
@@ -125,7 +125,7 @@ resource newStorageAccountName_resource 'Microsoft.Storage/storageAccounts@2021-
   kind: 'StorageV2'
 }
 
-resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-07-01' = {
+resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIPAddressName_var
   location: location
   properties: {
@@ -136,7 +136,7 @@ resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-07-01' = 
   }
 }
 
-resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-07-01' = {
+resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName_var
   location: location
   properties: {
@@ -156,7 +156,7 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-07-01' = {
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2020-07-01' = {
+resource nicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName_var
   location: location
   properties: {
@@ -180,7 +180,7 @@ resource nicName 'Microsoft.Network/networkInterfaces@2020-07-01' = {
   ]
 }
 
-resource vmName 'Microsoft.Compute/virtualMachines@2020-12-01' = {
+resource vmName 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName_var
   location: location
   properties: {
@@ -219,7 +219,7 @@ resource vmName 'Microsoft.Compute/virtualMachines@2020-12-01' = {
   ]
 }
 
-resource vmName_django 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource vmName_django 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vmName
   name: 'django'
   location: location

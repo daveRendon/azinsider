@@ -61,12 +61,12 @@ var apimSku = environmentType == 'prod' ? 'Standard' : 'Developer'
 var cosmosDbCollectionName = 'items'
 
 // Use existing User Assigned MSI. See https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template#configure-the-minimum-permissions
-resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' existing = {
+resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2024-11-30' existing = {
   name: userAssignedIdentityName
   scope: resourceGroup(userAssignedIdentityResourceGroup)
 }
 
-resource appInsights 'Microsoft.Insights/components@2018-05-01-preview' = {
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: appInsightsName
   location: location
   kind: 'web'

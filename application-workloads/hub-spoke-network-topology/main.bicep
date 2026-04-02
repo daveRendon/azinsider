@@ -21,7 +21,7 @@ param adminPassword string
 var suffix = uniqueString(subscription().subscriptionId, resourceGroup().id)
 var numFirewallIpAddressesToAssign = 3
 
-resource laHub 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+resource laHub 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: 'la-hub-${location}-${suffix}'
   location: location
   properties: {
@@ -63,7 +63,7 @@ resource laHub_diagnosticsSettings 'Microsoft.Insights/diagnosticSettings@2021-0
 }
 
 @description('The NSG around the Azure Bastion subnet. Source: https://learn.microsoft.com/azure/bastion/bastion-nsg')
-resource nsgBastionSubnet 'Microsoft.Network/networkSecurityGroups@2022-01-01' = {
+resource nsgBastionSubnet 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: 'nsg-${location}-bastion'
   location: location
   properties: {
@@ -246,7 +246,7 @@ resource nsgBastionSubnet_diagnosticSettings 'Microsoft.Insights/diagnosticSetti
   }
 }
 
-resource vnetHub 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+resource vnetHub 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: 'vnet-${location}-hub'
   location: location
   properties: {
@@ -292,7 +292,7 @@ resource vnetHub 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'AzureFirewallSubnet'
   }
 
-  resource peerToSpokeOne 'virtualNetworkPeerings@2022-01-01' = {
+  resource peerToSpokeOne 'virtualNetworkPeerings@2025-05-01' = {
     name: 'to_${vnetSpokeOne.name}'
     dependsOn: [
       vnetSpokeOne::peerToHub 
@@ -308,7 +308,7 @@ resource vnetHub 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     }
   }
 
-  resource peerToSpokeTwo 'virtualNetworkPeerings@2022-01-01' = {
+  resource peerToSpokeTwo 'virtualNetworkPeerings@2025-05-01' = {
     name: 'to_${vnetSpokeTwo.name}'
     dependsOn: [
       vnetSpokeTwo::peerToHub 
@@ -340,7 +340,7 @@ resource vnetHub_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-
 }
 
 
-resource pipsAzureFirewall 'Microsoft.Network/publicIPAddresses@2022-01-01' = [for i in range(0, numFirewallIpAddressesToAssign): {
+resource pipsAzureFirewall 'Microsoft.Network/publicIPAddresses@2025-05-01' = [for i in range(0, numFirewallIpAddressesToAssign): {
   name: 'pip-fw-${location}-${padLeft(i, 2, '0')}'
   location: location
   sku: {
@@ -379,7 +379,7 @@ resource pipsAzureFirewall_diagnosticSetting 'Microsoft.Insights/diagnosticSetti
 }]
 
 @description('Azure Firewall Policy')
-resource fwPolicy 'Microsoft.Network/firewallPolicies@2022-01-01' = {
+resource fwPolicy 'Microsoft.Network/firewallPolicies@2025-05-01' = {
   name: 'fw-policies-${location}'
   location: location
   properties: {
@@ -408,7 +408,7 @@ resource fwPolicy 'Microsoft.Network/firewallPolicies@2022-01-01' = {
   }
 
 
-  resource defaultNetworkRuleCollectionGroup 'ruleCollectionGroups@2022-01-01' = {
+  resource defaultNetworkRuleCollectionGroup 'ruleCollectionGroups@2025-05-01' = {
     name: 'DefaultNetworkRuleCollectionGroup'
     properties: {
       priority: 200
@@ -447,7 +447,7 @@ resource fwPolicy 'Microsoft.Network/firewallPolicies@2022-01-01' = {
     }
   }
 
-  resource defaultApplicationRuleCollectionGroup 'ruleCollectionGroups@2022-01-01' = {
+  resource defaultApplicationRuleCollectionGroup 'ruleCollectionGroups@2025-05-01' = {
     name: 'DefaultApplicationRuleCollectionGroup'
     dependsOn: [
       defaultNetworkRuleCollectionGroup
@@ -488,7 +488,7 @@ resource fwPolicy 'Microsoft.Network/firewallPolicies@2022-01-01' = {
   }
 }
 
-resource fwHub 'Microsoft.Network/azureFirewalls@2022-01-01' = {
+resource fwHub 'Microsoft.Network/azureFirewalls@2025-05-01' = {
   name: 'fw-${location}'
   location: location
   zones: [
@@ -543,7 +543,7 @@ resource fwHub_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05
 }
 
 @description('The public IP for the regional hub\'s Azure Bastion service.')
-resource pipAzureBastion 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
+resource pipAzureBastion 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: 'pip-ab-${location}'
   location: location
   sku: {
@@ -581,7 +581,7 @@ resource pipAzureBastion_diagnosticSetting 'Microsoft.Insights/diagnosticSetting
   }
 }
 
-resource azureBastion 'Microsoft.Network/bastionHosts@2022-01-01' = {
+resource azureBastion 'Microsoft.Network/bastionHosts@2025-05-01' = {
   name: 'ab-${location}-${suffix}'
   location: location
   sku: {
@@ -625,7 +625,7 @@ resource azureBastion_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@
   }
 }
 
-resource pipVpnGateway 'Microsoft.Network/publicIPAddresses@2022-01-01' = if (deployVpnGateway) {
+resource pipVpnGateway 'Microsoft.Network/publicIPAddresses@2025-05-01' = if (deployVpnGateway) {
   name: 'pip-vgw-${location}'
   location: location
   sku: {
@@ -663,7 +663,7 @@ resource pipVpnGateway_diagnosticSetting 'Microsoft.Insights/diagnosticSettings@
   }
 }
 
-resource vgwHub 'Microsoft.Network/virtualNetworkGateways@2022-01-01' = if (deployVpnGateway) {
+resource vgwHub 'Microsoft.Network/virtualNetworkGateways@2025-05-01' = if (deployVpnGateway) {
   name: 'vgw-${location}-hub'
   location: location
   properties: {
@@ -711,7 +711,7 @@ resource vgwHub_diagnosticSetting 'Microsoft.Insights/diagnosticSettings@2021-05
   }
 }
 
-resource routeNextHopToFirewall 'Microsoft.Network/routeTables@2022-01-01' = {
+resource routeNextHopToFirewall 'Microsoft.Network/routeTables@2025-05-01' = {
   name: 'route-to-${location}-hub-fw'
   location: location
   properties: {
@@ -728,7 +728,7 @@ resource routeNextHopToFirewall 'Microsoft.Network/routeTables@2022-01-01' = {
   }
 }
 
-resource nsgResourcesSubnet 'Microsoft.Network/networkSecurityGroups@2022-01-01' = {
+resource nsgResourcesSubnet 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: 'nsg-spoke-resources'
   location: location
   properties: {
@@ -794,7 +794,7 @@ resource nsgResourcesSubnet_diagnosticsSettings 'Microsoft.Insights/diagnosticSe
   }
 }
 
-resource nsgPrivateLinkEndpointsSubnet 'Microsoft.Network/networkSecurityGroups@2022-01-01' = {
+resource nsgPrivateLinkEndpointsSubnet 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: 'nsg-spoke-privatelinkendpoints'
   location: location
   properties: {
@@ -856,7 +856,7 @@ resource nsgPrivateLinkEndpointsSubnet_diagnosticsSettings 'Microsoft.Insights/d
   }
 }
 
-resource vnetSpokeOne 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+resource vnetSpokeOne 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: 'vnet-${location}-spoke-one'
   location: location
   properties: {
@@ -901,7 +901,7 @@ resource vnetSpokeOne 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'snet-resources'
   }
 
-  resource peerToHub 'virtualNetworkPeerings@2022-01-01' = {
+  resource peerToHub 'virtualNetworkPeerings@2025-05-01' = {
     name: 'to_${vnetHub.name}'
     properties: {
       allowForwardedTraffic: false
@@ -929,7 +929,7 @@ resource vnetSpokeOne_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@
   }
 }
 
-resource nicVmSpokeOneLinux 'Microsoft.Network/networkInterfaces@2022-01-01' = if (deployVirtualMachines) {
+resource nicVmSpokeOneLinux 'Microsoft.Network/networkInterfaces@2025-05-01' = if (deployVirtualMachines) {
   name: 'nic-vm-${location}-spoke-one-linux'
   location: location
   properties: {
@@ -962,7 +962,7 @@ resource nicVmSpokeOneLinux_diagnosticSettings 'Microsoft.Insights/diagnosticSet
   }
 }
 
-resource vmSpokeOneLinux 'Microsoft.Compute/virtualMachines@2022-03-01' = if (deployVirtualMachines) {
+resource vmSpokeOneLinux 'Microsoft.Compute/virtualMachines@2025-04-01' = if (deployVirtualMachines) {
   name: 'vm-${location}-spoke-one-linux'
   location: location
   properties: {
@@ -1024,7 +1024,7 @@ resource vmSpokeOneLinux 'Microsoft.Compute/virtualMachines@2022-03-01' = if (de
 }
 
 
-resource vnetSpokeTwo 'Microsoft.Network/virtualNetworks@2022-01-01' = {
+resource vnetSpokeTwo 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: 'vnet-${location}-spoke-two'
   location: location
   properties: {
@@ -1069,7 +1069,7 @@ resource vnetSpokeTwo 'Microsoft.Network/virtualNetworks@2022-01-01' = {
     name: 'snet-resources'
   }
 
-  resource peerToHub 'virtualNetworkPeerings@2022-01-01' = {
+  resource peerToHub 'virtualNetworkPeerings@2025-05-01' = {
     name: 'to_${vnetHub.name}'
     properties: {
       allowForwardedTraffic: false
@@ -1097,7 +1097,7 @@ resource vnetSpokeTwo_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@
   }
 }
 
-resource nicVmSpokeTwoLinux 'Microsoft.Network/networkInterfaces@2022-01-01' = if (deployVirtualMachines) {
+resource nicVmSpokeTwoLinux 'Microsoft.Network/networkInterfaces@2025-05-01' = if (deployVirtualMachines) {
   name: 'nic-vm-${location}-spoke-two-windows'
   location: location
   properties: {
@@ -1130,7 +1130,7 @@ resource nicVmSpokeTwoLinux_diagnosticSettings 'Microsoft.Insights/diagnosticSet
   }
 }
 
-resource vmSpokeTwoWindows 'Microsoft.Compute/virtualMachines@2022-03-01' = if (deployVirtualMachines) {
+resource vmSpokeTwoWindows 'Microsoft.Compute/virtualMachines@2025-04-01' = if (deployVirtualMachines) {
   name: 'vm-${location}-spoke-two-windows'
   location: location
   properties: {

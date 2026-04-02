@@ -63,7 +63,7 @@ var lbPIPCrName = '${projectName}-lbPublicIP-cr'
 var lbFrontEndCrName = 'LoadBalancerFrontEnd-cr'
 
 //Create network interfaces
-resource nicVmR1 'Microsoft.Network/networkInterfaces@2023-02-01' = [for i in range(0, 3): {
+resource nicVmR1 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, 3): {
   name: 'vm-r1-${(i + 1)}-networkInterface'
   location: locationR1
   properties: {
@@ -97,7 +97,7 @@ resource nicVmR1 'Microsoft.Network/networkInterfaces@2023-02-01' = [for i in ra
 }]
 
 //extension to install IIS
-resource installWebServerVmR1 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [for i in range(0, 3): {
+resource installWebServerVmR1 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, 3): {
   name: 'vm-r1-${(i + 1)}/InstallWebServer'
   location: locationR1
   properties: {
@@ -115,7 +115,7 @@ resource installWebServerVmR1 'Microsoft.Compute/virtualMachines/extensions@2023
 }]
 
 //create virtual machines
-resource vmR1 'Microsoft.Compute/virtualMachines@2023-03-01' = [for i in range(0, 3): {
+resource vmR1 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, 3): {
   name: 'vm-r1-${(i + 1)}'
   location: locationR1
   properties: {
@@ -159,7 +159,7 @@ resource vmR1 'Microsoft.Compute/virtualMachines@2023-03-01' = [for i in range(0
 }]
 
 //subnet for bastion
-resource vnetSubnetR1Bastion 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+resource vnetSubnetR1Bastion 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnetR1
   name: bastionSubnetR1Name
   properties: {
@@ -167,7 +167,7 @@ resource vnetSubnetR1Bastion 'Microsoft.Network/virtualNetworks/subnets@2023-02-
   }
 }
 
-resource vnetSubnetR1 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+resource vnetSubnetR1 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnetR1
   name: vnetSubnetR1Name
   properties: {
@@ -180,7 +180,7 @@ resource vnetSubnetR1 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
 }
 
 //bastion host
-resource bastionHostR1 'Microsoft.Network/bastionHosts@2023-02-01' = {
+resource bastionHostR1 'Microsoft.Network/bastionHosts@2025-05-01' = {
   name: bastionHostR1Name
   location: locationR1
   properties: {
@@ -207,7 +207,7 @@ resource bastionHostR1 'Microsoft.Network/bastionHosts@2023-02-01' = {
 }
 
 //public ip for bastion
-resource bastionPIPR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource bastionPIPR1 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: bastionPIPR1Name
   location: locationR1
   sku: {
@@ -220,7 +220,7 @@ resource bastionPIPR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
 }
 
 //load balancer
-resource lbR1 'Microsoft.Network/loadBalancers@2023-02-01' = {
+resource lbR1 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: lbR1Name
   location: locationR1
   sku: {
@@ -311,7 +311,7 @@ resource lbR1 'Microsoft.Network/loadBalancers@2023-02-01' = {
   }
 }
 
-resource lbPIPR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource lbPIPR1 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: lbPIPR1Name
   location: locationR1
   sku: {
@@ -324,7 +324,7 @@ resource lbPIPR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
 }
 
 //public ip for outbound traffic
-resource lbPIPOutboundR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource lbPIPOutboundR1 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: lbPIPOutboundR1Name
   location: locationR1
   sku: {
@@ -337,7 +337,7 @@ resource lbPIPOutboundR1 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
 }
 
 //network security group
-resource nsgR1 'Microsoft.Network/networkSecurityGroups@2023-02-01' = {
+resource nsgR1 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgR1Name
   location: locationR1
   properties: {
@@ -359,7 +359,7 @@ resource nsgR1 'Microsoft.Network/networkSecurityGroups@2023-02-01' = {
   }
 }
 
-resource vnetR1 'Microsoft.Network/virtualNetworks@2023-02-01' = {
+resource vnetR1 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetR1Name
   location: locationR1
   properties: {
@@ -371,7 +371,7 @@ resource vnetR1 'Microsoft.Network/virtualNetworks@2023-02-01' = {
   }
 }
 
-resource nicVmR2 'Microsoft.Network/networkInterfaces@2023-02-01' = [for i in range(0, 3): {
+resource nicVmR2 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, 3): {
   name: 'vm-r2-${(i + 1)}-networkInterface'
   location: locationR2
   properties: {
@@ -404,7 +404,7 @@ resource nicVmR2 'Microsoft.Network/networkInterfaces@2023-02-01' = [for i in ra
   ]
 }]
 
-resource installWebServerVmR2 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [for i in range(0, 3): {
+resource installWebServerVmR2 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, 3): {
   name: 'vm-r2-${(i + 1)}/InstallWebServer'
   location: locationR2
   properties: {
@@ -421,7 +421,7 @@ resource installWebServerVmR2 'Microsoft.Compute/virtualMachines/extensions@2023
   ]
 }]
 
-resource vmR2 'Microsoft.Compute/virtualMachines@2023-03-01' = [for i in range(0, 3): {
+resource vmR2 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, 3): {
   name: 'vm-r2-${(i + 1)}'
   location: locationR2
   properties: {
@@ -464,7 +464,7 @@ resource vmR2 'Microsoft.Compute/virtualMachines@2023-03-01' = [for i in range(0
   ]
 }]
 
-resource vnetSubnetR2Bastion 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+resource vnetSubnetR2Bastion 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnetR2
   name: bastionSubnetR2Name
   properties: {
@@ -472,7 +472,7 @@ resource vnetSubnetR2Bastion 'Microsoft.Network/virtualNetworks/subnets@2023-02-
   }
 }
 
-resource vnetSubnetR2 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+resource vnetSubnetR2 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   parent: vnetR2
   name: vnetSubnetR2Name
   properties: {
@@ -484,7 +484,7 @@ resource vnetSubnetR2 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
   ]
 }
 
-resource bastionHostR2 'Microsoft.Network/bastionHosts@2023-02-01' = {
+resource bastionHostR2 'Microsoft.Network/bastionHosts@2025-05-01' = {
   name: bastionHostR2Name
   location: locationR2
   properties: {
@@ -510,7 +510,7 @@ resource bastionHostR2 'Microsoft.Network/bastionHosts@2023-02-01' = {
   ]
 }
 
-resource bastionPIPR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource bastionPIPR2 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: bastionPIPR2Name
   location: locationR2
   sku: {
@@ -522,7 +522,7 @@ resource bastionPIPR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
   }
 }
 
-resource lbR2 'Microsoft.Network/loadBalancers@2023-02-01' = {
+resource lbR2 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: lbR2Name
   location: locationR2
   sku: {
@@ -613,7 +613,7 @@ resource lbR2 'Microsoft.Network/loadBalancers@2023-02-01' = {
   }
 }
 
-resource lbPIPR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource lbPIPR2 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: lbPIPR2Name
   location: locationR2
   sku: {
@@ -625,7 +625,7 @@ resource lbPIPR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
   }
 }
 
-resource lbPIPOutboundR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource lbPIPOutboundR2 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: lbPIPOutboundR2Name
   location: locationR2
   sku: {
@@ -637,7 +637,7 @@ resource lbPIPOutboundR2 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
   }
 }
 
-resource nsgR2 'Microsoft.Network/networkSecurityGroups@2023-02-01' = {
+resource nsgR2 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgR2Name
   location: locationR2
   properties: {
@@ -659,7 +659,7 @@ resource nsgR2 'Microsoft.Network/networkSecurityGroups@2023-02-01' = {
   }
 }
 
-resource vnetR2 'Microsoft.Network/virtualNetworks@2023-02-01' = {
+resource vnetR2 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetR2Name
   location: locationR2
   properties: {
@@ -671,7 +671,7 @@ resource vnetR2 'Microsoft.Network/virtualNetworks@2023-02-01' = {
   }
 }
 
-resource lbPIPCr 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+resource lbPIPCr 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: lbPIPCrName
   location: location
   sku: {
@@ -683,7 +683,7 @@ resource lbPIPCr 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
   }
 }
 
-resource lbCr 'Microsoft.Network/loadBalancers@2023-02-01' = {
+resource lbCr 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: lbCrName
   location: location
   sku: {
@@ -726,7 +726,7 @@ resource lbCr 'Microsoft.Network/loadBalancers@2023-02-01' = {
   }
 }
 
-resource lbBackendPoolCr 'Microsoft.Network/loadBalancers/backendAddressPools@2023-02-01' = {
+resource lbBackendPoolCr 'Microsoft.Network/loadBalancers/backendAddressPools@2025-05-01' = {
   parent: lbCr
   name: lbBackendPoolCrName
   properties: {

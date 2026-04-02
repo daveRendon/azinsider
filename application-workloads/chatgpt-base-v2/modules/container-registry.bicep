@@ -17,7 +17,7 @@ param zoneRedundancy string = 'Disabled'
 
 
 // 2022-02-01-preview needed for anonymousPullEnabled
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' = {
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2025-11-01' = {
   name: name
   location: location
   tags: tags

@@ -12,7 +12,7 @@ param adBDCConfigurationModulesURL string
 @secure()
 param artifactsLocationSasToken string
 
-resource extName_resource 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource extName_resource 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   name: extName
   location: location
   properties: {

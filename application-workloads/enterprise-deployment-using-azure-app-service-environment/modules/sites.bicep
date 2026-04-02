@@ -49,7 +49,7 @@ var testWebPlanName = '${testWebName}-plan'
 var votingFunctionPlanName = '${votingFunctionName}-plan'
 var aseId = resourceId('Microsoft.Web/hostingEnvironments', 'ase-azinsider')
 
-resource redisNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
+resource redisNSG 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: redisNSGName
   location: location
   tags: {
@@ -159,7 +159,7 @@ resource redisNSG 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   }
 }
 
-resource redisSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
+resource redisSubnet 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   name: '${vnetName}/${redisSubnetName}'
   //location: location
   properties: {
@@ -170,7 +170,7 @@ resource redisSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-07-01' = {
   }
 }
 
-resource redis 'Microsoft.Cache/Redis@2022-06-01' = {
+resource redis 'Microsoft.Cache/Redis@2024-11-01' = {
   name: redisName
   location: location
   zones: (zoneRedundant ? ['1','2','3'] : null)
@@ -186,12 +186,12 @@ resource redis 'Microsoft.Cache/Redis@2022-06-01' = {
 }
 
 
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
+resource keyVault 'Microsoft.KeyVault/vaults@2025-05-01' existing = {
   name: keyVaultName
 }
 
 
-resource keyVaultRedisSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+resource keyVaultRedisSecret 'Microsoft.KeyVault/vaults/secrets@2025-05-01' = {
   parent: keyVault
   name: redisSecretName
   properties: {
@@ -199,7 +199,7 @@ resource keyVaultRedisSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   }
 }
 
-resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: logAnalyticsWorkspace
   location: location  
 }
@@ -253,7 +253,7 @@ resource testWeb 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource votingFunctionPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
+resource votingFunctionPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: votingFunctionPlanName
   location: location
   sku: {
@@ -274,7 +274,7 @@ resource votingFunctionPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
 }
 
-resource votingApiPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
+resource votingApiPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: votingApiPlanName
   location: location
   sku: {
@@ -295,7 +295,7 @@ resource votingApiPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
 }
 
-resource votingWebPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
+resource votingWebPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: votingWebPlanName
   location: location
   sku: {
@@ -316,7 +316,7 @@ resource votingWebPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
 }
 
-resource testWebPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
+resource testWebPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: testWebPlanName
   location: location
   sku: {
@@ -337,7 +337,7 @@ resource testWebPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   }
 }
 
-resource votingFunction 'Microsoft.Web/sites@2022-03-01' = {
+resource votingFunction 'Microsoft.Web/sites@2025-03-01' = {
   name: votingFunctionName
   location: location
   kind: 'functionapp'
@@ -383,7 +383,7 @@ resource votingFunction 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource votingApiApp 'Microsoft.Web/sites@2022-03-01' = {
+resource votingApiApp 'Microsoft.Web/sites@2025-03-01' = {
   name: votingApiName
   location: location
   kind: 'app'
@@ -416,7 +416,7 @@ resource votingApiApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource votingWebApp 'Microsoft.Web/sites@2022-03-01' = {
+resource votingWebApp 'Microsoft.Web/sites@2025-03-01' = {
   name: votingWebName
   location: location
   kind: 'app'
@@ -469,7 +469,7 @@ resource votingWebApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource testWebApp 'Microsoft.Web/sites@2022-03-01' = {
+resource testWebApp 'Microsoft.Web/sites@2025-03-01' = {
   name: testWebName
   location: location
   kind: 'app'
@@ -498,7 +498,7 @@ resource testWebApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2022-07-01' = {
+resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2025-05-01' = {
   parent: keyVault
   name: 'add'
   properties: {

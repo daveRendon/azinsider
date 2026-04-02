@@ -66,7 +66,7 @@ var networkSecurityGroupName = 'myNetworkSecurityGroup'
 var primaryKey = logAnalyticsWorkspace.listKeys().primarySharedKey
 
 // Deploy an Azure virtual machine with a public IP address and a network security group
-resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -75,7 +75,7 @@ resource stg 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   kind: 'Storage'
 }
 
-resource pip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: publicIpName
   location: location
   sku: {
@@ -89,7 +89,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   }
 }
 
-resource securityGroup 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+resource securityGroup 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName
   location: location
   properties: {
@@ -124,7 +124,7 @@ resource securityGroup 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
   }
 }
 
-resource vn 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+resource vn 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -147,7 +147,7 @@ resource vn 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   }
 }
 
-resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
+resource nic 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: nicName
   location: location
   properties: {
@@ -168,7 +168,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
   }
 }
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   properties: {
@@ -218,7 +218,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 }
 
 // Create a Log Analytics workspace
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: logAnalyticsWorkspaceName
   location: location
   properties: any({
@@ -233,7 +233,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 }
 
 // Enable the Log Analytics virtual machine extension
-resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2022-11-01' = {
+resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vm
   name: 'Microsoft.Insights.LogAnalyticsAgent'
   location: location

@@ -13,6 +13,6 @@ resource aksAcrPull 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2025-11-01' existing = {
   name: containerRegistryName
 }

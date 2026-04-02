@@ -5,7 +5,7 @@ param securityRules array = []
 param location string = resourceGroup().location
 
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2023-04-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgName
   location: location
 }

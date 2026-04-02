@@ -27,7 +27,7 @@ param linuxAdminUsername string
 @secure()
 param sshRSAPublicKey string
 
-resource aks_cluster 'Microsoft.ContainerService/managedClusters@2020-09-01' = {
+resource aks_cluster 'Microsoft.ContainerService/managedClusters@2025-10-01' = {
   name: clusterName
   location: location
   identity: {

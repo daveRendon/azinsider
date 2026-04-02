@@ -51,7 +51,7 @@ var consulServerArgs = [
   '-advertise 10.0.0.6 -retry-join 10.0.0.4 -retry-join 10.0.0.5'
 ]
 
-resource newStorageAccountName 'Microsoft.Storage/storageAccounts@2021-01-01' = {
+resource newStorageAccountName 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: newStorageAccountName_var
   location: location
   sku: {
@@ -60,7 +60,7 @@ resource newStorageAccountName 'Microsoft.Storage/storageAccounts@2021-01-01' = 
   kind: 'StorageV2'
 }
 
-resource availabilitySetMasters 'Microsoft.Compute/availabilitySets@2017-12-01' = {
+resource availabilitySetMasters 'Microsoft.Compute/availabilitySets@2025-04-01' = {
   name: availabilitySetMasters_var
   location: location
   sku: {
@@ -72,7 +72,7 @@ resource availabilitySetMasters 'Microsoft.Compute/availabilitySets@2017-12-01' 
   }
 }
 
-resource availabilitySetNodes 'Microsoft.Compute/availabilitySets@2017-12-01' = {
+resource availabilitySetNodes 'Microsoft.Compute/availabilitySets@2025-04-01' = {
   name: availabilitySetNodes_var
   location: location
   sku: {
@@ -84,7 +84,7 @@ resource availabilitySetNodes 'Microsoft.Compute/availabilitySets@2017-12-01' = 
   }
 }
 
-resource managementPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2015-06-15' = {
+resource managementPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: managementPublicIPAddrName_var
   location: location
   properties: {
@@ -95,7 +95,7 @@ resource managementPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2015-06
   }
 }
 
-resource nodesPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2015-06-15' = {
+resource nodesPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: nodesPublicIPAddrName_var
   location: location
   properties: {
@@ -106,7 +106,7 @@ resource nodesPublicIPAddrName 'Microsoft.Network/publicIPAddresses@2015-06-15' 
   }
 }
 
-resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2015-06-15' = {
+resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName_var
   location: location
   properties: {
@@ -139,7 +139,7 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2015-06-15' = {
   }
 }
 
-resource mastersNsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
+resource mastersNsgName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: mastersNsgName_var
   location: location
   properties: {
@@ -161,7 +161,7 @@ resource mastersNsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
   }
 }
 
-resource nodesNsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
+resource nodesNsgName 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nodesNsgName_var
   location: location
   properties: {
@@ -184,7 +184,7 @@ resource nodesNsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
   }
 }
 
-resource vmNameMaster_nic 'Microsoft.Network/networkInterfaces@2015-06-15' = [for i in range(0, masterCount): {
+resource vmNameMaster_nic 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, masterCount): {
   name: '${vmNameMaster_var}${i}-nic'
   location: location
   properties: {
@@ -218,7 +218,7 @@ resource vmNameMaster_nic 'Microsoft.Network/networkInterfaces@2015-06-15' = [fo
   ]
 }]
 
-resource mastersLbName 'Microsoft.Network/loadBalancers@2015-06-15' = {
+resource mastersLbName 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: mastersLbName_var
   location: location
   properties: {
@@ -240,7 +240,7 @@ resource mastersLbName 'Microsoft.Network/loadBalancers@2015-06-15' = {
   }
 }
 
-resource mastersLbName_SSH_vmNameMaster 'Microsoft.Network/loadBalancers/inboundNatRules@2021-03-01' = [for i in range(0, masterCount): {
+resource mastersLbName_SSH_vmNameMaster 'Microsoft.Network/loadBalancers/inboundNatRules@2025-05-01' = [for i in range(0, masterCount): {
   name: '${mastersLbName_var}/SSH-${vmNameMaster_var}${i}'
   properties: {
     frontendIPConfiguration: {
@@ -256,7 +256,7 @@ resource mastersLbName_SSH_vmNameMaster 'Microsoft.Network/loadBalancers/inbound
   ]
 }]
 
-resource nodesLbName 'Microsoft.Network/loadBalancers@2015-06-15' = {
+resource nodesLbName 'Microsoft.Network/loadBalancers@2025-05-01' = {
   name: nodesLbName_var
   location: location
   properties: {
@@ -278,7 +278,7 @@ resource nodesLbName 'Microsoft.Network/loadBalancers@2015-06-15' = {
   }
 }
 
-resource vmNameNode_nic 'Microsoft.Network/networkInterfaces@2015-06-15' = [for i in range(0, nodeCount): {
+resource vmNameNode_nic 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, nodeCount): {
   name: '${vmNameNode_var}${i}-nic'
   location: location
   properties: {
@@ -305,7 +305,7 @@ resource vmNameNode_nic 'Microsoft.Network/networkInterfaces@2015-06-15' = [for 
   ]
 }]
 
-resource vmNameMaster 'Microsoft.Compute/virtualMachines@2017-03-30' = [for i in range(0, masterCount): {
+resource vmNameMaster 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, masterCount): {
   name: '${vmNameMaster_var}${i}'
   location: location
   properties: {
@@ -357,7 +357,7 @@ resource vmNameMaster 'Microsoft.Compute/virtualMachines@2017-03-30' = [for i in
   ]
 }]
 
-resource vmNameNode 'Microsoft.Compute/virtualMachines@2017-03-30' = [for i in range(0, nodeCount): {
+resource vmNameNode 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, nodeCount): {
   name: '${vmNameNode_var}${i}'
   location: location
   properties: {
@@ -408,7 +408,7 @@ resource vmNameNode 'Microsoft.Compute/virtualMachines@2017-03-30' = [for i in r
   ]
 }]
 
-resource vmNameMaster_DockerExtension 'Microsoft.Compute/virtualMachines/extensions@2015-06-15' = [for i in range(0, masterCount): {
+resource vmNameMaster_DockerExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, masterCount): {
   name: '${vmNameMaster_var}${i}/DockerExtension'
   location: location
   properties: {
@@ -457,7 +457,7 @@ resource vmNameMaster_DockerExtension 'Microsoft.Compute/virtualMachines/extensi
   ]
 }]
 
-resource vmNameNode_DockerExtension 'Microsoft.Compute/virtualMachines/extensions@2015-06-15' = [for i in range(0, nodeCount): {
+resource vmNameNode_DockerExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, nodeCount): {
   name: '${vmNameNode_var}${i}/DockerExtension'
   location: location
   properties: {

@@ -10,7 +10,7 @@ param exists bool
 param openAiDeploymentName string
 param openAiEndpoint string
 
-resource acaIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+resource acaIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2024-11-30' = {
   name: identityName
   location: location
 }

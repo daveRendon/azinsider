@@ -9,15 +9,15 @@ param webAppSubnet string
 // Azure Firewall Parameters
 param firewallName string
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' existing = {
   name: virtualNetworkName
 }
 
-resource firewall 'Microsoft.Network/azureFirewalls@2021-02-01' existing = {
+resource firewall 'Microsoft.Network/azureFirewalls@2025-05-01' existing = {
   name: firewallName
 }
 
-resource routetable 'Microsoft.Network/routeTables@2021-02-01' = {
+resource routetable 'Microsoft.Network/routeTables@2025-05-01' = {
   name: routetablename
   location: location
   properties: {
@@ -35,7 +35,7 @@ resource routetable 'Microsoft.Network/routeTables@2021-02-01' = {
   }
 }
 
-resource subnet 'Microsoft.Network/virtualnetworks/subnets@2021-02-01' = {
+resource subnet 'Microsoft.Network/virtualnetworks/subnets@2025-05-01' = {
   parent: virtualNetwork
   name: 'subnet-webapp'
   properties: {

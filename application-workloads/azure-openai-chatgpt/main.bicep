@@ -178,7 +178,7 @@ var cosmosdb_container_name = 'conversations'
 var roleDefinitionId = '00000000-0000-0000-0000-000000000002'
 var roleAssignmentId = guid(roleDefinitionId, WebsiteName, cosmosdb_account_name.id)
 
-resource HostingPlan 'Microsoft.Web/serverfarms@2020-06-01' = {
+resource HostingPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: HostingPlanName
   location: resourceGroup().location
   sku: {
@@ -191,7 +191,7 @@ resource HostingPlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   kind: 'linux'
 }
 
-resource Website 'Microsoft.Web/sites@2020-06-01' = {
+resource Website 'Microsoft.Web/sites@2025-03-01' = {
   name: WebsiteName
   location: resourceGroup().location
   identity: {
@@ -410,7 +410,7 @@ resource ApplicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
 }
 
-resource cosmosdb_account_name 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = if (WebAppEnableChatHistory) {
+resource cosmosdb_account_name 'Microsoft.DocumentDB/databaseAccounts@2025-10-15' = if (WebAppEnableChatHistory) {
   name: cosmosdb_account_name_var
   location: resourceGroup().location
   kind: 'GlobalDocumentDB'
@@ -434,7 +434,7 @@ resource cosmosdb_account_name 'Microsoft.DocumentDB/databaseAccounts@2023-04-15
   }
 }
 
-resource cosmosdb_account_name_cosmosdb_database_name 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023-04-15' = if (WebAppEnableChatHistory) {
+resource cosmosdb_account_name_cosmosdb_database_name 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-10-15' = if (WebAppEnableChatHistory) {
   parent: cosmosdb_account_name
   name: '${cosmosdb_database_name}'
   properties: {
@@ -444,7 +444,7 @@ resource cosmosdb_account_name_cosmosdb_database_name 'Microsoft.DocumentDB/data
   }
 }
 
-resource cosmosdb_account_name_cosmosdb_database_name_conversations 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2023-04-15' = if (WebAppEnableChatHistory) {
+resource cosmosdb_account_name_cosmosdb_database_name_conversations 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-10-15' = if (WebAppEnableChatHistory) {
   parent: cosmosdb_account_name_cosmosdb_database_name
   name: 'conversations'
   properties: {
@@ -477,7 +477,7 @@ resource cosmosdb_account_name_cosmosdb_database_name_conversations 'Microsoft.D
   ]
 }
 
-resource cosmosdb_account_name_roleAssignmentId 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2021-04-15' = if (WebAppEnableChatHistory) {
+resource cosmosdb_account_name_roleAssignmentId 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2025-10-15' = if (WebAppEnableChatHistory) {
   parent: cosmosdb_account_name
   name: '${roleAssignmentId}'
   properties: {

@@ -1,7 +1,7 @@
 param frontDoorName string
 param customBackendFqdn string
 
-resource frontDoor 'Microsoft.Network/frontDoors@2020-05-01' = {
+resource frontDoor 'Microsoft.Network/frontDoors@2025-10-01' = {
   name: frontDoorName
   location:'global'
   properties: {

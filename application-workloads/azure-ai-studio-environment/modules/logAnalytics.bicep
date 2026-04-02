@@ -21,7 +21,7 @@ param retentionInDays int = 60
 param tags object
 
 // Resources
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: name
   tags: tags
   location: location

@@ -40,7 +40,7 @@ param containerCpuCoreCount string = '0.5'
 @description('Memory allocated to a single container instance, e.g. 1Gi')
 param containerMemory string = '1.0Gi'
 
-resource existingApp 'Microsoft.App/containerApps@2022-03-01' existing = if (exists) {
+resource existingApp 'Microsoft.App/containerApps@2025-07-01' existing = if (exists) {
   name: name
 }
 

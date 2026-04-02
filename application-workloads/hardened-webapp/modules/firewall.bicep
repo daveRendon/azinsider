@@ -11,19 +11,19 @@ param virtualNetworkName string
 // Web App 
 param webAppName string
 
-resource firewallip 'Microsoft.Network/publicIPAddresses@2021-02-01' existing = {
+resource firewallip 'Microsoft.Network/publicIPAddresses@2025-05-01' existing = {
   name: firewallIpName
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' existing = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-05-01' existing = {
   name: virtualNetworkName
 }
 
-resource privateendpointnic 'Microsoft.Network/networkInterfaces@2021-02-01' existing = {
+resource privateendpointnic 'Microsoft.Network/networkInterfaces@2025-05-01' existing = {
   name: privateendpointnicname
 }
 
-resource firewall 'Microsoft.Network/azureFirewalls@2021-02-01' = {
+resource firewall 'Microsoft.Network/azureFirewalls@2025-05-01' = {
   name: firewallName
   location: location
   properties: {

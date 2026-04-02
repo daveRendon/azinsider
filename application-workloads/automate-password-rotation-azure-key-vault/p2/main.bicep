@@ -18,7 +18,7 @@ param repoURL string = 'https://github.com/daveRendon/KeyVault-Rotation.git'
 var functionStorageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var eventSubscriptionName = '${keyVaultName}-${secretName}-${functionAppName}'
 
-resource functionStorageAccount 'Microsoft.Storage/storageAccounts@2019-04-01' = {
+resource functionStorageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: functionStorageAccountName
   location: location
   sku: {
@@ -27,7 +27,7 @@ resource functionStorageAccount 'Microsoft.Storage/storageAccounts@2019-04-01' =
   kind: 'Storage'
 }
 
-resource functionApp 'Microsoft.Web/serverfarms@2018-02-01' = {
+resource functionApp 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: concat(functionAppName)
   location: location
   sku: {
@@ -37,7 +37,7 @@ resource functionApp 'Microsoft.Web/serverfarms@2018-02-01' = {
 
 }
 
-resource Microsoft_Web_sites_functionApp 'Microsoft.Web/sites@2018-11-01' = {
+resource Microsoft_Web_sites_functionApp 'Microsoft.Web/sites@2025-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'
@@ -82,7 +82,7 @@ resource Microsoft_Web_sites_functionApp 'Microsoft.Web/sites@2018-11-01' = {
   }
 }
 
-resource functionAppName_web 'Microsoft.Web/sites/sourcecontrols@2018-11-01' = {
+resource functionAppName_web 'Microsoft.Web/sites/sourcecontrols@2025-03-01' = {
   name: '${functionAppName}/web'
   properties: {
     repoUrl: repoURL
@@ -94,7 +94,7 @@ resource functionAppName_web 'Microsoft.Web/sites/sourcecontrols@2018-11-01' = {
   ]
 }
 
-resource microsoft_insights_components_functionApp 'microsoft.insights/components@2018-05-01-preview' = {
+resource microsoft_insights_components_functionApp 'Microsoft.Insights/components@2020-02-02' = {
   name: functionAppName
   location: location
   kind: 'web'
@@ -104,7 +104,7 @@ resource microsoft_insights_components_functionApp 'microsoft.insights/component
   }
 }
 
-resource keyVaultName_add 'Microsoft.KeyVault/vaults/accessPolicies@2018-02-14' = {
+resource keyVaultName_add 'Microsoft.KeyVault/vaults/accessPolicies@2025-05-01' = {
   name: '${keyVaultName}/add'
   properties: {
     accessPolicies: [

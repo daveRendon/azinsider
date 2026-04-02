@@ -43,7 +43,7 @@ var sqlDbName = 'OctopusDeploy'
 var sqlDbCollation = 'SQL_Latin1_General_CP1_CI_AS'
 var sqlDbMaxSizeBytes = 268435456000
 
-resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource storageAccountName 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName_var
   location: location
   sku: {
@@ -57,7 +57,7 @@ resource storageAccountName 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   properties: {}
 }
 
-resource networkPublicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
+resource networkPublicIPAddressName 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: networkPublicIPAddressName_var
   location: location
   tags: {
@@ -72,7 +72,7 @@ resource networkPublicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-11
   }
 }
 
-resource networkVNetName 'Microsoft.Network/virtualNetworks@2020-11-01' = {
+resource networkVNetName 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: networkVNetName_var
   location: location
   tags: {
@@ -96,7 +96,7 @@ resource networkVNetName 'Microsoft.Network/virtualNetworks@2020-11-01' = {
   }
 }
 
-resource networkNicName 'Microsoft.Network/networkInterfaces@2020-11-01' = {
+resource networkNicName 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkNicName_var
   location: location
   tags: {
@@ -124,7 +124,7 @@ resource networkNicName 'Microsoft.Network/networkInterfaces@2020-11-01' = {
   ]
 }
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2020-12-01' = {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   tags: {
@@ -166,7 +166,7 @@ resource vmName_resource 'Microsoft.Compute/virtualMachines@2020-12-01' = {
   ]
 }
 
-resource vmName_OctopusDeployInstaller 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource vmName_OctopusDeployInstaller 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = {
   parent: vmName_resource
   name: 'OctopusDeployInstaller'
   location: location
@@ -187,7 +187,7 @@ resource vmName_OctopusDeployInstaller 'Microsoft.Compute/virtualMachines/extens
   ]
 }
 
-resource sqlServerName_resource 'Microsoft.Sql/servers@2020-08-01-preview' = {
+resource sqlServerName_resource 'Microsoft.Sql/servers@2023-08-01' = {
   name: sqlServerName
   location: location
   tags: {
@@ -201,7 +201,7 @@ resource sqlServerName_resource 'Microsoft.Sql/servers@2020-08-01-preview' = {
   }
 }
 
-resource sqlServerName_sqlDbName 'Microsoft.Sql/servers/databases@2021-05-01-preview' = {
+resource sqlServerName_sqlDbName 'Microsoft.Sql/servers/databases@2023-08-01' = {
   parent: sqlServerName_resource
   name: sqlDbName
   location: location
@@ -215,7 +215,7 @@ resource sqlServerName_sqlDbName 'Microsoft.Sql/servers/databases@2021-05-01-pre
   }
 }
 
-resource sqlServerName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2020-08-01-preview' = {
+resource sqlServerName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallrules@2023-08-01' = {
   parent: sqlServerName_resource
   name: 'AllowAllWindowsAzureIps'
   properties: {

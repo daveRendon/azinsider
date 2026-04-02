@@ -22,7 +22,7 @@ var location = resourceGroup().location
 var publisherEmail = 'email@domain.com'
 var publisherName = 'Your Company'
 
-resource apiManagement 'Microsoft.ApiManagement/service@2021-01-01-preview' = {
+resource apiManagement 'Microsoft.ApiManagement/service@2024-05-01' = {
   name: apimName
   location: location
   tags: resourceTags
@@ -39,7 +39,7 @@ resource apiManagement 'Microsoft.ApiManagement/service@2021-01-01-preview' = {
   }
 }
 
-resource apiManagementLogger 'Microsoft.ApiManagement/service/loggers@2021-01-01-preview' = {
+resource apiManagementLogger 'Microsoft.ApiManagement/service/loggers@2024-05-01' = {
   name: appInsightsName
   parent: apiManagement
   properties: {
@@ -51,7 +51,7 @@ resource apiManagementLogger 'Microsoft.ApiManagement/service/loggers@2021-01-01
   }
 }
 
-resource apimInstanceDiagnostics 'Microsoft.ApiManagement/service/diagnostics@2021-01-01-preview' = {
+resource apimInstanceDiagnostics 'Microsoft.ApiManagement/service/diagnostics@2024-05-01' = {
   name: 'applicationinsights'
   parent: apiManagement
   properties: {

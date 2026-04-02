@@ -23,7 +23,7 @@ param adminPassword string
 
 
 //Create Lab Plan
-resource labPlanName_resource 'Microsoft.LabServices/labPlans@2021-11-15-preview' = {
+resource labPlanName_resource 'Microsoft.LabServices/labPlans@2023-06-07' = {
   name: labPlanName
   location: location
   tags: {
@@ -44,7 +44,7 @@ output labPlanId string = labPlanName_resource.id
 
 
 //Create lab
-resource labName_resource 'Microsoft.LabServices/labs@2021-11-15-preview' = {
+resource labName_resource 'Microsoft.LabServices/labs@2023-06-07' = {
   name: labName
   location: location
   tags: {

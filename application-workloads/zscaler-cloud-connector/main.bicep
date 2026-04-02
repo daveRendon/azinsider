@@ -26,7 +26,7 @@ var nsgId = resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityG
 var vnetId = resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', vnetName)
 var subnetRef = '${vnetId}/subnets/${subnetName}'
 
-resource networkInterfaceName1_resource 'Microsoft.Network/networkInterfaces@2021-03-01' = {
+resource networkInterfaceName1_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkInterfaceName1
   location: location
   properties: {
@@ -59,7 +59,7 @@ resource networkInterfaceName1_resource 'Microsoft.Network/networkInterfaces@202
   ]
 }
 
-resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGroups@2019-02-01' = {
+resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName
   location: location
   properties: {
@@ -67,7 +67,7 @@ resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGro
   }
 }
 
-resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-11-01' = {
+resource vnetName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: vnetName
   location: location
   properties: {
@@ -78,7 +78,7 @@ resource vnetName_resource 'Microsoft.Network/virtualNetworks@2020-11-01' = {
   }
 }
 
-resource publicIpAddressName1_resource 'Microsoft.Network/publicIpAddresses@2019-02-01' = {
+resource publicIpAddressName1_resource 'Microsoft.Network/publicIpAddresses@2025-05-01' = {
   name: publicIpAddressName1
   location: location
   properties: {
@@ -92,7 +92,7 @@ resource publicIpAddressName1_resource 'Microsoft.Network/publicIpAddresses@2019
   ]
 }
 
-resource vmName_resource 'Microsoft.Compute/virtualMachines@2021-07-01' = {
+resource vmName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: vmName
   location: location
   properties: {

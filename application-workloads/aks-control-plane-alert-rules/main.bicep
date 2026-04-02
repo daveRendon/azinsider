@@ -16,13 +16,13 @@ param actionGroupName string = 'AKSAlertsActionGroup'
 param actionGroupShortName string = 'aksAG'
 
 // Reference existing AKS cluster
-resource aksCluster 'Microsoft.ContainerService/managedClusters@2023-07-01' existing = {
+resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-01' existing = {
   name: aksClusterName
   scope: resourceGroup(aksResourceGroup)
 }
 
 // Create Action Group
-resource actionGroup 'Microsoft.Insights/actionGroups@2022-06-01' = {
+resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
   name: actionGroupName
   location: 'global'
   properties: {

@@ -10,7 +10,7 @@ param principalId string
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
-resource ledgerName_resource 'Microsoft.ConfidentialLedger/ledgers@2020-12-01-preview' = {
+resource ledgerName_resource 'Microsoft.ConfidentialLedger/ledgers@2022-05-13' = {
   name: ledgerName
   location: location
   properties: {

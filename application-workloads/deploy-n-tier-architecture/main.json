@@ -1,0 +1,473 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.37.4.10188",
+      "templateHash": "3725228165444624952"
+    }
+  },
+  "parameters": {
+    "username": {
+      "type": "string",
+      "defaultValue": "adminaccount"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "password": {
+      "type": "securestring"
+    },
+    "sqlServerName": {
+      "type": "string",
+      "defaultValue": "[format('demo-dbserver-{0}', uniqueString(resourceGroup().id))]"
+    }
+  },
+  "variables": {
+    "deploymentUrl": "https://raw.githubusercontent.com/daveRendon/n-tier-architecture/master/Deployment/",
+    "sqlServerDatabaseName": "demo-sqldb",
+    "vnetName_var": "demo-vnet",
+    "vnetAddressPrefix": "10.1.0.0/16",
+    "webNSGName_var": "demo-web-nsg",
+    "webNSGResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNSGName_var'))]",
+    "webVMName_var": "demo-web-vm",
+    "webVMNicName_var": "demo-web-vm-nic",
+    "webVMNicPIPName_var": "demo-web-vm-nic-pip",
+    "webSubnetName": "demo-web-subnet",
+    "webSubnetPrefix": "10.1.0.0/24",
+    "bizVMName_var": "demo-biz-vm",
+    "bizVMNicName_var": "demo-biz-vm-nic",
+    "bizNSGName_var": "demo-biz-nsg",
+    "bizSubnetName": "demo-biz-subnet",
+    "bizSubnetPrefix": "10.1.1.0/24",
+    "bizNSGResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bizNSGName_var'))]",
+    "webVMNicResourceId": "[resourceId('Microsoft.Network/networkInterfaces', variables('webVMNicName_var'))]",
+    "webVMNicPIPResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('webVMNicPIPName_var'))]",
+    "webSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName_var'), variables('webSubnetName'))]",
+    "bizVMNicResourceId": "[resourceId('Microsoft.Network/networkInterfaces', variables('bizVMNicName_var'))]",
+    "bizSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName_var'), variables('bizSubnetName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "2023-08-01",
+      "name": "[parameters('sqlServerName')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "data"
+      },
+      "properties": {
+        "administratorLogin": "[parameters('username')]",
+        "administratorLoginPassword": "[parameters('password')]",
+        "version": "12.0"
+      }
+    },
+    {
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2023-08-01",
+      "name": "[format('{0}/{1}', parameters('sqlServerName'), variables('sqlServerDatabaseName'))]",
+      "sku": {
+        "name": "S0",
+        "tier": "Standard"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "data"
+      },
+      "properties": {
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/virtualNetworkRules",
+      "apiVersion": "2023-08-01",
+      "name": "[format('{0}/{1}', parameters('sqlServerName'), 'demo-vnet-biz-rule')]",
+      "properties": {
+        "ignoreMissingVnetServiceEndpoint": false,
+        "virtualNetworkSubnetId": "[variables('bizSubnetResourceId')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('webNSGName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "presentation"
+      },
+      "properties": {
+        "securityRules": [
+          {
+            "name": "http",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "80",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 300,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('bizNSGName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "application"
+      },
+      "properties": {
+        "securityRules": [
+          {
+            "name": "http",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "80",
+              "sourceAddressPrefix": "10.1.0.0/24",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 300,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "DenyInbound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 400,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('vnetName_var')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('vnetAddressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('webSubnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('webSubnetPrefix')]"
+            }
+          },
+          {
+            "name": "[variables('bizSubnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('bizSubnetPrefix')]",
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Sql",
+                  "locations": [
+                    "[parameters('location')]"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('webVMNicPIPName_var')]",
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "presentation"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('webVMNicName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "presentation"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAddress": "10.1.0.4",
+              "privateIPAllocationMethod": "Static",
+              "publicIPAddress": {
+                "id": "[variables('webVMNicPIPResourceId')]"
+              },
+              "subnet": {
+                "id": "[variables('webSubnetResourceId')]"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "primary": true,
+        "networkSecurityGroup": {
+          "id": "[variables('webNSGResourceId')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName_var'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNSGName_var'))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('webVMNicPIPName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2025-05-01",
+      "name": "[variables('bizVMNicName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "application"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAddress": "10.1.1.4",
+              "privateIPAllocationMethod": "Static",
+              "subnet": {
+                "id": "[variables('bizSubnetResourceId')]"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "primary": true,
+        "networkSecurityGroup": {
+          "id": "[variables('bizNSGResourceId')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bizNSGName_var'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2025-04-01",
+      "name": "[variables('webVMName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "presentation"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D2s_v3"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "18.04-LTS",
+            "version": "latest"
+          },
+          "osDisk": {
+            "osType": "Linux",
+            "name": "[format('{0}-disk', variables('webVMName_var'))]",
+            "createOption": "FromImage",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS"
+            },
+            "diskSizeGB": 30
+          },
+          "dataDisks": []
+        },
+        "osProfile": {
+          "computerName": "[variables('webVMName_var')]",
+          "adminUsername": "[parameters('username')]",
+          "adminPassword": "[parameters('password')]",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": false,
+            "provisionVMAgent": true
+          },
+          "secrets": [],
+          "allowExtensionOperations": true
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[variables('webVMNicResourceId')]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": false
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('webVMNicName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "apiVersion": "2025-04-01",
+      "name": "[format('{0}/{1}', variables('webVMName_var'), 'apache-ext')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "skipDos2Unix": true
+        },
+        "protectedSettings": {
+          "commandToExecute": "sh setup-votingweb.sh",
+          "fileUris": [
+            "[uri(variables('deploymentUrl'), 'setup-votingweb.sh')]",
+            "[uri(variables('deploymentUrl'), 'votingweb.conf')]",
+            "[uri(variables('deploymentUrl'), 'votingweb.service')]",
+            "[uri(variables('deploymentUrl'), 'votingweb.zip')]"
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines', variables('webVMName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2025-04-01",
+      "name": "[variables('bizVMName_var')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "tier": "application"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D2s_v3"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "18.04-LTS",
+            "version": "latest"
+          },
+          "osDisk": {
+            "osType": "Linux",
+            "name": "[format('{0}-disk', variables('bizVMName_var'))]",
+            "createOption": "FromImage",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS"
+            },
+            "diskSizeGB": 30
+          },
+          "dataDisks": []
+        },
+        "osProfile": {
+          "computerName": "[variables('bizVMName_var')]",
+          "adminUsername": "[parameters('username')]",
+          "adminPassword": "[parameters('password')]",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": false,
+            "provisionVMAgent": true
+          },
+          "secrets": [],
+          "allowExtensionOperations": true
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[variables('bizVMNicResourceId')]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": false
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('bizVMNicName_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "apiVersion": "2025-04-01",
+      "name": "[format('{0}/{1}', variables('bizVMName_var'), 'apache-ext')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "displayName": "customScript for Linux VM"
+      },
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.1",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "skipDos2Unix": true,
+          "fileUris": [
+            "[uri(variables('deploymentUrl'), 'setup-votingdata.sh')]",
+            "[uri(variables('deploymentUrl'), 'votingdata.conf')]",
+            "[uri(variables('deploymentUrl'), 'votingdata.service')]",
+            "[uri(variables('deploymentUrl'), 'votingdata.zip')]"
+          ]
+        },
+        "protectedSettings": {
+          "commandToExecute": "[format('sh setup-votingdata.sh {0} {1} {2}', parameters('sqlServerName'), parameters('username'), parameters('password'))]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines', variables('bizVMName_var'))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "webSiteUrl": {
+      "type": "string",
+      "value": "[format('http://{0}', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('webVMNicPIPName_var')), '2025-05-01').ipAddress)]"
+    }
+  }
+}

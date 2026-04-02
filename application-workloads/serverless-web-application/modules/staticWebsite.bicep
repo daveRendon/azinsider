@@ -4,7 +4,7 @@ param deploymentScriptServicePrincipalId string
 
 var location = resourceGroup().location
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   tags: resourceTags
@@ -32,7 +32,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource deploymentScripts 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+resource deploymentScripts 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   name: 'configStaticWeb'
   kind: 'AzurePowerShell'
   location: location

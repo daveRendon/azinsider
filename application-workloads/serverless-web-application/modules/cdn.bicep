@@ -4,7 +4,7 @@ param staticWebsiteURL string
 var endpointName = replace(cdnProfileName,'cdn-','')
 var staticWebsiteHostName = replace(replace(staticWebsiteURL,'https://',''),'/','')
 
-resource cdnProfile 'Microsoft.Cdn/profiles@2020-04-15' = {
+resource cdnProfile 'Microsoft.Cdn/profiles@2025-06-01' = {
   name: cdnProfileName
   location: resourceGroup().location
   sku: { 
@@ -12,7 +12,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2020-04-15' = {
   }
 }
 
-resource endpoint 'Microsoft.Cdn/profiles/endpoints@2020-04-15' = {
+resource endpoint 'Microsoft.Cdn/profiles/endpoints@2025-06-01' = {
   parent: cdnProfile
   name: endpointName
   location: resourceGroup().location

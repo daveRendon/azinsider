@@ -5,7 +5,7 @@ param resourcePrefix string
 param location string 
 
 // Virtual Network
-resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: '${resourcePrefix}-vnet'
   location: location
   properties: {
@@ -41,7 +41,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 }
 
 // Network Security Group for APIM Subnet
-resource nsg 'Microsoft.Network/networkSecurityGroups@2023-05-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: '${resourcePrefix}-apim-nsg'
   location: location
   properties: {
@@ -64,7 +64,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2023-05-01' = {
 }
 
 // Azure OpenAI instance
-resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
+resource openAi 'Microsoft.CognitiveServices/accounts@2025-09-01' = {
   name: '${resourcePrefix}-openai'
   location: location
   kind: 'OpenAI'
@@ -77,7 +77,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 }
 
 // Private Endpoint for Azure OpenAI
-resource openAiPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = {
+resource openAiPrivateEndpoint 'Microsoft.Network/privateEndpoints@2025-05-01' = {
   name: '${resourcePrefix}-openai-pe'
   location: location
   properties: {
@@ -97,7 +97,7 @@ resource openAiPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' =
 }
 
 // API Management (Internal VNet)
-resource apim 'Microsoft.ApiManagement/service@2023-03-01-preview' = {
+resource apim 'Microsoft.ApiManagement/service@2024-05-01' = {
   name: '${resourcePrefix}-apim'
   location: location
   sku: {
@@ -119,7 +119,7 @@ resource apim 'Microsoft.ApiManagement/service@2023-03-01-preview' = {
 }
 
 // Public IP for Application Gateway
-resource publicIp 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
+resource publicIp 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: '${resourcePrefix}-appgw-pip'
   location: location
   sku: {
@@ -131,7 +131,7 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2023-05-01' = {
 }
 
 // Application Gateway (HTTP listener)
-resource appGw 'Microsoft.Network/applicationGateways@2023-05-01' = {
+resource appGw 'Microsoft.Network/applicationGateways@2025-05-01' = {
   name: '${resourcePrefix}-appGw'
   location: location
   properties: {

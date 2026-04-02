@@ -76,7 +76,7 @@ var v2VmContainer = 'iaasvmcontainer;iaasvmcontainerv2;'
 var v2Vm = 'vm;iaasvmcontainerv2;'
 
 
-resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = [for i in range(0, numberOfInstances): {
+resource nic 'Microsoft.Network/networkInterfaces@2025-05-01' = [for i in range(0, numberOfInstances): {
   name: '${nicNamePrefix}${i}'
   location: location
   properties: {
@@ -104,7 +104,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = [for i in range(
   ]
 }]
 
-resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-06-01' = {
+resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -124,7 +124,7 @@ resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-06-
   }
 }
 
-resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = [for i in range(0, numberOfInstances): {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = [for i in range(0, numberOfInstances): {
   name: '${pipNamePrefix}${i}'
   location: location
   properties: {
@@ -132,7 +132,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = [for i in range(
   }
 }]
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: nsgName
   location: location
   properties: {
@@ -154,7 +154,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
   }
 }
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for i in range(0, numberOfInstances): {
+resource vm 'Microsoft.Compute/virtualMachines@2025-04-01' = [for i in range(0, numberOfInstances): {
   name: '${vmNamePrefix}${i}'
   location: location
   properties: {
@@ -193,7 +193,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for i in range(0, 
   ]
 }]
 
-resource customScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2018-06-01' = [for i in range(0, numberOfInstances): {
+resource customScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2025-04-01' = [for i in range(0, numberOfInstances): {
   name: '${vmNamePrefix}${i}/customScriptExtension'
   location: location
   properties: {
@@ -211,7 +211,7 @@ resource customScriptExtension 'Microsoft.Compute/virtualMachines/extensions@201
 }]
 
 
-resource recoveryServicesVault 'Microsoft.RecoveryServices/vaults@2022-01-01' = {
+resource recoveryServicesVault 'Microsoft.RecoveryServices/vaults@2025-08-01' = {
   name: vaultName
   location: location
   sku: {
@@ -226,7 +226,7 @@ resource recoveryServicesVault 'Microsoft.RecoveryServices/vaults@2022-01-01' = 
 
 
 
-resource backupPolicy 'Microsoft.RecoveryServices/vaults/backupPolicies@2021-03-01' = if (isNewPolicy) {
+resource backupPolicy 'Microsoft.RecoveryServices/vaults/backupPolicies@2025-08-01' = if (isNewPolicy) {
   parent: recoveryServicesVault
   name: backupPolicyName
   location: location
@@ -305,7 +305,7 @@ resource backupPolicy 'Microsoft.RecoveryServices/vaults/backupPolicies@2021-03-
 
 
 
-resource protectedItems 'Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems@2022-01-01' = [for item in existingVirtualMachines: {
+resource protectedItems 'Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems@2025-08-01' = [for item in existingVirtualMachines: {
   name: '${vaultName}/${backupFabric}/${v2VmContainer}${existingVirtualMachinesResourceGroup};${item}/${v2Vm}${existingVirtualMachinesResourceGroup};${item}'
   location: location
   properties: {

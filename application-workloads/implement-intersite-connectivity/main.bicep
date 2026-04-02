@@ -31,7 +31,7 @@ var vnet1 = 'az104-05-vnet1'
 var vnet2 = 'az104-05-vnet2'
 var remoteVnetRg = 'azinsider_demo'
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for (item, i) in locationNames: {
+resource vm 'Microsoft.Compute/virtualMachines@2025-04-01' = [for (item, i) in locationNames: {
   name: '${vmName}${i}'
   location: item
   properties: {
@@ -74,7 +74,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = [for (item, i) in l
   ]
 }]
 
-resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = [for (item, i) in locationNames: {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = [for (item, i) in locationNames: {
   name: '${vnetName}${i}'
   location: item
   properties: {
@@ -94,7 +94,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = [for (item, i) in
   }
 }]
 
-resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = [for (item, i) in locationNames: {
+resource nic 'Microsoft.Network/networkInterfaces@2025-05-01' = [for (item, i) in locationNames: {
   name: '${nicName}${i}'
   location: item
   properties: {
@@ -123,7 +123,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = [for (item, i) i
   ]
 }]
 
-resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = [for (item, i) in locationNames: {
+resource pip 'Microsoft.Network/publicIPAddresses@2025-05-01' = [for (item, i) in locationNames: {
   name: '${pipName}${i}'
   location: item
   properties: {
@@ -131,7 +131,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = [for (item, i) i
   }
 }]
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = [for (item, i) in locationNames: {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-05-01' = [for (item, i) in locationNames: {
   name: '${nsgName}${i}'
   location: item
   properties: {
@@ -154,7 +154,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = [for (item, 
 }]
 
 //This creates a peering from vnet0 to vnet1
-resource peer1 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer1 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet0}/peering-to-vnet1'
   properties: {
     allowVirtualNetworkAccess: true
@@ -171,7 +171,7 @@ resource peer1 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05
 }
 
 //This creates a peering from vnet1 to vnet0
-resource peer2 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer2 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet1}/peering-to-vnet0'
   properties: {
     allowVirtualNetworkAccess: true
@@ -188,7 +188,7 @@ resource peer2 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05
 }
 
 //This creates a peering from vnet2 to vnet0
-resource peer3 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer3 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet2}/peering-to-vnet0'
   properties: {
     allowVirtualNetworkAccess: true
@@ -205,7 +205,7 @@ resource peer3 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05
 }
 
 //This creates a peering from vnet0 to vnet2
-resource peer4 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer4 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet0}/peering-to-vnet2'
   properties: {
     allowVirtualNetworkAccess: true
@@ -222,7 +222,7 @@ resource peer4 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05
 }
 
 //This creates a peering from vnet2 to vnet1
-resource peer5 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer5 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet2}/peering-to-vnet1'
   properties: {
     allowVirtualNetworkAccess: true
@@ -239,7 +239,7 @@ resource peer5 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05
 }
 
 //This creates a peering from vnet1 to vnet2
-resource peer6 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2020-05-01' = {
+resource peer6 'microsoft.network/virtualNetworks/virtualNetworkPeerings@2025-05-01' = {
   name: '${vnet1}/peering-to-vnet2'
   properties: {
     allowVirtualNetworkAccess: true

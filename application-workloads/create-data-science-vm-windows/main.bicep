@@ -24,7 +24,7 @@ var nsgId = resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityG
 var vnetId = resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', virtualNetworkName)
 var subnetRef = '${vnetId}/subnets/${subnetName}'
 // This will be your Primary NIC
-resource networkInterfaceName_resource 'Microsoft.Network/networkInterfaces@2021-03-01' = {
+resource networkInterfaceName_resource 'Microsoft.Network/networkInterfaces@2025-05-01' = {
   name: networkInterfaceName
   location: location
   properties: {
@@ -53,7 +53,7 @@ resource networkInterfaceName_resource 'Microsoft.Network/networkInterfaces@2021
   ]
 }
 // Simple Network Security Group
-resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGroups@2019-02-01' = {
+resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: networkSecurityGroupName
   location: location
   properties: {
@@ -61,7 +61,7 @@ resource networkSecurityGroupName_resource 'Microsoft.Network/networkSecurityGro
   }
 }
 // This will build a Virtual Network.
-resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-11-01' = {
+resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -72,7 +72,7 @@ resource virtualNetworkName_resource 'Microsoft.Network/virtualNetworks@2020-11-
   }
 }
 // Public IP for your Primary NIC
-resource pip 'Microsoft.Network/publicIpAddresses@2019-02-01' = {
+resource pip 'Microsoft.Network/publicIpAddresses@2025-05-01' = {
   name: publicIpAddressName
   location: location
   properties: {
@@ -83,7 +83,7 @@ resource pip 'Microsoft.Network/publicIpAddresses@2019-02-01' = {
   }
 }
 // This is the virtual machine that you're building.
-resource virtualMachineName_resource 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+resource virtualMachineName_resource 'Microsoft.Compute/virtualMachines@2025-04-01' = {
   name: virtualMachineName
   location: location
   properties: {

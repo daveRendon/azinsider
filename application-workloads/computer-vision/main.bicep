@@ -16,7 +16,7 @@ param virtualNetworkName string = 'virtualNetwork'
 
 
 // This will build a Virtual Network.
-resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-05-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -38,7 +38,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
 }
 
 // This will build a Computer Vision service.
-resource name_resource 'Microsoft.CognitiveServices/accounts@2021-04-30' = {
+resource name_resource 'Microsoft.CognitiveServices/accounts@2025-09-01' = {
   name: name
   location: location
   kind: 'ComputerVision'

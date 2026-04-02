@@ -18,7 +18,7 @@ var functionTier = functionSku == 'Y1' ? 'Dynamic' : 'ElasticPremium'
 var functionKind = functionSku == 'Y1' ? 'functionapp' : 'elastic'
 var keyVaultSecretName = '${cosmosAccountName}-key'
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   tags: resourceTags
@@ -45,7 +45,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource plan 'Microsoft.Web/serverFarms@2020-06-01' = {
+resource plan 'Microsoft.Web/serverFarms@2025-03-01' = {
   name: appServicePlanName
   location: location
   kind: functionKind
@@ -57,7 +57,7 @@ resource plan 'Microsoft.Web/serverFarms@2020-06-01' = {
   properties: {}
 }
 
-resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
+resource functionApp 'Microsoft.Web/sites@2025-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'

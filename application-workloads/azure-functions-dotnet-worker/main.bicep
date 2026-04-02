@@ -53,7 +53,7 @@ var applicationInsightsName = functionAppName
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var isReserved = ((functionPlanOS == 'Linux') ? true : false)
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -62,7 +62,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   kind: 'Storage'
 }
 
-resource hostingPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+resource hostingPlan 'Microsoft.Web/serverfarms@2025-03-01' = {
   name: hostingPlanName
   location: location
   sku: {
@@ -88,7 +88,7 @@ resource applicationInsights 'microsoft.insights/components@2020-02-02' = {
   kind: 'web'
 }
 
-resource functionApp 'Microsoft.Web/sites@2021-02-01' = {
+resource functionApp 'Microsoft.Web/sites@2025-03-01' = {
   name: functionAppName
   location: location
   kind: (isReserved ? 'functionapp,linux' : 'functionapp')
@@ -125,7 +125,7 @@ resource functionApp 'Microsoft.Web/sites@2021-02-01' = {
   }
 }
 
-resource zipDeploy 'Microsoft.Web/sites/extensions@2021-02-01' = {
+resource zipDeploy 'Microsoft.Web/sites/extensions@2025-03-01' = {
   parent: functionApp
   name: 'MSDeploy'
   properties: {

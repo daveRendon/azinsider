@@ -3,11 +3,11 @@ param openApiUrl string
 param apiName string
 param originUrl string
 
-resource apim 'Microsoft.ApiManagement/service@2021-01-01-preview' existing = {
+resource apim 'Microsoft.ApiManagement/service@2024-05-01' existing = {
   name: apimName
 }
 
-resource api 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
+resource api 'Microsoft.ApiManagement/service/apis@2024-05-01' = {
   parent: apim
   name: apiName
   properties: {
@@ -23,7 +23,7 @@ resource api 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
   }
 }
 
-resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2021-01-01-preview' = {
+resource apiPolicy 'Microsoft.ApiManagement/service/apis/policies@2024-05-01' = {
   parent: api
   name: 'policy'
   properties: {

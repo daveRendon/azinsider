@@ -11,7 +11,7 @@ param retentionInDays int = 90
 var workspaceName = '${location}-${sentinelName}-${uniqueString(resourceGroup().id)}'
 var solutionName = 'SecurityInsights(${sentinelWorkspace.name})'
 
-resource sentinelWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource sentinelWorkspace 'Microsoft.OperationalInsights/workspaces@2025-07-01' = {
   name: workspaceName
   location: location
   properties: {
@@ -38,7 +38,7 @@ resource sentinelSolution 'Microsoft.OperationsManagement/solutions@2015-11-01-p
 
 
 
-resource ruleGuid 'Microsoft.SecurityInsights/alertRules@2021-03-01-preview' = {
+resource ruleGuid 'Microsoft.SecurityInsights/alertRules@2025-09-01' = {
   scope: sentinelWorkspace
   name: ruleName
   kind: 'Scheduled'

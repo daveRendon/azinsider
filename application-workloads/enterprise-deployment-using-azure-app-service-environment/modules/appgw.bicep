@@ -68,7 +68,7 @@ var appgwAutoScaleMinCapacity = 0
 var appgwAutoScaleMaxCapacity = 10
 var appgwZonesArray = (empty(appgwZones) ? json('null') : split(appgwZones, ','))
 
-resource publicIPAddress 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
+resource publicIPAddress 'Microsoft.Network/publicIPAddresses@2025-05-01' = {
   name: appgwPublicIpAddressName
   location: location
   sku: {
@@ -79,7 +79,7 @@ resource publicIPAddress 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
   }
 }
 
-resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2022-05-01' = {
+resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2025-05-01' = {
   name: appgwNSGName
   location: location
   tags: {
@@ -136,7 +136,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2022-05-0
   }
 }
 
-resource appGatewaySubnet 'Microsoft.Network/virtualNetworks/subnets@2022-05-01' = {
+resource appGatewaySubnet 'Microsoft.Network/virtualNetworks/subnets@2025-05-01' = {
   name: subnetName
   properties: {
     addressPrefix: appGwSubnetAddressWithPrefix
@@ -144,7 +144,7 @@ resource appGatewaySubnet 'Microsoft.Network/virtualNetworks/subnets@2022-05-01'
   }
 }
 
-resource appGateway 'Microsoft.Network/applicationGateways@2022-05-01' = {
+resource appGateway 'Microsoft.Network/applicationGateways@2025-05-01' = {
   name: appGatewayName
   location: location
   zones: appgwZonesArray
